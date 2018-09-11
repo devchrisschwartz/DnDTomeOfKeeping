@@ -24,7 +24,7 @@ namespace DnDTomeOfKeeping.Models
     
         public int CharID { get; set; }
         public string CharName { get; set; }
-        public string Class { get; set; }
+        public int Class { get; set; }
         public int HitPoints { get; set; }
         public string Alignment { get; set; }
         public int CharLevel { get; set; }

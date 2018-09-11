@@ -232,6 +232,9 @@
     <Compile Include="Models\Spell.cs">
       <DependentUpon>viewbagofholdingEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>viewbagofholdingEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\viewbagofholdingEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -329,6 +332,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\CharacterCreator.cshtml" />
+    <Content Include="Views\Home\Tracker.cshtml" />
+    <Content Include="Views\Home\CCSearch.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Campaign.cshtml" />
+    <Content Include="Views\Home\CharacterEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
