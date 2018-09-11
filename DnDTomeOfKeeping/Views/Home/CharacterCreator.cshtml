@@ -1,0 +1,45 @@
+﻿
+@{
+	ViewBag.Title = "CharacterCreator";
+}
+
+<h2>CharacterCreator</h2>
+<br />
+<h1>Class: @ViewBag.Classes["name"]</h1> <br />
+<h1>HP: @ViewBag.Classes["hit_die"]</h1> <br />
+
+
+<h2>Proficiency Choices: </h2> <br />
+
+@for (int j = 0; j < ViewBag.Classes["proficiency_choices"].Count; j++)
+{
+	for (int i = 0; i < ViewBag.Classes["proficiency_choices"][j]["from"].Count; i++)
+	{
+		<h3>@ViewBag.Classes["proficiency_choices"][j]["from"][i]["name"]</h3> <br />
+	}
+}
+
+<br />
+
+<h3>Armor and Weapon Proficiencies</h3> <br />
+
+@for (int i = 0; i < ViewBag.Classes["proficiencies"].Count; i++)
+{
+	<p>@ViewBag.Classes["proficiencies"][i]["name"]</p>
+}
+
+
+<h3>Saving Throws</h3> <br />
+
+@for (int i = 0; i < ViewBag.Classes["saving_throws"].Count; i++)
+{
+	<p>@ViewBag.Classes["saving_throws"][i]["name"]</p>
+}
+
+
+
+
+
+
+
+
