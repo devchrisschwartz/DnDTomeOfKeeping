@@ -26,8 +26,11 @@
                     <li>@Html.ActionLink("Create a Campaign", "Campaign", "Home")</li>
                     <li>@Html.ActionLink("Tracker", "Tracker", "Home")</li>
                     <li>@Html.ActionLink("Character & Campaign Search", "CCSearch", "Home")</li>
+                    <li> @Html.Partial("_LoginPartial")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+            <form class="form-inline navbar-right">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></form>
             </div>
         </div>
     </div>
