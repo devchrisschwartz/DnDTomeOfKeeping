@@ -111,7 +111,13 @@ namespace DnDTomeOfKeeping.Controllers
 
             return View();
         }
-
+        public ActionResult CreateCampaign()
+        {
+         
+            ViewBag.User = User.Identity.GetUserId();
+           
+           return View();
+        }
         [HttpGet]
         [Authorize]
         public ActionResult Tracker()
@@ -123,12 +129,7 @@ namespace DnDTomeOfKeeping.Controllers
         public ActionResult CCSearch()
         {
 
-        //    //viewbagofholdingEntities ORM = new viewbagofholdingEntities();
-        //    //ViewBag.Characters = ORM.character.Where(x => x.charID.Contains
-        //    //(charID.)).ToList()
-
-
-            return View();
+         return View();
         }
 
         [HttpGet]
@@ -211,7 +212,21 @@ namespace DnDTomeOfKeeping.Controllers
             return View("CampaignResult");
         }
 
-       
+        public ActionResult SaveCampaign(Campaign newCampaign)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+           // ViewBag.campaign = ORM.Campaigns;
+
+            ORM.Campaigns.Add(newCampaign);
+
+            ORM.SaveChanges();
+
+            return RedirectToAction("Campaign");
+
+        }
+
+
+
 
     }
 }
