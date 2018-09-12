@@ -5,14 +5,24 @@
 
 <div class="container">
     <div class="row text-center">
-        <div class="col-md-4">
-            <div class="h3">Character Search</div>
-            <p>Lorem ipsum</p>
-        </div>
-        <div class="col-md-4">
-            <div class="h3">Campaign Search</div>
-            <p>Lorem ipsum</p>
-        </div>
+		<div class="col-md-4">
+			<div class="h3">Character Search</div>
+			<p>Lorem ipsum</p>
+			<form action="/Home/SearchCharByName" method="get">
+				<label class="form-control">CharacterName</label>
+				<input type="text" name="Character Name" class="form-control" />
+				<input type="submit" value="Search" />
+			</form>
+		</div>
+		<div class="col-md-4">
+			<div class="h3">Campaign Search</div>
+			<p>Lorem ipsum</p>
+			<form action="/Home/SearchCampaignByName" method="get">
+				<label class="form-control">CampaignName</label>
+				<input type="text" name="Campaign Name" class="form-control" />
+				<input type="submit" value="Search" />
+			</form>
+		</div>
         <div class="col-md-4">
             <div class="h3">Browse by Category</div>
             <p>Lorem ipsum</p>

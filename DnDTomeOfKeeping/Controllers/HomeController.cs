@@ -7,11 +7,14 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using DnDTomeOfKeeping.Models;
+using Microsoft.AspNet.Identity;
 
 namespace DnDTomeOfKeeping.Controllers
 {
     public class HomeController : Controller
     {
+        
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -44,6 +47,7 @@ namespace DnDTomeOfKeeping.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult CharacterCreator(int Class)
         {
             string classString = Class.ToString();
@@ -98,6 +102,11 @@ namespace DnDTomeOfKeeping.Controllers
                 JObject jsonSpells = JObject.Parse(data);
 
                 ViewBag.Spells = jsonSpells["results"];
+            }
+
+            if(User.Identity.IsAuthenticated)
+            {
+                ViewBag.User = User.Identity.GetUserId();
             }
 
             return View();
