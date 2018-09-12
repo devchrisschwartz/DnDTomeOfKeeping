@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="viewbagofholdingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="viewbagofholdingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -87,12 +87,12 @@
           <Property Name="CharLevel" Type="int" Nullable="false" />
           <Property Name="Feats" Type="nvarchar" MaxLength="500" />
           <Property Name="Equipment" Type="nvarchar" MaxLength="4000" />
-          <Property Name="Features" Type="nchar" MaxLength="10" />
+          <Property Name="Features" Type="nvarchar" MaxLength="500" />
           <Property Name="Campaign" Type="int" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Race" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="SpellsKnown" Type="nchar" MaxLength="10" />
-          <Property Name="Proficiencies" Type="nchar" MaxLength="10" />
+          <Property Name="SpellsKnown" Type="nvarchar" MaxLength="3000" />
+          <Property Name="Proficiencies" Type="nvarchar" MaxLength="2000" />
           <Property Name="Strength" Type="int" Nullable="false" />
           <Property Name="Dexterity" Type="int" Nullable="false" />
           <Property Name="Constitution" Type="int" Nullable="false" />
@@ -305,8 +305,7 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
             <End Role="Spells" EntitySet="Spells" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="viewbagofholdingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -394,12 +393,12 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
           <Property Name="CharLevel" Type="Int32" Nullable="false" />
           <Property Name="Feats" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Equipment" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Features" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Features" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Campaign" Type="Int32" />
           <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Race" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SpellsKnown" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Proficiencies" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SpellsKnown" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="Proficiencies" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="Strength" Type="Int32" Nullable="false" />
           <Property Name="Dexterity" Type="Int32" Nullable="false" />
           <Property Name="Constitution" Type="Int32" Nullable="false" />

@@ -127,7 +127,6 @@ namespace DnDTomeOfKeeping.Controllers
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
             ORM.Characters.Add(newCharacter);
-
             ORM.SaveChanges();
 
             return RedirectToAction("Index");
