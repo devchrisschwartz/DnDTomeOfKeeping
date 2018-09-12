@@ -35,6 +35,7 @@ namespace DnDTomeOfKeeping.Controllers
             return View();
         }
 
+        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -79,6 +80,24 @@ namespace DnDTomeOfKeeping.Controllers
                 JObject jsonRaces = JObject.Parse(data);
 
                 ViewBag.Races = jsonRaces["results"];
+            }
+            string[] Names = new string[] { "barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard" };
+
+            HttpWebRequest spellApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class-1]}");
+
+            spellApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse spellApiResponse = (HttpWebResponse)spellApiRequest.GetResponse();
+
+            if (spellApiResponse.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(spellApiResponse.GetResponseStream());
+
+                string data = responseData.ReadToEnd();
+
+                JObject jsonSpells = JObject.Parse(data);
+
+                ViewBag.Spells = jsonSpells["results"];
             }
 
             return View();
