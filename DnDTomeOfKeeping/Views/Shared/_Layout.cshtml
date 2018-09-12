@@ -18,20 +18,41 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            @*<div class="navbar-collapse collapse">*@
+            <ul class="nav nav-pills">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/Home/Index">Home</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Home/About">About</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Home/CharacterCreator">Character Builder</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Home/Tracker">Tracker</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Home/Campaign">Create a Campaign</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Home/CCSearch">Character and Campaign Search</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Account/Register">Register</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Account/Login">Login</a>
+                    </div>
+                </li>
+                @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Character Builder", "CharacterCreator", "Home")</li>
                     <li>@Html.ActionLink("Create a Campaign", "Campaign", "Home")</li>
                     <li>@Html.ActionLink("Tracker", "Tracker", "Home")</li>
                     <li>@Html.ActionLink("Character & Campaign Search", "CCSearch", "Home")</li>
-                    <li> @Html.Partial("_LoginPartial")</li>
-                </ul>
+                    <li> @Html.Partial("_LoginPartial")</li>*@
+            </ul>
             <form class="form-inline navbar-right">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></form>
-            </div>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            @*</div>*@
         </div>
     </div>
     <div class="container body-content">
