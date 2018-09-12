@@ -1,7 +1,8 @@
 ﻿@{
-	ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home Page";
 }
-<br />
+
+@*<br />
 <br />
 <br />
 <form action="/Home/CharacterCreator" method="get">
@@ -13,9 +14,41 @@
         }
 	</select>
     @*<input type="hidden" value="@ViewBag.Classes["name"]" name="CharName"/>*@
-	<button type="submit">Select</button>
-</form>
+	@*<button type="submit">Select</button>
+</form>*@
 
-<br /><br />
+@*<form action="/Home/CharacterCreator" method="get">
+        <select name="Class">
+            @for(int i = 0; i<12; i++)
+            {
+            <option value="@(i+1)">@ViewBag.Classes[i]["name"]</option>
+            }
+        </select>
+        <button type="submit">Select</button>
+    </form>
+>>>>>>> changes to shared layout page and site.cs stylesheets/bootstrap class, changes to views and HC
 
-<a href="/Home/CharacterEdit">Edit Character</a>
+    <br /><br />
+
+    <a href="/Home/CharacterEdit">Edit Character</a>*@
+<div class="row">
+    <div class="container">
+
+        <div class="jumbotron col-md-6">
+            <h1 class="display-4">Welcome to Tome of Keeping!</h1>
+            <p class="lead">Shit goes here</p>
+            <hr class="my-4">
+            <p>More shit goes here, too.</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Tutorial</a>
+        </div>
+        
+
+        <div class="jumbotron col-md-6">
+            <h1 class="display-4">Register!</h1>
+            <p class="lead">Register stuff here</p>
+            <hr class="my-4">
+            <p>More stuff for registering goes here too</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </div>
+    </div>
+</div>

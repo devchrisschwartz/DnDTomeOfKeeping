@@ -3,66 +3,76 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>D&D Tome of Keeping</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <img src="http://www.enworld.org/forum/attachment.php?attachmentid=90789&d=1510228329&stc=1"
+                     alt="" style="width:100%">
             </div>
-            @*<div class="navbar-collapse collapse">*@
-            <ul class="nav nav-pills">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/Home/Index">Home</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/Home/About">About</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/Home/CharacterCreator">Character Builder</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/Home/Tracker">Tracker</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/Home/Campaign">Create a Campaign</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/Home/CCSearch">Character and Campaign Search</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/Account/Register">Register</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/Account/Login">Login</a>
+            <div class="col-sm-9">
+                <div class="h1">D&D Tome of Keeping</div>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                                    aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                       aria-expanded="false">Character<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/Home/CharacterCreator">Character Builder</a></li>
+                                        <li><a href="/Home/Tracker">Tracker</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                       aria-expanded="false">Campaign<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/Home/Campaign">Create Campaign</a></li>
+                                        <li><a href="/Home/CCSearch">Character and Campaign</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/Home/About">About</a></li>
+                            </ul>
+                            <div class="navbar-form navbar-right">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="/Home/Register">Register</a></li>
+                                <li><a href="/Home/Login">Login</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </li>
-                @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Character Builder", "CharacterCreator", "Home")</li>
-                    <li>@Html.ActionLink("Create a Campaign", "Campaign", "Home")</li>
-                    <li>@Html.ActionLink("Tracker", "Tracker", "Home")</li>
-                    <li>@Html.ActionLink("Character & Campaign Search", "CCSearch", "Home")</li>
-                    <li> @Html.Partial("_LoginPartial")</li>*@
-            </ul>
-            <form class="form-inline navbar-right">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            @*</div>*@
+                </nav>
+            </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
-
+    <footer class="footer">
+        <div class="container">
+            <div class="row text-center">D & D Tome of Keeping - Character and Campaign Builder & Tracker Project September 2018</div>
+        </div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

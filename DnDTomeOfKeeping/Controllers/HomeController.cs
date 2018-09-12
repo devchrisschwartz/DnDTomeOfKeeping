@@ -109,15 +109,15 @@ namespace DnDTomeOfKeeping.Controllers
             return View();
         }
 
-        //[HttpGet]
-        //public ActionResult CCSearch()
-        //{
+        [HttpGet]
+        public ActionResult CCSearch()
+        {
         //    //viewbagofholdingEntities ORM = new viewbagofholdingEntities();
         //    //ViewBag.Characters = ORM.character.Where(x => x.charID.Contains
         //    //(charID.)).ToList();
 
-        //    return View();
-        //}
+            return View();
+        }
 
         [HttpGet]
         public ActionResult Login()

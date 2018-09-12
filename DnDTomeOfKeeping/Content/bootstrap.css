@@ -4096,8 +4096,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
-  color: #fff;
-  background-color: #337ab7;
+  color: dimgrey;
+  background-color: #ffffff;
 }
 .nav-stacked > li {
   float: none;
@@ -4334,7 +4334,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     float: none;
     width: auto;
     margin-top: 0;
-    background-color: transparent;
+    background-color: dimgray;
     border: 0;
     -webkit-box-shadow: none;
             box-shadow: none;
