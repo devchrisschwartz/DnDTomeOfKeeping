@@ -1,49 +1,109 @@
-﻿@{
+﻿@model DnDTomeOfKeeping.Models.RegisterViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
+<<<<<<< HEAD
 
 @*<form action="/Home/CharacterCreator" method="get">
-        <select name="Class">
-            @for(int i = 0; i<12; i++)
-            {
-            <option value="@(i+1)">@ViewBag.Classes[i]["name"]</option>
-            }
-        </select>
-        <button type="submit">Select</button>
-    </form>
+    =======
+    @*<br />
+        <br />
+        <br />
+        <form action="/Home/CharacterCreator" method="get">
+    >>>>>>> fixed login issues. changed layout, home controller/account controller, and account view models.
+            <select name="Class">
 
+                @for(int i = 0; i<12; i++)
+                {
+                <option value="@(i+1)">@ViewBag.Classes[i]["name"]</option>
+                }
+            </select>
+    <<<<<<< HEAD
+            <button type="submit">Select</button>
+        </form>
 
-    <br /><br />
+    =======
+            @*<input type="hidden" value="@ViewBag.Classes["name"]" name="CharName"/>*@
+@*<button type="submit">Select</button>
+    </form>*@
 
-    <a href="/Home/CharacterEdit">Edit Character</a>*@
+@*<form action="/Home/CharacterCreator" method="get">
+                <select name="Class">
+                    @for(int i = 0; i<12; i++)
+                    {
+                    <option value="@(i+1)">@ViewBag.Classes[i]["name"]</option>
+                    }
+                </select>
+                <button type="submit">Select</button>
+            </form>
+        >>>>>>> changes to shared layout page and site.cs stylesheets/bootstrap class, changes to views and HC
+    >>>>>>> fixed login issues. changed layout, home controller/account controller, and account view models.
+
+            <br /><br />
+
+            <a href="/Home/CharacterEdit">Edit Character</a>*@
+
 <div class="row">
-    <div class="container">
-
-    </select>
-    <button type="submit">Select</button>
-</form>
-
-
-        <div class="jumbotron col-md-6">
-            <h1 class="display-4">Welcome to Tome of Keeping!</h1>
-            <p class="lead">Shit goes here</p>
-            <hr class="my-4">
-            <p>More shit goes here, too.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Tutorial</a>
+        <div class="col-md-5">
+            <h2>So you want to play</h2>
+            <h2>some D&D...</h2>
+            <p>
+                Some shit about the game here
+            </p>
+            <p><a class="btn btn-default" href="/Home/About">Go to the tutorial &raquo;</a></p>
         </div>
-        
+        <div class="col-md-5">
+            <h2>Register!</h2>
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="Register" />
+                    </div>
+                </div>
+            }
 
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
 
-        <div class="jumbotron col-md-6">
-            <h1 class="display-4">Register!</h1>
-            <p class="lead">Register stuff here</p>
-            <hr class="my-4">
-            <p>More stuff for registering goes here too</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </div>
+        <div class="col-md-2 text-right">
+            <b>Recent Characters</b>
+            <p>
+                <a href="">Character 1</a><br />
+                <a href="">Character 2</a><br />
+                <a href="">Character 3</a><br />
+                <a href="">Character 4</a><br />
+            </p>
         </div>
     </div>
-</div>
-
-<a href="/Home/CharacterEdit">Edit Character</a>
 

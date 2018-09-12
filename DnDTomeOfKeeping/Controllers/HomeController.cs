@@ -113,6 +113,7 @@ namespace DnDTomeOfKeeping.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Tracker()
         {
             return View();
