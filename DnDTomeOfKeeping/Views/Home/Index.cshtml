@@ -2,20 +2,6 @@
     ViewBag.Title = "Home Page";
 }
 
-@*<br />
-<br />
-<br />
-<form action="/Home/CharacterCreator" method="get">
-	<select name="Class">
-
-		@for(int i = 0; i<12; i++)
-        {
-		<option value="@(i+1)">@ViewBag.Classes[i]["name"]</option>
-        }
-	</select>
-    @*<input type="hidden" value="@ViewBag.Classes["name"]" name="CharName"/>*@
-	@*<button type="submit">Select</button>
-</form>*@
 
 @*<form action="/Home/CharacterCreator" method="get">
         <select name="Class">
@@ -26,13 +12,18 @@
         </select>
         <button type="submit">Select</button>
     </form>
->>>>>>> changes to shared layout page and site.cs stylesheets/bootstrap class, changes to views and HC
+
 
     <br /><br />
 
     <a href="/Home/CharacterEdit">Edit Character</a>*@
 <div class="row">
     <div class="container">
+
+    </select>
+    <button type="submit">Select</button>
+</form>
+
 
         <div class="jumbotron col-md-6">
             <h1 class="display-4">Welcome to Tome of Keeping!</h1>
@@ -43,6 +34,7 @@
         </div>
         
 
+
         <div class="jumbotron col-md-6">
             <h1 class="display-4">Register!</h1>
             <p class="lead">Register stuff here</p>
@@ -52,3 +44,6 @@
         </div>
     </div>
 </div>
+
+<a href="/Home/CharacterEdit">Edit Character</a>
+

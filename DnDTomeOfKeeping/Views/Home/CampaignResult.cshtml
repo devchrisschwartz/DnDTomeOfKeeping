@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "CampaignResult";
+}
+
+<h2>CampaignResult</h2>
+
+
+
+@if (ViewBag.Campaigns != null)
+{
+   // @ViewBag.Campaigns[0]
+
+    <table border="1" class="table">
+        <tr>
+            <th>Name</th>
+            <th>Dungeon Master</th>
+            
+        </tr>
+        @foreach (var campaign in ViewBag.Campaigns)
+        {
+            <tr>
+                <td>@campaign.name</td>
+                <td>@campaign.DMUserID</td>
+              </tr>  
+        }
+    </table>
+
+}
+

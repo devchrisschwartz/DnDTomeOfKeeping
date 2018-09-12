@@ -112,9 +112,11 @@ namespace DnDTomeOfKeeping.Controllers
         [HttpGet]
         public ActionResult CCSearch()
         {
+
         //    //viewbagofholdingEntities ORM = new viewbagofholdingEntities();
         //    //ViewBag.Characters = ORM.character.Where(x => x.charID.Contains
-        //    //(charID.)).ToList();
+        //    //(charID.)).ToList()
+
 
             return View();
         }
@@ -177,5 +179,29 @@ namespace DnDTomeOfKeeping.Controllers
 
             return View();
         }
+
+
+        public ActionResult SearchCharByName(string charName)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            ViewBag.Characters = ORM.Characters.Where(x => x.CharName.ToLower().Contains
+            (charName.ToLower())).ToList();
+
+            return View("CharacterResult");
+        }
+
+        public ActionResult SearchCampaignByName(string campaignName)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            ViewBag.Campaigns = ORM.Campaigns.Where(x => x.CampaignName.ToLower().Contains
+            (campaignName.ToLower())).ToList();
+
+            return View("CampaignResult");
+        }
+
+       
+
     }
 }

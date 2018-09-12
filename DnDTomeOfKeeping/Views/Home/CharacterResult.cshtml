@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "CharacterResult";
+}
+
+<h2>CharacterResult</h2>
+
+
+
+
+@if (ViewBag.Characters != null)
+{
+    @ViewBag.Characters[0]
+
+    <table border="1" class="table">
+        <tr>
+            <th>Name</th>
+            <th>class</th>
+
+        </tr>
+        @foreach (var character in ViewBag.Characters)
+        {
+            <tr>
+                <td>@character.name</td>
+                <td>@character.Class</td>
+            </tr>
+        }
+    </table>
+
+
+}

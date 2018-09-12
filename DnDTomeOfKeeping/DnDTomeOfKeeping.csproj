@@ -337,6 +337,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Campaign.cshtml" />
     <Content Include="Views\Home\CharacterEdit.cshtml" />
+    <Content Include="Views\Home\CharacterResult.cshtml" />
+    <Content Include="Views\Home\CampaignResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
