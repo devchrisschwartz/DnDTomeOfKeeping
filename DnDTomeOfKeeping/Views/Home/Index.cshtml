@@ -3,47 +3,6 @@
     ViewBag.Title = "Home Page";
 }
 
-<<<<<<< HEAD
-
-@*<form action="/Home/CharacterCreator" method="get">
-    =======
-    @*<br />
-        <br />
-        <br />
-        <form action="/Home/CharacterCreator" method="get">
-    >>>>>>> fixed login issues. changed layout, home controller/account controller, and account view models.
-            <select name="Class">
-
-                @for(int i = 0; i<12; i++)
-                {
-                <option value="@(i+1)">@ViewBag.Classes[i]["name"]</option>
-                }
-            </select>
-    <<<<<<< HEAD
-            <button type="submit">Select</button>
-        </form>
-
-    =======
-            @*<input type="hidden" value="@ViewBag.Classes["name"]" name="CharName"/>*@
-@*<button type="submit">Select</button>
-    </form>*@
-
-@*<form action="/Home/CharacterCreator" method="get">
-                <select name="Class">
-                    @for(int i = 0; i<12; i++)
-                    {
-                    <option value="@(i+1)">@ViewBag.Classes[i]["name"]</option>
-                    }
-                </select>
-                <button type="submit">Select</button>
-            </form>
-        >>>>>>> changes to shared layout page and site.cs stylesheets/bootstrap class, changes to views and HC
-    >>>>>>> fixed login issues. changed layout, home controller/account controller, and account view models.
-
-            <br /><br />
-
-            <a href="/Home/CharacterEdit">Edit Character</a>*@
-
 <div class="row">
         <div class="col-md-5">
             <h2>So you want to play</h2>
