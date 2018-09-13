@@ -156,6 +156,8 @@ namespace DnDTomeOfKeeping.Controllers
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
+            ViewBag.ListOfCharacters = ORM.Characters.Where(x => x.Campaign == id).ToList();
+
             ViewBag.Campaign = ORM.Campaigns.Find(id);
 
             ViewBag.User = User.Identity.GetUserId();
@@ -367,9 +369,16 @@ namespace DnDTomeOfKeeping.Controllers
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
+            Character charToEdit = ORM.Characters.Find(charID);
+
+            charToEdit.Campaign = campaignid;
+
+            ORM.Entry(charToEdit).State = System.Data.Entity.EntityState.Modified;
+            ORM.SaveChanges();
+
             ViewBag.ListOfCharacters = ORM.Characters.Where(x => x.Campaign == campaignid).ToList();
 
-            return RedirectToAction("Campaign", campaignid);
+            return RedirectToAction("Campaign", new { id = campaignid });
         }
     }
 }

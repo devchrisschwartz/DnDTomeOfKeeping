@@ -25,7 +25,7 @@
 <h3>My Campaigns</h3>
 @foreach (var Camp in ViewBag.MyCampaigns)
 {
-    <p>@Camp.CampaignName</p>
+    <a href="/Home/Campaign?id=@Camp.CampaignID">@Camp.CampaignName</a>
 }
 
-<br /><br /><br />
+<br /><br /><br /><br /><br /><br />

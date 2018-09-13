@@ -1,21 +1,22 @@
 ﻿
 @{
-    ViewBag.Title = "Campaign";
+	ViewBag.Title = "Campaign";
 }
 
 <h2>Campaign</h2>
 
 <h1>@ViewBag.Campaign.CampaignName</h1>
-
-@foreach (var character in ViewBag.ListOfCharacters)
+@if (ViewBag.ListOfCharacters != null)
 {
-	<p>@character.CharName</p>
+	foreach (var character in ViewBag.ListOfCharacters)
+	{
+		<p>@character.CharName</p>
+	}
 }
-
 <br /><br /><br />
 <form action="/Home/AddToCampaign">
-	<input type="hidden" value="@ViewBag.Campaign.CampaignID" name="campaignid"/>
-	<input type="number" name="charID"/> <br />
+	<input type="hidden" value="@ViewBag.Campaign.CampaignID" name="campaignid" />
+	<input type="number" name="charID" /> <br />
 	<input type="submit" value="Add To Campaign" />
 </form>
 
