@@ -5,9 +5,18 @@
 
 <h2>Campaign</h2>
 
-<form action="/Home/SaveCampaign">
-	<input type="hidden" value="0" name="CharacterIDs"/>
-	<input name="DMUserID" type="hidden" value="@ViewBag.User" />
-	<label>CampaignName</label><input name="CampaignName" type="text" />
-	<input type="submit" value="Create Campaign" />
+<h1>@ViewBag.Campaign.CampaignName</h1>
+
+@foreach (var character in ViewBag.ListOfCharacters)
+{
+	<p>@character.CharName</p>
+}
+
+<br /><br /><br />
+<form action="/Home/AddToCampaign">
+	<input type="hidden" value="@ViewBag.Campaign.CampaignID" name="campaignid"/>
+	<input type="number" name="charID"/> <br />
+	<input type="submit" value="Add To Campaign" />
 </form>
+
+<br /><br /><br />

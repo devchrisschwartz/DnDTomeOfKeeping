@@ -1,12 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "CreateCampaign";
+	ViewBag.Title = "CreateCampaign";
 }
 
-<h2>CreateCampaign</h2>
+<h2>Campaign</h2>
 
-<form>
-<input name="DmUserID" type="hidden" value="@ViewBag.Campaign" />
-<input name="CampaignName" type="text"
-<input type="submit" value="Create Campaign" />
+<form action="/Home/SaveCampaign">
+	<input type="hidden" value="0" name="CharacterIDs" />
+	<input name="DMUserID" type="hidden" value="@ViewBag.User" />
+	<label>CampaignName</label><input name="CampaignName" type="text" />
+	<input type="submit" value="Create Campaign" />
 </form>

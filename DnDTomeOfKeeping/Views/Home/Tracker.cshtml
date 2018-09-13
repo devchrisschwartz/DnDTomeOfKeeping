@@ -1,12 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "Tracker";
+	ViewBag.Title = "Tracker";
 }
 
 <h2>Tracker</h2>
 <a href="/Home/PickClass">Create a new character!</a> <br />
 <h3>My Characters</h3>
 <table>
+
     @foreach (var Char in ViewBag.CharacterToView)
     {
         <tr>
@@ -19,8 +20,6 @@
         </tr>
     }
 </table>
-
-
 
 <br />
 <h3>My Campaigns</h3>

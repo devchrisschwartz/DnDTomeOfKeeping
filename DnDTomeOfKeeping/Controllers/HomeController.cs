@@ -14,7 +14,6 @@ namespace DnDTomeOfKeeping.Controllers
     public class HomeController : Controller
     {
 
-
         [HttpGet]
         public ActionResult Index()
         {
@@ -123,9 +122,9 @@ namespace DnDTomeOfKeeping.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult CreateCampaign()
         {
-
             ViewBag.User = User.Identity.GetUserId();
 
             return View();
@@ -153,14 +152,12 @@ namespace DnDTomeOfKeeping.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Login()
+        public ActionResult Campaign(int id)
         {
-            return View();
-        }
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
-        public ActionResult Campaign()
-        {
+            ViewBag.Campaign = ORM.Campaigns.Find(id);
+
             ViewBag.User = User.Identity.GetUserId();
 
             return View();
@@ -321,7 +318,6 @@ namespace DnDTomeOfKeeping.Controllers
             //OldRecord.Campaign = UpdateItem.Campaign;
         }
 
-
         public ActionResult SearchCharByName(string charName)
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
@@ -365,6 +361,15 @@ namespace DnDTomeOfKeeping.Controllers
             ViewBag.Character = ORM.Characters.Find(CharacterID);
 
             return View();
+        }
+
+        public ActionResult AddToCampaign(int charID, int campaignid)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            ViewBag.ListOfCharacters = ORM.Characters.Where(x => x.Campaign == campaignid).ToList();
+
+            return RedirectToAction("Campaign", campaignid);
         }
     }
 }
