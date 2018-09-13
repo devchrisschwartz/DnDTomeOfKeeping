@@ -1,5 +1,7 @@
 ﻿
 @{
+    
+
     ViewBag.Title = "ViewCharacter";
 }
 
@@ -7,12 +9,23 @@
 
 <h2>@ViewBag.Character.CharName</h2>
 
-<table class="table" border="1">
-    foreach()
-    {
-    
-    
-    }
+<label>Character Name: </label> @ViewBag.Character.CharName  <br />
+<label>Race: </label> @ViewBag.Character.Race  <br />
+<label>Class: </label> @ViewBag.Character.Class  <br />
+<label>Current Level: </label> @ViewBag.Character.CharLevel<br />
+<label>Current HP: </label> @ViewBag.Character.HitPoints<br />
+<label>Current Alignment: </label> @ViewBag.Character.Alignment<br />
+<label>Current STR: </label> @ViewBag.Character.Strength<br />
+<label>Current DEX: </label> @ViewBag.Character.Dexterity<br />
+<label>Current CON: </label> @ViewBag.Character.Constitution<br />
+<label>Current INT: </label> @ViewBag.Character.Intelligence<br />
+<label>Current WIS: </label> @ViewBag.Character.Wisdom<br />
+<label>Current CHA: </label> @ViewBag.Character.Charisma<br />
+<label>Current Spells: </label>@ViewBag.Character.SpellsKnown<br />
+<label>Current Proficiencies: </label>@ViewBag.Character.Proficiencies <br />
 
 
-    </table>
+<br /><br /><br />
+
+
+
