@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "PickClass";
+}
+
+<h2>PickClass</h2>
+
+<form action="/Home/CharacterCreator" method="get">
+	<select name="Class">
+		@for(int i = 0; i<12; i++)
+            {
+		<option value="@(i+1)">@ViewBag.Classes[i]["name"]</option>
+            }
+	</select>
+	<button type="submit">Select</button>
+</form>

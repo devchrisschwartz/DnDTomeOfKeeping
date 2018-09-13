@@ -4,4 +4,10 @@
 }
 
 <h2>Tracker</h2>
+    <a href="/Home/PickClass">Create a new character!</a> <br />
 
+    @foreach (var Char in ViewBag.CharacterToView)
+    {
+<a href="/Home/CharacterEdit?CharacterID=@Char.CharID&Class=@Char.Class">Edit @Char.CharName</a><br />
+}
+    

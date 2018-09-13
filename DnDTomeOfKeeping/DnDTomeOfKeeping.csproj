@@ -340,6 +340,8 @@
     <Content Include="Views\Home\CharacterResult.cshtml" />
     <Content Include="Views\Home\CampaignResult.cshtml" />
     <Content Include="Views\Home\CreateCampaign.cshtml" />
+    <Content Include="Views\Home\PickClass.cshtml" />
+    <Content Include="Views\Home\ViewCharacter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
