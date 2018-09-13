@@ -13,12 +13,12 @@
 	<label>Level: </label><input type="number" min="1" max="20" name="CharLevel" id="charlvl" />
 	<label>HP: </label><input type="number" name="HitPoints" @*min="@(ViewBag.Classes["hit_die"] + con + (1*(charlvl - 1)))"*@ />
 	<h2>Statistics</h2><br />
-	<label>STR: </label><input name="Strength" type="number" minimum="6" max="20" /><br />
-	<label>DEX: </label><input name="Dexterity" type="number" minimum="6" max="20" /><br />
-	<label>CON: </label><input name="Constitution" type="number" minimum="6" max="20" id="con" /><br />
-	<label>INT: </label><input name="Intelligence" type="number" minimum="6" max="20" /><br />
-	<label>WIS: </label><input name="Wisdom" type="number" minimum="6" max="20" /><br />
-	<label>CHA: </label><input name="Charisma" type="number" minimum="6" max="20" /><br />
+	<label>STR: </label><input name="Strength" type="number" min="3" /><br />
+	<label>DEX: </label><input name="Dexterity" type="number" min="3" /><br />
+	<label>CON: </label><input name="Constitution" type="number" min="3" id="con" /><br />
+	<label>INT: </label><input name="Intelligence" type="number" min="3" /><br />
+	<label>WIS: </label><input name="Wisdom" type="number" min="3"/><br />
+	<label>CHA: </label><input name="Charisma" type="number" min="3" /><br />
 	<h2>Alignment</h2><br />
 	<select name="Alignment">
 		<option value="Lawful Good">Lawful Good</option>

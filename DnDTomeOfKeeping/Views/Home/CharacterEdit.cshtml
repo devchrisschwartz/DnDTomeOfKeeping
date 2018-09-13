@@ -15,11 +15,11 @@
 
 <form action="/Home/SaveChanges" method="post">
 	<label>Current Level: </label> @ViewBag.CharacterData.CharLevel
-	<label> New Level: </label><input type="number" min="1" max="20" name="CharLevel" id="charlvl" />
+	<label> New Level: </label><input type="number" min="1" max="20" name="CharLevel" value="@ViewBag.CharacterData.CharLevel" id="charlvl" />
 	<br />
 	<input type="hidden" name="CharID" value="@ViewBag.CharacterData.CharID" />
 	<label>Current HP: </label> @ViewBag.CharacterData.HitPoints
-	<label>New HP: </label><input type="number" name="HitPoints" />
+	<label>New HP: </label><input type="number" name="HitPoints" value="@ViewBag.CharacterData.HitPoints"/>
 	<br />
 	<label> Current Alignment: </label> @ViewBag.CharacterData.Alignment
 	<label>New Alignment: </label>
@@ -36,17 +36,17 @@
 	</select>
 	<br />
 	<label>Current STR: </label> @ViewBag.CharacterData.Strength
-	<label>New STR: </label><input name="Strength" type="number" minimum="6" max="20" /><br />
+	<label>New STR: </label><input name="Strength" type="number" minimum="3" value="@ViewBag.CharacterData.Strength"  /><br />
 	<label>Current DEX: </label> @ViewBag.CharacterData.Dexterity
-	<label>New DEX: </label><input name="Dexterity" type="number" minimum="6" max="20" /><br />
+	<label>New DEX: </label><input name="Dexterity" type="number" minimum="3" value="@ViewBag.CharacterData.Dexterity"/><br />
 	<label>Current CON: </label> @ViewBag.CharacterData.Constitution
-	<label>New CON: </label><input name="Constitution" type="number" minimum="6" max="20" id="con" /><br />
+	<label>New CON: </label><input name="Constitution" type="number" minimum="3" value="@ViewBag.CharacterData.Constitution" id="con" /><br />
 	<label>Current INT: </label> @ViewBag.CharacterData.Intelligence
-	<label>New INT: </label><input name="Intelligence" type="number" minimum="6" max="20" /><br />
+	<label>New INT: </label><input name="Intelligence" type="number" minimum="3" value="@ViewBag.CharacterData.Intelligence" /><br />
 	<label>Current WIS: </label> @ViewBag.CharacterData.Wisdom
-	<label>New WIS: </label><input name="Wisdom" type="number" minimum="6" max="20" /><br />
+	<label>New WIS: </label><input name="Wisdom" type="number" minimum="3" value="@ViewBag.CharacterData.Wisdom"/><br />
 	<label>Current CHA: </label> @ViewBag.CharacterData.Charisma
-	<label>New CHA:</label><input name="Charisma" type="number" minimum="6" max="20" /><br />
+	<label>New CHA:</label><input name="Charisma" type="number" minimum="3" value="@ViewBag.CharacterData.Charisma"/><br />
 	<label>Current Spells: </label>@ViewBag.CharacterData.SpellsKnown
 	<label>Add Spells:</label>
     <table border="1">
