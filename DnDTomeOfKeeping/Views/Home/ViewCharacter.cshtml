@@ -1,8 +1,11 @@
 ﻿
 @{
-    
+
 
     ViewBag.Title = "ViewCharacter";
+
+    string[] classNames = new string[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"};
+    string[] raceNames = new string[] { "Dwarf", "Elf", "Halfling", "Human", "Dragonborn", "Gnome", "Half-Elf", "Half-Orc", "Tiefling" };
 }
 
 <h2>ViewCharacter</h2>
@@ -10,8 +13,8 @@
 <h2>@ViewBag.Character.CharName</h2>
 
 <label>Character Name: </label> @ViewBag.Character.CharName  <br />
-<label>Race: </label> @ViewBag.Character.Race  <br />
-<label>Class: </label> @ViewBag.Character.Class  <br />
+<label>Race: </label> @raceNames[@ViewBag.Character.Race-1]  <br />
+<label>Class: </label> @classNames[@ViewBag.Character.Class-1]  <br />
 <label>Current Level: </label> @ViewBag.Character.CharLevel<br />
 <label>Current HP: </label> @ViewBag.Character.HitPoints<br />
 <label>Current Alignment: </label> @ViewBag.Character.Alignment<br />

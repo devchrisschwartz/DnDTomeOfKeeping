@@ -32,7 +32,7 @@ namespace DnDTomeOfKeeping.Models
         public string Features { get; set; }
         public Nullable<int> Campaign { get; set; }
         public string UserID { get; set; }
-        public string Race { get; set; }
+        public int Race { get; set; }
         public string SpellsKnown { get; set; }
         public string Proficiencies { get; set; }
         public int Strength { get; set; }
@@ -43,10 +43,10 @@ namespace DnDTomeOfKeeping.Models
         public int Charisma { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Campaign Campaign1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proficiency> Proficiencies1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Spell> Spells { get; set; }
-        public virtual Campaign Campaign1 { get; set; }
     }
 }
