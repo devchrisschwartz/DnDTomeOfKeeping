@@ -14,12 +14,18 @@ namespace DnDTomeOfKeeping.Models
     
     public partial class Campaign
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Campaign()
+        {
+            this.Characters = new HashSet<Character>();
+        }
+    
         public int CampaignID { get; set; }
         public string DMUserID { get; set; }
         public string CampaignName { get; set; }
-        public int CharacterIDs { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual Character Character { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Character> Characters { get; set; }
     }
 }

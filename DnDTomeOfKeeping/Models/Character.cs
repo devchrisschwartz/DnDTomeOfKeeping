@@ -17,7 +17,6 @@ namespace DnDTomeOfKeeping.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Character()
         {
-            this.Campaigns = new HashSet<Campaign>();
             this.Proficiencies1 = new HashSet<Proficiency>();
             this.Spells = new HashSet<Spell>();
         }
@@ -45,10 +44,9 @@ namespace DnDTomeOfKeeping.Models
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Campaign> Campaigns { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proficiency> Proficiencies1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Spell> Spells { get; set; }
+        public virtual Campaign Campaign1 { get; set; }
     }
 }

@@ -10,20 +10,20 @@
         <EntityTypeShape EntityType="viewbagofholdingModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="viewbagofholdingModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="viewbagofholdingModel.AspNetUser" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="viewbagofholdingModel.Campaign" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="viewbagofholdingModel.Character" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="viewbagofholdingModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="viewbagofholdingModel.Proficiency" Width="1.5" PointX="7.5" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="viewbagofholdingModel.Spell" Width="1.5" PointX="7.5" PointY="14.375" IsExpanded="true" />
         <AssociationConnector Association="viewbagofholdingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="viewbagofholdingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="viewbagofholdingModel.FK_Campaigns_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="viewbagofholdingModel.FK_Characters_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="viewbagofholdingModel.FK_Campaigns_Characters" ManuallyRouted="false" />
         <AssociationConnector Association="viewbagofholdingModel.FK_Proficiencies_Characters" ManuallyRouted="false" />
         <AssociationConnector Association="viewbagofholdingModel.FK_Spells_Characters" ManuallyRouted="false" />
         <AssociationConnector Association="viewbagofholdingModel.AspNetUserRoles" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="viewbagofholdingModel.Campaign" Width="1.5" PointX="8.5" PointY="4.25" />
+        <AssociationConnector Association="viewbagofholdingModel.FK_Campaigns_AspNetUsers" />
+        <AssociationConnector Association="viewbagofholdingModel.FK_Characters_Campaigns" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

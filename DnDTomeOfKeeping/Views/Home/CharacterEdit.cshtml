@@ -17,7 +17,7 @@
 	<label>Current Level: </label> @ViewBag.CharacterData.CharLevel
 	<label> New Level: </label><input type="number" min="1" max="20" name="CharLevel" id="charlvl" />
 	<br />
-
+	<input type="hidden" name="CharID" value="@ViewBag.CharacterData.CharID" />
 	<label>Current HP: </label> @ViewBag.CharacterData.HitPoints
 	<label>New HP: </label><input type="number" name="HitPoints" />
 	<br />
@@ -60,15 +60,24 @@
 		</tr>
 		}
 	</table>
-	<label>Current Proficiencies: </label>@ViewBag.CharacterData.Proficiencies
-	<label>Change Proficiencies: </label>
+	<label>Current Proficiencies: </label>@ViewBag.CharacterData.Proficiencies <br />
+	<label>Change Proficiencies: </label> <br />
     @for (int i = 0; i < ViewBag.Classes["from"].Count; i++)
 	{
 	<input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["from"][i]["name"]" />
 	@ViewBag.Classes["from"][i]["name"]
 	<br />
 	}
+    @for (int i = 0; i < ViewBag.Pro.Count; i++)
+	{
+	<input type="hidden" name="Proficiencies" value="@ViewBag.Pro[i]["name"]"/>
+	}
 
+    @for (int i = 0; i < ViewBag.Saves.Count; i++)
+	{
+	<input type="hidden" name="Proficiencies" value="@ViewBag.Saves[i]["name"]" />
+	}
+    <input type="submit" value="Save Changes" />
 </form>
 <br />
 <br />

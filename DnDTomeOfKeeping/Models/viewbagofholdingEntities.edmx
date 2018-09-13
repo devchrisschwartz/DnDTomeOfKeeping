@@ -73,13 +73,12 @@
           <Property Name="CampaignID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DMUserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="CampaignName" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="CharacterIDs" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Characters">
           <Key>
             <PropertyRef Name="CharID" />
           </Key>
-          <Property Name="CharID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CharID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CharName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Class" Type="int" Nullable="false" />
           <Property Name="HitPoints" Type="int" Nullable="false" />
@@ -142,18 +141,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Campaigns_Characters">
-          <End Role="Characters" Type="Self.Characters" Multiplicity="1" />
-          <End Role="Campaigns" Type="Self.Campaigns" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Characters">
-              <PropertyRef Name="CharID" />
-            </Principal>
-            <Dependent Role="Campaigns">
-              <PropertyRef Name="CharacterIDs" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Characters_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Characters" Type="Self.Characters" Multiplicity="*" />
@@ -163,6 +150,18 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
             </Principal>
             <Dependent Role="Characters">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Characters_Campaigns">
+          <End Role="Campaigns" Type="Self.Campaigns" Multiplicity="0..1" />
+          <End Role="Characters" Type="Self.Characters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campaigns">
+              <PropertyRef Name="CampaignID" />
+            </Principal>
+            <Dependent Role="Characters">
+              <PropertyRef Name="Campaign" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -272,12 +271,12 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Campaigns" EntitySet="Campaigns" />
           </AssociationSet>
-          <AssociationSet Name="FK_Campaigns_Characters" Association="Self.FK_Campaigns_Characters">
-            <End Role="Characters" EntitySet="Characters" />
-            <End Role="Campaigns" EntitySet="Campaigns" />
-          </AssociationSet>
           <AssociationSet Name="FK_Characters_AspNetUsers" Association="Self.FK_Characters_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Characters" EntitySet="Characters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Characters_Campaigns" Association="Self.FK_Characters_Campaigns">
+            <End Role="Campaigns" EntitySet="Campaigns" />
             <End Role="Characters" EntitySet="Characters" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -366,20 +365,9 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="Campaigns" Relationship="Self.FK_Campaigns_AspNetUsers" FromRole="AspNetUsers" ToRole="Campaigns" />
           <NavigationProperty Name="Characters" Relationship="Self.FK_Characters_AspNetUsers" FromRole="AspNetUsers" ToRole="Characters" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-        </EntityType>
-        <EntityType Name="Campaign">
-          <Key>
-            <PropertyRef Name="CampaignID" />
-          </Key>
-          <Property Name="CampaignID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DMUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CampaignName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CharacterIDs" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Campaigns_AspNetUsers" FromRole="Campaigns" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Character" Relationship="Self.FK_Campaigns_Characters" FromRole="Campaigns" ToRole="Characters" />
+          <NavigationProperty Name="Campaigns" Relationship="viewbagofholdingModel.FK_Campaigns_AspNetUsers" FromRole="AspNetUser" ToRole="Campaign" />
         </EntityType>
         <EntityType Name="Character">
           <Key>
@@ -406,9 +394,9 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
           <Property Name="Wisdom" Type="Int32" Nullable="false" />
           <Property Name="Charisma" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Characters_AspNetUsers" FromRole="Characters" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Campaigns" Relationship="Self.FK_Campaigns_Characters" FromRole="Characters" ToRole="Campaigns" />
           <NavigationProperty Name="Proficiencies1" Relationship="Self.FK_Proficiencies_Characters" FromRole="Characters" ToRole="Proficiencies" />
           <NavigationProperty Name="Spells" Relationship="Self.FK_Spells_Characters" FromRole="Characters" ToRole="Spells" />
+          <NavigationProperty Name="Campaign1" Relationship="viewbagofholdingModel.FK_Characters_Campaigns" FromRole="Character" ToRole="Campaign" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -466,18 +454,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Campaigns_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
-          <End Role="Campaigns" Type="Self.Campaign" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Campaigns">
-              <PropertyRef Name="DMUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Characters_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
           <End Role="Characters" Type="Self.Character" Multiplicity="*" />
@@ -487,18 +463,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
             </Principal>
             <Dependent Role="Characters">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Campaigns_Characters">
-          <End Role="Characters" Type="Self.Character" Multiplicity="1" />
-          <End Role="Campaigns" Type="Self.Campaign" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Characters">
-              <PropertyRef Name="CharID" />
-            </Principal>
-            <Dependent Role="Campaigns">
-              <PropertyRef Name="CharacterIDs" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -536,7 +500,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="Campaigns" EntityType="Self.Campaign" />
           <EntitySet Name="Characters" EntityType="Self.Character" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Proficiencies" EntityType="Self.Proficiency" />
@@ -549,17 +512,9 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK_Campaigns_AspNetUsers" Association="Self.FK_Campaigns_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Campaigns" EntitySet="Campaigns" />
-          </AssociationSet>
           <AssociationSet Name="FK_Characters_AspNetUsers" Association="Self.FK_Characters_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Characters" EntitySet="Characters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Campaigns_Characters" Association="Self.FK_Campaigns_Characters">
-            <End Role="Characters" EntitySet="Characters" />
-            <End Role="Campaigns" EntitySet="Campaigns" />
           </AssociationSet>
           <AssociationSet Name="FK_Proficiencies_Characters" Association="Self.FK_Proficiencies_Characters">
             <End Role="Characters" EntitySet="Characters" />
@@ -573,8 +528,51 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-        </EntityContainer>
-      </Schema>
+          <EntitySet Name="Campaigns" EntityType="viewbagofholdingModel.Campaign" />
+          <AssociationSet Name="FK_Campaigns_AspNetUsers" Association="viewbagofholdingModel.FK_Campaigns_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Campaign" EntitySet="Campaigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Characters_Campaigns" Association="viewbagofholdingModel.FK_Characters_Campaigns">
+            <End Role="Campaign" EntitySet="Campaigns" />
+            <End Role="Character" EntitySet="Characters" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Campaign">
+          <Key>
+            <PropertyRef Name="CampaignID" />
+          </Key>
+          <Property Name="CampaignID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DMUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CampaignName" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="viewbagofholdingModel.FK_Campaigns_AspNetUsers" FromRole="Campaign" ToRole="AspNetUser" />
+          <NavigationProperty Name="Characters" Relationship="viewbagofholdingModel.FK_Characters_Campaigns" FromRole="Campaign" ToRole="Character" />
+        </EntityType>
+        <Association Name="FK_Campaigns_AspNetUsers">
+          <End Type="viewbagofholdingModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="viewbagofholdingModel.Campaign" Role="Campaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Campaign">
+              <PropertyRef Name="DMUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Characters_Campaigns">
+          <End Type="viewbagofholdingModel.Campaign" Role="Campaign" Multiplicity="0..1" />
+          <End Type="viewbagofholdingModel.Character" Role="Character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campaign">
+              <PropertyRef Name="CampaignID" />
+            </Principal>
+            <Dependent Role="Character">
+              <PropertyRef Name="Campaign" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -632,16 +630,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Campaigns">
-            <EntityTypeMapping TypeName="viewbagofholdingModel.Campaign">
-              <MappingFragment StoreEntitySet="Campaigns">
-                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
-                <ScalarProperty Name="DMUserID" ColumnName="DMUserID" />
-                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
-                <ScalarProperty Name="CharacterIDs" ColumnName="CharacterIDs" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -706,6 +694,15 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Campaigns">
+            <EntityTypeMapping TypeName="viewbagofholdingModel.Campaign">
+              <MappingFragment StoreEntitySet="Campaigns">
+                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
+                <ScalarProperty Name="DMUserID" ColumnName="DMUserID" />
+                <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

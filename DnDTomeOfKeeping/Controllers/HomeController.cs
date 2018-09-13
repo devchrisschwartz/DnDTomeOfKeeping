@@ -18,23 +18,6 @@ namespace DnDTomeOfKeeping.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            HttpWebRequest dndApiRequest = WebRequest.CreateHttp("http://www.dnd5eapi.co/api/classes");
-
-            dndApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
-
-            HttpWebResponse dndApiResponse = (HttpWebResponse)dndApiRequest.GetResponse();
-
-            if (dndApiResponse.StatusCode == HttpStatusCode.OK)
-            {
-                StreamReader responseData = new StreamReader(dndApiResponse.GetResponseStream());
-
-                string data = responseData.ReadToEnd();
-
-                JObject jsonClasses = JObject.Parse(data);
-
-                ViewBag.Classes = jsonClasses["results"];
-            }
-
             return View();
         }
 
@@ -157,6 +140,8 @@ namespace DnDTomeOfKeeping.Controllers
             ViewBag.CharacterToView = ORM.Characters.Where(x => x.UserID == loggedinuser).ToList();
             //ViewBag.CharacterToView = ORM.Characters.ToList();
             ViewBag.CharacterIDs = ORM.Characters.Where(x => x.CharID > 0).ToList();
+
+            ViewBag.MyCampaigns = ORM.Campaigns.Where(x => x.DMUserID == loggedinuser).ToList();
 
             return View();
         }
@@ -288,31 +273,52 @@ namespace DnDTomeOfKeeping.Controllers
             return RedirectToAction("Tracker");
         }
 
-        public ActionResult SaveChanges(Character UpdatedCharacter)
+        public ActionResult SaveChanges(Character UpdatedCharacter, string[] Proficiencies, string[] SpellsKnown)
         {
-            //Character OldRecord = ORM.Characters.Find(UpdateItem.CharID);
+            if (SpellsKnown != null)
+            {
+                string spells = "";
 
-            //OldRecord.CharName = UpdateItem.CharName;
-            //OldRecord.Class = UpdateItem.Class;
-            //OldRecord.HitPoints = UpdateItem.HitPoints;
-            //OldRecord.Alignment = UpdateItem.Alignment;
-            //OldRecord.CharLevel = UpdateItem.CharLevel;
+                foreach (string spell in SpellsKnown)
+                {
+                    spells += spell + ",";
+                }
+                UpdatedCharacter.SpellsKnown = spells;
+            }
+
+            string s = "";
+
+            foreach (string p in Proficiencies)
+            {
+                s += p + ",";
+            }
+            UpdatedCharacter.Proficiencies = s;
+
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            Character OldRecord = ORM.Characters.Find(UpdatedCharacter.CharID);
+
+            OldRecord.HitPoints = UpdatedCharacter.HitPoints;
+            OldRecord.Alignment = UpdatedCharacter.Alignment;
+            OldRecord.CharLevel = UpdatedCharacter.CharLevel;
+            OldRecord.SpellsKnown = UpdatedCharacter.SpellsKnown;
+            OldRecord.Proficiencies = UpdatedCharacter.Proficiencies;
+            OldRecord.Strength = UpdatedCharacter.Strength;
+            OldRecord.Dexterity = UpdatedCharacter.Dexterity;
+            OldRecord.Constitution = UpdatedCharacter.Constitution;
+            OldRecord.Intelligence = UpdatedCharacter.Intelligence;
+            OldRecord.Wisdom = UpdatedCharacter.Wisdom;
+            OldRecord.Charisma = UpdatedCharacter.Charisma;
+
+            ORM.Entry(OldRecord).State = System.Data.Entity.EntityState.Modified;
+            ORM.SaveChanges();
+
+
+            return RedirectToAction("Tracker");
             //OldRecord.Feats = UpdateItem.Feats;
             //OldRecord.Equipment = UpdateItem.Equipment;
             //OldRecord.Features = UpdateItem.Features;
             //OldRecord.Campaign = UpdateItem.Campaign;
-            //OldRecord.UserID = UpdateItem.UserID;
-            //OldRecord.Race = UpdateItem.Race;
-            //OldRecord.SpellsKnown = UpdateItem.SpellsKnown;
-            //OldRecord.Proficiencies = UpdateItem.Proficiencies;
-            //OldRecord.Strength = UpdateItem.Strength;
-            //OldRecord.Dexterity = UpdateItem.Dexterity;
-            //OldRecord.Constitution = UpdateItem.Constitution;
-            //OldRecord.Intellegence = UpdateItem.Intellegence;
-            //OldRecord.Wisdom = UpdateItem.Wisdom;
-            //OldRecord.Charisma = UpdateItem.Charisma;
-
-            return View();
         }
 
 
@@ -349,18 +355,16 @@ namespace DnDTomeOfKeeping.Controllers
 
         }
 
+        [HttpGet]
         public ActionResult ViewCharacter(int CharacterID)
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
             //ViewBag.CharacterToView = ORM.Characters.Where(x => x.CharID.ToString().Contains(CharID.ToString())).ToList();
 
-            Character characterToEdit = ORM.Characters.Find(CharacterID);
+            ViewBag.Character = ORM.Characters.Find(CharacterID);
 
-            return View("ViewCharacter");
+            return View();
         }
-
-
-
     }
 }

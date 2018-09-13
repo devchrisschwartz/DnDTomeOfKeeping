@@ -5,9 +5,17 @@
 
 <h2>Tracker</h2>
     <a href="/Home/PickClass">Create a new character!</a> <br />
-
+<h3>My Characters</h3>
     @foreach (var Char in ViewBag.CharacterToView)
     {
 <a href="/Home/CharacterEdit?CharacterID=@Char.CharID&Class=@Char.Class">Edit @Char.CharName</a><br />
 }
-    
+
+<br />
+<h3>My Campaigns</h3>
+@foreach (var Camp in ViewBag.MyCampaigns)
+{
+	<p>@Camp.CampaignName</p>
+}
+
+<br /><br /><br />
