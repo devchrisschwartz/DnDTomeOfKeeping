@@ -65,8 +65,13 @@ namespace DnDTomeOfKeeping.Controllers
                 string data = responseData.ReadToEnd();
 
                 JObject jsonClasses = JObject.Parse(data);
+                int size = jsonClasses["proficiency_choices"].Count();
+                ViewBag.Name = jsonClasses["name"];
+                ViewBag.Classes = jsonClasses["proficiency_choices"][size - 1];
 
-                ViewBag.Classes = jsonClasses;
+                ViewBag.Choose = jsonClasses["proficiency_choices"][size - 1]["choose"];
+                ViewBag.Pro = jsonClasses["proficiencies"];
+                ViewBag.Saves = jsonClasses["saving_throws"];
             }
 
             HttpWebRequest dndRaceApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/races");
@@ -154,14 +159,23 @@ namespace DnDTomeOfKeeping.Controllers
             return View();
         }
 
-        public ActionResult CharacterSubmit(Character newCharacter)
+        public ActionResult CharacterSubmit(Character newCharacter, string[] Proficiencies)
         {
+
+            string s = "";
+
+            foreach (string p in Proficiencies)
+            {
+                s += p + ",";
+            }
+            newCharacter.Proficiencies = s;
+            //Session["t"] = newCharacter.Proficiencies;
+            //Session["t2"] = newCharacter.Proficiencies[1];
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
             ORM.Characters.Add(newCharacter);
             ORM.SaveChanges();
-
-            return RedirectToAction("Index");
+            return RedirectToAction("Tracker");
         }
 
         public ActionResult SaveChanges(Character UpdatedCharacter)

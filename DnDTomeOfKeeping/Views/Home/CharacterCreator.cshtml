@@ -5,16 +5,11 @@
 
 <form action="/Home/CharacterSubmit" method="post">
 	<h2>CharacterCreator</h2><br />
-
 	<label>Character Name: </label><input type="text" name="CharName" />
-
-	<input type="hidden" value="@ViewBag.Classes["name"]" />
-	<h2>Class: @ViewBag.Classes["index"]</h2> <br />
-
+	<input type="hidden" value="@ViewBag.Name" />
+	<h2>Class: @ViewBag.Name</h2> <br />
 	<label>Level: </label><input type="number" min="1" max="20" name="CharLevel" id="charlvl" />
-
 	<label>HP: </label><input type="number" name="HitPoints" @*min="@(ViewBag.Classes["hit_die"] + con + (1*(charlvl - 1)))"*@ />
-
 	<h2>Statistics</h2><br />
 	<label>STR: </label><input name="Strength" type="number" minimum="6" max="20" /><br />
 	<label>DEX: </label><input name="Dexterity" type="number" minimum="6" max="20" /><br />
@@ -22,7 +17,6 @@
 	<label>INT: </label><input name="Intelligence" type="number" minimum="6" max="20" /><br />
 	<label>WIS: </label><input name="Wisdom" type="number" minimum="6" max="20" /><br />
 	<label>CHA: </label><input name="Charisma" type="number" minimum="6" max="20" /><br />
-
 	<h2>Alignment</h2><br />
 	<select name="Alignment">
 		<option value="Lawful Good">Lawful Good</option>
@@ -36,40 +30,28 @@
 		<option value="Chaotic Evil"> Chaotic Evil</option>
 	</select>
 	<br />
-
 	<h2>Race</h2><br />
 	<select name="Race">
 		@for (int i = 0; i < ViewBag.Races.Count; i++)
 		{
 			<option value="@(i+1)">@ViewBag.Races[i]["name"]</option>
 		}
-
 	</select>
 
 	<br />
-
 	<h2>Proficiency Choices: </h2>
 	<br />
 
-	<table border="1">
 
-		@for (int j = 0; j < ViewBag.Classes["proficiency_choices"].Count; j++)
-		{
-			<tr>
-				<th>Pick @ViewBag.Classes["proficiency_choices"][j]["choose"] from this list</th>
-			</tr>
-			<tr>
-				<td>
-					@for (int i = 0; i < ViewBag.Classes["proficiency_choices"][j]["from"].Count; i++)
-					{
-						<input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["proficiency_choices"][j]["from"][i]["name"]" />
-						@ViewBag.Classes["proficiency_choices"][j]["from"][i]["name"]
-					}
-				</td>
-			</tr>
-		}
+	<h2>Pick @ViewBag.Choose from this list</h2>
+	@for (int i = 0; i < ViewBag.Classes["from"].Count; i++)
+	{
 
-	</table>
+		<input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["from"][i]["name"]" />
+		@ViewBag.Classes["from"][i]["name"]
+
+	}
+
 	<br />
 
 	<h2>Spells:</h2>
@@ -81,25 +63,26 @@
 				<td>
 					<input type="checkbox" name="Spells" value="@ViewBag.Spells[i]["name"]" />
 					@ViewBag.Spells[i]["name"]
-
 				</td>
 			</tr>
 		}
 	</table>
 
-
-
 	<h3>Armor and Weapon Proficiencies</h3>
 	<br />
-
-	@for (int i = 0; i < ViewBag.Classes["proficiencies"].Count; i++)
+	@for (int i = 0; i < ViewBag.Pro.Count; i++)
 	{
-		<p>@ViewBag.Classes["proficiencies"][i]["name"]</p>
+		<p>@ViewBag.Pro[i]["name"]</p>
 	}
 
-	<input name="UserID" type="hidden" value="@ViewBag.User" />
+	<h3>Saving Throws</h3>
+	<br />
+	@for (int i = 0; i < ViewBag.Saves.Count; i++)
+	{
+		<p>@ViewBag.Saves[i]["name"]</p>
+	}
 
+	<input name="UserID" type="hidden" value="2182a8b6-b950-47ec-98eb-54b00a08fe63" />
 	<input type="submit" value="Create Character" />
-    <input name="DmUserID" type="hidden" value="@ViewBag.Campaign"/>
-    <input type="submit" value="Create Campaign"/>
 </form>
+<br /><br /><br /><br />
