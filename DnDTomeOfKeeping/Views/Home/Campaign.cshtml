@@ -5,19 +5,24 @@
 
 <h2>Campaign</h2>
 
-<h1>@ViewBag.Campaign.CampaignName</h1>
+<h1>@ViewBag.Campaign.CampaignName</h1> @*create list of characters in the campaign*@
 @if (ViewBag.ListOfCharacters != null)
 {
 	foreach (var character in ViewBag.ListOfCharacters)
 	{
-		<p>@character.CharName</p>
+<a href="/Home/ViewCharacter?CharacterID=@character.CharID">@character.CharName</a> <br />
 	}
 }
 <br /><br /><br />
-<form action="/Home/AddToCampaign">
-	<input type="hidden" value="@ViewBag.Campaign.CampaignID" name="campaignid" />
-	<input type="number" name="charID" /> <br />
-	<input type="submit" value="Add To Campaign" />
+<form action="/Home/AddToCampaign"> @*Create list of available characters that are not in a campaign, give option to add to the campaign*@
+    <input type="hidden" value="@ViewBag.Campaign.CampaignID" name="campaignid" />
+    <select name="charID">
+        @foreach(var availablecharacter in @ViewBag.AvailableCharacters)
+		{
+        <option value="@availablecharacter.CharID">@availablecharacter.CharName</option>
+        }
+    </select>
+    <input type="submit" value="Add To Campaign" />
 </form>
 
 <br /><br /><br />

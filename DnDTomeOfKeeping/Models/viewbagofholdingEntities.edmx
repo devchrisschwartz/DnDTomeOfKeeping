@@ -86,7 +86,7 @@
           <Property Name="CharLevel" Type="int" Nullable="false" />
           <Property Name="Feats" Type="nvarchar" MaxLength="500" />
           <Property Name="Equipment" Type="nvarchar" MaxLength="4000" />
-          <Property Name="Features" Type="nvarchar" MaxLength="500" />
+          <Property Name="Features" Type="nvarchar" MaxLength="2000" />
           <Property Name="Campaign" Type="int" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Race" Type="int" Nullable="false" />
@@ -507,7 +507,7 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
           <Property Name="CharLevel" Type="Int32" Nullable="false" />
           <Property Name="Feats" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Equipment" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Features" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Features" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="Campaign" Type="Int32" />
           <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Race" Type="Int32" Nullable="false" />

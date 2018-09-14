@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "CharacterEdit";
 
-	@*ViewBag.CharacterData*@
+    @*ViewBag.CharacterData*@
 }
 
 <h2>CharacterEdit</h2>
@@ -14,68 +14,109 @@
 <label>Class: </label> @ViewBag.CharacterData.Class  <br />
 
 <form action="/Home/SaveChanges" method="post">
-	<label>Current Level: </label> @ViewBag.CharacterData.CharLevel
-	<label> New Level: </label><input type="number" min="1" max="20" name="CharLevel" value="@ViewBag.CharacterData.CharLevel" id="charlvl" />
-	<br />
-	<input type="hidden" name="CharID" value="@ViewBag.CharacterData.CharID" />
-	<label>Current HP: </label> @ViewBag.CharacterData.HitPoints
-	<label>New HP: </label><input type="number" name="HitPoints" value="@ViewBag.CharacterData.HitPoints"/>
-	<br />
-	<label> Current Alignment: </label> @ViewBag.CharacterData.Alignment
-	<label>New Alignment: </label>
-	<select name="Alignment">
-		<option value="Lawful Good">Lawful Good</option>
-		<option value="Lawful Neutral">Lawful Neutral</option>
-		<option value="Lawful Evil">Lawful Evil</option>
-		<option value="Neutral Good">Neutral Good</option>
-		<option value="True Neutral">True Neutral</option>
-		<option value="Neutral Evil">Neutral Evil</option>
-		<option value="Chaotic Good"> Chaotic Good</option>
-		<option value="Chaotic Neutral"> Chaotic Neutral</option>
-		<option value="Chaotic Evil"> Chaotic Evil</option>
-	</select>
-	<br />
-	<label>Current STR: </label> @ViewBag.CharacterData.Strength
-	<label>New STR: </label><input name="Strength" type="number" minimum="3" value="@ViewBag.CharacterData.Strength"  /><br />
-	<label>Current DEX: </label> @ViewBag.CharacterData.Dexterity
-	<label>New DEX: </label><input name="Dexterity" type="number" minimum="3" value="@ViewBag.CharacterData.Dexterity"/><br />
-	<label>Current CON: </label> @ViewBag.CharacterData.Constitution
-	<label>New CON: </label><input name="Constitution" type="number" minimum="3" value="@ViewBag.CharacterData.Constitution" id="con" /><br />
-	<label>Current INT: </label> @ViewBag.CharacterData.Intelligence
-	<label>New INT: </label><input name="Intelligence" type="number" minimum="3" value="@ViewBag.CharacterData.Intelligence" /><br />
-	<label>Current WIS: </label> @ViewBag.CharacterData.Wisdom
-	<label>New WIS: </label><input name="Wisdom" type="number" minimum="3" value="@ViewBag.CharacterData.Wisdom"/><br />
-	<label>Current CHA: </label> @ViewBag.CharacterData.Charisma
-	<label>New CHA:</label><input name="Charisma" type="number" minimum="3" value="@ViewBag.CharacterData.Charisma"/><br />
-	<label>Current Spells: </label>@ViewBag.CharacterData.SpellsKnown
-	<label>Add Spells:</label>
+    <label>Current Level: </label> @ViewBag.CharacterData.CharLevel
+    <label> New Level: </label><input type="number" min="1" max="20" name="CharLevel" value="@ViewBag.CharacterData.CharLevel" id="charlvl" />
+
+
+    <label>New Level: </label>
+    <select name="CharLevel">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+    </select> <br />
+
+    <br />
+    <input type="hidden" name="CharID" value="@ViewBag.CharacterData.CharID" />
+    <label>Current HP: </label> @ViewBag.CharacterData.HitPoints
+    <label>New HP: </label>
+    <input type="number" name="HitPoints" value="@ViewBag.CharacterData.HitPoints" />
+    <br />
+    <label> Current Alignment: </label> @ViewBag.CharacterData.Alignment
+    <label>New Alignment: </label>
+    <select name="Alignment">
+        <option value="Lawful Good">Lawful Good</option>
+        <option value="Lawful Neutral">Lawful Neutral</option>
+        <option value="Lawful Evil">Lawful Evil</option>
+        <option value="Neutral Good">Neutral Good</option>
+        <option value="True Neutral">True Neutral</option>
+        <option value="Neutral Evil">Neutral Evil</option>
+        <option value="Chaotic Good"> Chaotic Good</option>
+        <option value="Chaotic Neutral"> Chaotic Neutral</option>
+        <option value="Chaotic Evil"> Chaotic Evil</option>
+    </select>
+    <br />
+    <label>Current STR: </label> @ViewBag.CharacterData.Strength
+    <label>New STR: </label>
+    <input name="Strength" type="number" minimum="3" value="@ViewBag.CharacterData.Strength" />
+    <br />
+    <label>Current DEX: </label> @ViewBag.CharacterData.Dexterity
+    <label>New DEX: </label>
+    <input name="Dexterity" type="number" minimum="3" value="@ViewBag.CharacterData.Dexterity" />
+    <br />
+    <label>Current CON: </label> @ViewBag.CharacterData.Constitution
+    <label>New CON: </label>
+    <input name="Constitution" type="number" minimum="3" value="@ViewBag.CharacterData.Constitution" id="con" />
+    <br />
+    <label>Current INT: </label> @ViewBag.CharacterData.Intelligence
+    <label>New INT: </label>
+    <input name="Intelligence" type="number" minimum="3" value="@ViewBag.CharacterData.Intelligence" />
+    <br />
+    <label>Current WIS: </label> @ViewBag.CharacterData.Wisdom
+    <label>New WIS: </label>
+    <input name="Wisdom" type="number" minimum="3" value="@ViewBag.CharacterData.Wisdom" />
+    <br />
+    <label>Current CHA: </label> @ViewBag.CharacterData.Charisma
+    <label>New CHA:</label>
+    <input name="Charisma" type="number" minimum="3" value="@ViewBag.CharacterData.Charisma" />
+    <br />
+    <label>Current Spells: </label>@ViewBag.CharacterData.SpellsKnown
+    <label>Add Spells:</label>
     <table border="1">
-		@for (int i = 0; i < ViewBag.Spells.Count; i++)
+        @for (int i = 0; i < ViewBag.Spells.Count; i++)
 		{
-		<tr>
-			<td>
-				<input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells[i]["name"]" />
-				@ViewBag.Spells[i]["name"]
-			</td>
-		</tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells[i]["name"]" />
+                @ViewBag.Spells[i]["name"]
+            </td>
+        </tr>
 		}
-	</table>
-	<label>Current Proficiencies: </label>@ViewBag.CharacterData.Proficiencies <br />
-	<label>Change Proficiencies: </label> <br />
+    </table>
+    <label>Current Proficiencies: </label>@ViewBag.CharacterData.Proficiencies
+    <br />
+    <label>Change Proficiencies: </label>
+    <br />
     @for (int i = 0; i < ViewBag.Classes["from"].Count; i++)
 	{
-	<input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["from"][i]["name"]" />
-	@ViewBag.Classes["from"][i]["name"]
-	<br />
+    <input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["from"][i]["name"]" />
+    @ViewBag.Classes["from"][i]["name"]
+    <br />
 	}
     @for (int i = 0; i < ViewBag.Pro.Count; i++)
 	{
-	<input type="hidden" name="Proficiencies" value="@ViewBag.Pro[i]["name"]"/>
+    <input type="hidden" name="Proficiencies" value="@ViewBag.Pro[i]["name"]" />
 	}
 
     @for (int i = 0; i < ViewBag.Saves.Count; i++)
 	{
-	<input type="hidden" name="Proficiencies" value="@ViewBag.Saves[i]["name"]" />
+    <input type="hidden" name="Proficiencies" value="@ViewBag.Saves[i]["name"]" />
 	}
     <input type="submit" value="Save Changes" />
 </form>

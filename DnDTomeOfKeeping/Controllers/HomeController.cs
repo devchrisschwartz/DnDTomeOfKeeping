@@ -13,6 +13,7 @@ namespace DnDTomeOfKeeping.Controllers
 {
     public class HomeController : Controller
     {
+        string[] Names = new string[] { "barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard" };
 
         [HttpGet]
         public ActionResult Index()
@@ -156,7 +157,9 @@ namespace DnDTomeOfKeeping.Controllers
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
-            ViewBag.ListOfCharacters = ORM.Characters.Where(x => x.Campaign == id).ToList();
+            ViewBag.ListOfCharacters = ORM.Characters.Where(x => x.Campaign == id).ToList(); //list of characters in the campaign
+
+            ViewBag.AvailableCharacters = ORM.Characters.Where(x => x.Campaign == null).ToList();
 
             ViewBag.Campaign = ORM.Campaigns.Find(id);
 
@@ -209,7 +212,6 @@ namespace DnDTomeOfKeeping.Controllers
 
                 ViewBag.Races = jsonRaces["results"];
             }
-            string[] Names = new string[] { "barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard" };
 
             HttpWebRequest spellApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}");
 
@@ -245,6 +247,39 @@ namespace DnDTomeOfKeeping.Controllers
 
         public ActionResult CharacterSubmit(Character newCharacter, string[] Proficiencies, string[] SpellsKnown)
         {
+
+            string featuresString = "";
+
+            string characterLevel;
+
+            for (int i = 1; i <= newCharacter.CharLevel; i++)
+            {
+
+                characterLevel = i.ToString();
+                HttpWebRequest dndFeatureApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/classes/{Names[newCharacter.Class-1]}/level/{characterLevel}");
+
+                dndFeatureApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+                HttpWebResponse dndFeatureApiResponse = (HttpWebResponse)dndFeatureApiRequest.GetResponse();
+
+                if (dndFeatureApiResponse.StatusCode == HttpStatusCode.OK)
+                {
+                    StreamReader featureResponseData = new StreamReader(dndFeatureApiResponse.GetResponseStream());
+
+                    string featuredata = featureResponseData.ReadToEnd();
+
+                    JObject jsonFeatures = JObject.Parse(featuredata);
+
+                    for (int j = 0; j < jsonFeatures["features"].Count(); j++)
+                    {
+                        featuresString += jsonFeatures["features"][j]["name"] + ",";
+                    }
+                }
+            }
+
+
+            newCharacter.Features = featuresString;
+
             if (SpellsKnown != null)
             {
                 string spells = "";
@@ -274,6 +309,36 @@ namespace DnDTomeOfKeeping.Controllers
 
         public ActionResult SaveChanges(Character UpdatedCharacter, string[] Proficiencies, string[] SpellsKnown)
         {
+            string featuresString = "";
+
+            string characterLevel;
+
+            for (int i = 1; i <= UpdatedCharacter.CharLevel; i++)
+            {
+
+                characterLevel = i.ToString();
+                HttpWebRequest dndFeatureApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/classes/{Names[UpdatedCharacter.Class - 1]}/level/{characterLevel}");
+
+                dndFeatureApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+                HttpWebResponse dndFeatureApiResponse = (HttpWebResponse)dndFeatureApiRequest.GetResponse();
+
+                if (dndFeatureApiResponse.StatusCode == HttpStatusCode.OK)
+                {
+                    StreamReader featureResponseData = new StreamReader(dndFeatureApiResponse.GetResponseStream());
+
+                    string featuredata = featureResponseData.ReadToEnd();
+
+                    JObject jsonFeatures = JObject.Parse(featuredata);
+
+                    for (int j = 0; j < jsonFeatures["features"].Count(); j++)
+                    {
+                        featuresString += jsonFeatures["features"][j]["name"] + ",";
+                    }
+                }
+            }
+
+
             if (SpellsKnown != null)
             {
                 string spells = "";
@@ -308,6 +373,7 @@ namespace DnDTomeOfKeeping.Controllers
             OldRecord.Intelligence = UpdatedCharacter.Intelligence;
             OldRecord.Wisdom = UpdatedCharacter.Wisdom;
             OldRecord.Charisma = UpdatedCharacter.Charisma;
+            OldRecord.Features = UpdatedCharacter.Features;
 
             ORM.Entry(OldRecord).State = System.Data.Entity.EntityState.Modified;
             ORM.SaveChanges();

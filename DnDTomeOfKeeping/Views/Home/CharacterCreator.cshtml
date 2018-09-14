@@ -10,10 +10,33 @@
 	<h2>Class: @ViewBag.Name</h2>
 	<input type="hidden" value="@ViewBag.ClassID" name="Class"/>
 	<br />
-	<label>Level: </label><input type="number" min="1" max="20" name="CharLevel" id="charlvl" />
+	<label>Level: </label>
+	<select name="CharLevel">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+		<option value="20">20</option>
+	</select> <br />
 	<label>HP: </label><input type="number" name="HitPoints" @*min="@(ViewBag.Classes["hit_die"] + con + (1*(charlvl - 1)))"*@ />
 	<h2>Statistics</h2><br />
 	<label>STR: </label><input name="Strength" type="number" min="3" /><br />
+	<p>Strength (STR) is your character's physical power. Used for climbing, jumping, melee martial-type weapon attacks, and Athletics skill checks.</p>
 	<label>DEX: </label><input name="Dexterity" type="number" min="3" /><br />
 	<label>CON: </label><input name="Constitution" type="number" min="3" id="con" /><br />
 	<label>INT: </label><input name="Intelligence" type="number" min="3" /><br />
