@@ -18,7 +18,7 @@
         <AssociationConnector Association="viewbagofholdingModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="viewbagofholdingModel.Campaign" Width="1.5" PointX="8.5" PointY="4.25" />
         <AssociationConnector Association="viewbagofholdingModel.FK_Campaigns_AspNetUsers" />
-        <EntityTypeShape EntityType="viewbagofholdingModel.Character" Width="1.5" PointX="5.125" PointY="8.75" />
+        <EntityTypeShape EntityType="viewbagofholdingModel.Character" Width="1.5" PointX="10.75" PointY="4.625" />
         <AssociationConnector Association="viewbagofholdingModel.FK_Characters_AspNetUsers" />
         <AssociationConnector Association="viewbagofholdingModel.FK_Characters_Campaigns" />
         <AssociationConnector Association="viewbagofholdingModel.FK_Proficiencies_Characters" />
