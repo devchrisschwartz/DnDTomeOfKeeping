@@ -257,7 +257,7 @@ namespace DnDTomeOfKeeping.Controllers
             {
 
                 characterLevel = i.ToString();
-                HttpWebRequest dndFeatureApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/classes/{Names[newCharacter.Class-1]}/level/{characterLevel}");
+                HttpWebRequest dndFeatureApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/classes/{Names[newCharacter.Class - 1]}/level/{characterLevel}");
 
                 dndFeatureApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
 
@@ -294,7 +294,7 @@ namespace DnDTomeOfKeeping.Controllers
 
                 JObject jsonSpellSlot = JObject.Parse(spellslotdata);
 
-                if(jsonSpellSlot["spellcasting"] != null)
+                if (jsonSpellSlot["spellcasting"] != null)
                 {
                     newCharacter.Cantrips = (int)jsonSpellSlot["spellcasting"]["cantrips_known"];
                     newCharacter.SpellSlot1 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_1"];
@@ -477,6 +477,23 @@ namespace DnDTomeOfKeeping.Controllers
             return View("CampaignResult");
         }
 
+
+        public ActionResult BrowseCharacters()
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            ViewBag.CharList = ORM.Characters.ToList();
+            return View();
+        }
+
+        public ActionResult BrowseCampaigns()
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            ViewBag.CampList = ORM.Campaigns.ToList();
+            return View();
+        }
+
         public ActionResult SaveCampaign(Campaign newCampaign)
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
@@ -486,7 +503,7 @@ namespace DnDTomeOfKeeping.Controllers
 
             ORM.SaveChanges();
 
-            return RedirectToAction("Campaign");
+            return RedirectToAction("Campaign", new { id = newCampaign.CampaignID });
 
         }
 

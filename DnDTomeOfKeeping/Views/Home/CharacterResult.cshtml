@@ -10,8 +10,6 @@
 
 @if (ViewBag.Characters != null)
 {
-    @ViewBag.Characters[0]
-
     <table border="1" class="table">
         <tr>
             <th>Name</th>
@@ -21,7 +19,7 @@
         @foreach (var character in ViewBag.Characters)
         {
             <tr>
-                <td>@character.name</td>
+                <td><a href="/Home/ViewCharacter?CharacterID=@character.CharID">@character.CharName</a></td>
                 <td>@character.Class</td>
             </tr>
         }

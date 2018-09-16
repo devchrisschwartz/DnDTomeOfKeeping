@@ -76,6 +76,8 @@
 
 	<br />
 
+    @if (ViewBag.Spells.Count != 0)
+    {
 	<h2>This is the list of spells for your class:</h2>
 	<h3>Please select the ones your character knows:</h3>
 	<br />
@@ -90,6 +92,7 @@
 		</tr>
 		}
 	</table>
+    }
 
 	<h3>Armor and Weapon Proficiencies</h3>
 	@for (int i = 0; i < ViewBag.Pro.Count; i++)

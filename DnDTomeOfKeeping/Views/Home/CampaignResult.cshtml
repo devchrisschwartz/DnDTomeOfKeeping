@@ -19,10 +19,10 @@
         </tr>
         @foreach (var campaign in ViewBag.Campaigns)
         {
-            <tr>
-                <td>@campaign.name</td>
-                <td>@campaign.DMUserID</td>
-              </tr>  
+        <tr>
+            <td><a href="/Home/Campaign?id=@campaign.CampaignID">@campaign.CampaignName</a></td>
+            <td>@campaign.DMUserID</td>
+        </tr>  
         }
     </table>
 
