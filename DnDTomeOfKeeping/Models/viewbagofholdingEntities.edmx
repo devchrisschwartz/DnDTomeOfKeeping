@@ -98,26 +98,16 @@
           <Property Name="Intelligence" Type="int" Nullable="false" />
           <Property Name="Wisdom" Type="int" Nullable="false" />
           <Property Name="Charisma" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'viewbagofholding.dbo.Proficiencies' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Proficiencies">
-          <Key>
-            <PropertyRef Name="CharID" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="CharID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Spells">
-          <Key>
-            <PropertyRef Name="CharID" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="CharID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="SpellSlot1" Type="int" />
+          <Property Name="SpellSlot2" Type="int" />
+          <Property Name="SpellSlot3" Type="int" />
+          <Property Name="SpellSlot4" Type="int" />
+          <Property Name="SpellSlot5" Type="int" />
+          <Property Name="SpellSlot6" Type="int" />
+          <Property Name="SpellSlot7" Type="int" />
+          <Property Name="SpellSlot8" Type="int" />
+          <Property Name="SpellSlot9" Type="int" />
+          <Property Name="Cantrips" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -221,30 +211,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proficiencies_Characters">
-          <End Role="Characters" Type="Self.Characters" Multiplicity="1" />
-          <End Role="Proficiencies" Type="Self.Proficiencies" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Characters">
-              <PropertyRef Name="CharID" />
-            </Principal>
-            <Dependent Role="Proficiencies">
-              <PropertyRef Name="CharID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Spells_Characters">
-          <End Role="Characters" Type="Self.Characters" Multiplicity="1" />
-          <End Role="Spells" Type="Self.Spells" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Characters">
-              <PropertyRef Name="CharID" />
-            </Principal>
-            <Dependent Role="Spells">
-              <PropertyRef Name="CharID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="viewbagofholdingModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -255,18 +221,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
           <EntitySet Name="Campaigns" EntityType="Self.Campaigns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Characters" EntityType="Self.Characters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Proficiencies" EntityType="Self.Proficiencies" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Proficiencies].[CharID] AS [CharID], 
-    [Proficiencies].[Name] AS [Name]
-    FROM [dbo].[Proficiencies] AS [Proficiencies]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Spells" EntityType="Self.Spells" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Spells].[CharID] AS [CharID], 
-    [Spells].[Name] AS [Name]
-    FROM [dbo].[Spells] AS [Spells]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Campaigns_AspNetUsers" Association="Self.FK_Campaigns_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Campaigns" EntitySet="Campaigns" />
@@ -294,14 +248,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proficiencies_Characters" Association="Self.FK_Proficiencies_Characters">
-            <End Role="Characters" EntitySet="Characters" />
-            <End Role="Proficiencies" EntitySet="Proficiencies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Spells_Characters" Association="Self.FK_Spells_Characters">
-            <End Role="Characters" EntitySet="Characters" />
-            <End Role="Spells" EntitySet="Spells" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -379,24 +325,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Proficiency">
-          <Key>
-            <PropertyRef Name="CharID" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="CharID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Character" Relationship="viewbagofholdingModel.FK_Proficiencies_Characters" FromRole="Proficiency" ToRole="Character" />
-        </EntityType>
-        <EntityType Name="Spell">
-          <Key>
-            <PropertyRef Name="CharID" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="CharID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Character" Relationship="viewbagofholdingModel.FK_Spells_Characters" FromRole="Spell" ToRole="Character" />
-        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -436,8 +364,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Proficiencies" EntityType="Self.Proficiency" />
-          <EntitySet Name="Spells" EntityType="Self.Spell" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -463,14 +389,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
           <AssociationSet Name="FK_Characters_Campaigns" Association="viewbagofholdingModel.FK_Characters_Campaigns">
             <End Role="Campaign" EntitySet="Campaigns" />
             <End Role="Character" EntitySet="Characters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proficiencies_Characters" Association="viewbagofholdingModel.FK_Proficiencies_Characters">
-            <End Role="Character" EntitySet="Characters" />
-            <End Role="Proficiency" EntitySet="Proficiencies" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Spells_Characters" Association="viewbagofholdingModel.FK_Spells_Characters">
-            <End Role="Character" EntitySet="Characters" />
-            <End Role="Spell" EntitySet="Spells" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Campaign">
@@ -519,10 +437,18 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
           <Property Name="Intelligence" Type="Int32" Nullable="false" />
           <Property Name="Wisdom" Type="Int32" Nullable="false" />
           <Property Name="Charisma" Type="Int32" Nullable="false" />
+          <Property Name="SpellSlot1" Type="Int32" />
+          <Property Name="SpellSlot2" Type="Int32" />
+          <Property Name="SpellSlot3" Type="Int32" />
+          <Property Name="SpellSlot4" Type="Int32" />
+          <Property Name="SpellSlot5" Type="Int32" />
+          <Property Name="SpellSlot6" Type="Int32" />
+          <Property Name="SpellSlot7" Type="Int32" />
+          <Property Name="SpellSlot8" Type="Int32" />
+          <Property Name="SpellSlot9" Type="Int32" />
+          <Property Name="Cantrips" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="viewbagofholdingModel.FK_Characters_AspNetUsers" FromRole="Character" ToRole="AspNetUser" />
           <NavigationProperty Name="Campaign1" Relationship="viewbagofholdingModel.FK_Characters_Campaigns" FromRole="Character" ToRole="Campaign" />
-          <NavigationProperty Name="Proficiencies1" Relationship="viewbagofholdingModel.FK_Proficiencies_Characters" FromRole="Character" ToRole="Proficiency" />
-          <NavigationProperty Name="Spells" Relationship="viewbagofholdingModel.FK_Spells_Characters" FromRole="Character" ToRole="Spell" />
         </EntityType>
         <Association Name="FK_Characters_AspNetUsers">
           <End Type="viewbagofholdingModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -545,30 +471,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
             </Principal>
             <Dependent Role="Character">
               <PropertyRef Name="Campaign" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proficiencies_Characters">
-          <End Type="viewbagofholdingModel.Character" Role="Character" Multiplicity="1" />
-          <End Type="viewbagofholdingModel.Proficiency" Role="Proficiency" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Character">
-              <PropertyRef Name="CharID" />
-            </Principal>
-            <Dependent Role="Proficiency">
-              <PropertyRef Name="CharID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Spells_Characters">
-          <End Type="viewbagofholdingModel.Character" Role="Character" Multiplicity="1" />
-          <End Type="viewbagofholdingModel.Spell" Role="Spell" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Character">
-              <PropertyRef Name="CharID" />
-            </Principal>
-            <Dependent Role="Spell">
-              <PropertyRef Name="CharID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -644,22 +546,6 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Proficiencies">
-            <EntityTypeMapping TypeName="viewbagofholdingModel.Proficiency">
-              <MappingFragment StoreEntitySet="Proficiencies">
-                <ScalarProperty Name="CharID" ColumnName="CharID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Spells">
-            <EntityTypeMapping TypeName="viewbagofholdingModel.Spell">
-              <MappingFragment StoreEntitySet="Spells">
-                <ScalarProperty Name="CharID" ColumnName="CharID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="viewbagofholdingModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
@@ -680,6 +566,16 @@ warning 6002: The table/view 'viewbagofholding.dbo.Spells' does not have a prima
           <EntitySetMapping Name="Characters">
             <EntityTypeMapping TypeName="viewbagofholdingModel.Character">
               <MappingFragment StoreEntitySet="Characters">
+                <ScalarProperty Name="Cantrips" ColumnName="Cantrips" />
+                <ScalarProperty Name="SpellSlot9" ColumnName="SpellSlot9" />
+                <ScalarProperty Name="SpellSlot8" ColumnName="SpellSlot8" />
+                <ScalarProperty Name="SpellSlot7" ColumnName="SpellSlot7" />
+                <ScalarProperty Name="SpellSlot6" ColumnName="SpellSlot6" />
+                <ScalarProperty Name="SpellSlot5" ColumnName="SpellSlot5" />
+                <ScalarProperty Name="SpellSlot4" ColumnName="SpellSlot4" />
+                <ScalarProperty Name="SpellSlot3" ColumnName="SpellSlot3" />
+                <ScalarProperty Name="SpellSlot2" ColumnName="SpellSlot2" />
+                <ScalarProperty Name="SpellSlot1" ColumnName="SpellSlot1" />
                 <ScalarProperty Name="Charisma" ColumnName="Charisma" />
                 <ScalarProperty Name="Wisdom" ColumnName="Wisdom" />
                 <ScalarProperty Name="Intelligence" ColumnName="Intelligence" />

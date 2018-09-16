@@ -14,13 +14,6 @@ namespace DnDTomeOfKeeping.Models
     
     public partial class Character
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Character()
-        {
-            this.Proficiencies1 = new HashSet<Proficiency>();
-            this.Spells = new HashSet<Spell>();
-        }
-    
         public int CharID { get; set; }
         public string CharName { get; set; }
         public int Class { get; set; }
@@ -41,12 +34,18 @@ namespace DnDTomeOfKeeping.Models
         public int Intelligence { get; set; }
         public int Wisdom { get; set; }
         public int Charisma { get; set; }
+        public Nullable<int> SpellSlot1 { get; set; }
+        public Nullable<int> SpellSlot2 { get; set; }
+        public Nullable<int> SpellSlot3 { get; set; }
+        public Nullable<int> SpellSlot4 { get; set; }
+        public Nullable<int> SpellSlot5 { get; set; }
+        public Nullable<int> SpellSlot6 { get; set; }
+        public Nullable<int> SpellSlot7 { get; set; }
+        public Nullable<int> SpellSlot8 { get; set; }
+        public Nullable<int> SpellSlot9 { get; set; }
+        public Nullable<int> Cantrips { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Campaign Campaign1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proficiency> Proficiencies1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Spell> Spells { get; set; }
     }
 }

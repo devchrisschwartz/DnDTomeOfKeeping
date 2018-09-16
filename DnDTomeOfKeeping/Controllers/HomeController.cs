@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -280,6 +281,36 @@ namespace DnDTomeOfKeeping.Controllers
 
             newCharacter.Features = featuresString;
 
+            characterLevel = newCharacter.CharLevel.ToString();
+            HttpWebRequest dndSpellSlotApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/classes/{Names[newCharacter.Class - 1]}/level/{characterLevel}");
+            dndSpellSlotApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+            HttpWebResponse dndSpellSlotApiResponse = (HttpWebResponse)dndSpellSlotApiRequest.GetResponse();
+
+            if (dndSpellSlotApiResponse.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader SpellSlotResponseData = new StreamReader(dndSpellSlotApiResponse.GetResponseStream());
+
+                string spellslotdata = SpellSlotResponseData.ReadToEnd();
+
+                JObject jsonSpellSlot = JObject.Parse(spellslotdata);
+
+                if(jsonSpellSlot["spellcasting"] != null)
+                {
+                    newCharacter.Cantrips = (int)jsonSpellSlot["spellcasting"]["cantrips_known"];
+                    newCharacter.SpellSlot1 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_1"];
+                    newCharacter.SpellSlot2 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_2"];
+                    newCharacter.SpellSlot3 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_3"];
+                    newCharacter.SpellSlot4 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_4"];
+                    newCharacter.SpellSlot5 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_5"];
+                    newCharacter.SpellSlot6 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_6"];
+                    newCharacter.SpellSlot7 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_7"];
+                    newCharacter.SpellSlot8 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_8"];
+                    newCharacter.SpellSlot9 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_9"];
+
+                }
+
+            }
+
             if (SpellsKnown != null)
             {
                 string spells = "";
@@ -289,6 +320,7 @@ namespace DnDTomeOfKeeping.Controllers
                     spells += spell + ",";
                 }
                 newCharacter.SpellsKnown = spells;
+
             }
 
             string s = "";
@@ -339,6 +371,36 @@ namespace DnDTomeOfKeeping.Controllers
             }
 
 
+            characterLevel = UpdatedCharacter.CharLevel.ToString();
+            HttpWebRequest dndSpellSlotApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/classes/{Names[UpdatedCharacter.Class - 1]}/level/{characterLevel}");
+            dndSpellSlotApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+            HttpWebResponse dndSpellSlotApiResponse = (HttpWebResponse)dndSpellSlotApiRequest.GetResponse();
+
+            if (dndSpellSlotApiResponse.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader SpellSlotResponseData = new StreamReader(dndSpellSlotApiResponse.GetResponseStream());
+
+                string spellslotdata = SpellSlotResponseData.ReadToEnd();
+
+                JObject jsonSpellSlot = JObject.Parse(spellslotdata);
+
+                if (jsonSpellSlot["spellcasting"] != null)
+                {
+                    UpdatedCharacter.Cantrips = (int)jsonSpellSlot["spellcasting"]["cantrips_known"];
+                    UpdatedCharacter.SpellSlot1 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_1"];
+                    UpdatedCharacter.SpellSlot2 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_2"];
+                    UpdatedCharacter.SpellSlot3 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_3"];
+                    UpdatedCharacter.SpellSlot4 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_4"];
+                    UpdatedCharacter.SpellSlot5 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_5"];
+                    UpdatedCharacter.SpellSlot6 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_6"];
+                    UpdatedCharacter.SpellSlot7 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_7"];
+                    UpdatedCharacter.SpellSlot8 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_8"];
+                    UpdatedCharacter.SpellSlot9 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_9"];
+
+                }
+
+            }
+
             if (SpellsKnown != null)
             {
                 string spells = "";
@@ -374,6 +436,15 @@ namespace DnDTomeOfKeeping.Controllers
             OldRecord.Wisdom = UpdatedCharacter.Wisdom;
             OldRecord.Charisma = UpdatedCharacter.Charisma;
             OldRecord.Features = UpdatedCharacter.Features;
+            OldRecord.SpellSlot1 = UpdatedCharacter.SpellSlot1;
+            OldRecord.SpellSlot2 = UpdatedCharacter.SpellSlot2;
+            OldRecord.SpellSlot3 = UpdatedCharacter.SpellSlot3;
+            OldRecord.SpellSlot4 = UpdatedCharacter.SpellSlot4;
+            OldRecord.SpellSlot5 = UpdatedCharacter.SpellSlot5;
+            OldRecord.SpellSlot6 = UpdatedCharacter.SpellSlot6;
+            OldRecord.SpellSlot7 = UpdatedCharacter.SpellSlot7;
+            OldRecord.SpellSlot8 = UpdatedCharacter.SpellSlot8;
+            OldRecord.SpellSlot9 = UpdatedCharacter.SpellSlot9;
 
             ORM.Entry(OldRecord).State = System.Data.Entity.EntityState.Modified;
             ORM.SaveChanges();

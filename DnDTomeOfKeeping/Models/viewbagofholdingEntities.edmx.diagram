@@ -11,18 +11,14 @@
         <EntityTypeShape EntityType="viewbagofholdingModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="viewbagofholdingModel.AspNetUser" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="viewbagofholdingModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="viewbagofholdingModel.Proficiency" Width="1.5" PointX="7.5" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="viewbagofholdingModel.Spell" Width="1.5" PointX="7.5" PointY="14.375" IsExpanded="true" />
         <AssociationConnector Association="viewbagofholdingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="viewbagofholdingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="viewbagofholdingModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="viewbagofholdingModel.Campaign" Width="1.5" PointX="8.5" PointY="4.25" />
         <AssociationConnector Association="viewbagofholdingModel.FK_Campaigns_AspNetUsers" />
-        <EntityTypeShape EntityType="viewbagofholdingModel.Character" Width="1.5" PointX="10.75" PointY="4.625" />
+        <EntityTypeShape EntityType="viewbagofholdingModel.Character" Width="1.5" PointX="10.75" PointY="3.75" />
         <AssociationConnector Association="viewbagofholdingModel.FK_Characters_AspNetUsers" />
         <AssociationConnector Association="viewbagofholdingModel.FK_Characters_Campaigns" />
-        <AssociationConnector Association="viewbagofholdingModel.FK_Proficiencies_Characters" />
-        <AssociationConnector Association="viewbagofholdingModel.FK_Spells_Characters" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
