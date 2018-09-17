@@ -9,6 +9,25 @@
     string[] raceNames = new string[] { "Dwarf", "Elf", "Halfling", "Human", "Dragonborn", "Gnome", "Half-Elf", "Half-Orc", "Tiefling" };
 }
 
+<script>
+    function rollhp(level) {
+		total = 0;
+		hp = document.getElementById('characterhp');
+		con = document.getElementById('constitution');
+		conmodifier = Math.floor(con.value / 2) - 5;
+		
+		timestoroll = level - 1;
+		dicetoroll = @ViewBag.HitDieSize + 0;
+		for (i = 0; i < timestoroll; i++) {
+			random = Math.ceil(Math.random() * dicetoroll);
+			total += random;
+		}
+		if (conmodifier == -5) {
+			hp.value = total + @ViewBag.HitDieSize + 0 + (conmodifier * (level-1));
+		} else {
+			hp.value = total + @ViewBag.HitDieSize + conmodifier + (conmodifier * (level-1));
+		}
+</script>
 
 <h2>CharacterEdit</h2>
 
@@ -23,7 +42,7 @@
     <label>Current Level: </label> @ViewBag.CharacterData.CharLevel
 
     <label>New Level: </label>
-    <select name="CharLevel">
+    <select name="CharLevel" id="level">
         @for (int i = 1; i <= 20; i++)
         {
             if (i == @ViewBag.CharacterData.CharLevel)
@@ -39,9 +58,9 @@
 
     <br />
     <input type="hidden" name="CharID" value="@ViewBag.CharacterData.CharID" />
-    <label>Current HP: </label> @ViewBag.CharacterData.HitPoints
+    <label>Current HP: </label> @ViewBag.CharacterData.HitPoints <button type="button" id="roll" onclick="rollhp(level.value)">Roll HP</button>
     <label>New HP: </label>
-    <input type="number" name="HitPoints" value="@ViewBag.CharacterData.HitPoints" />
+    <input type="number" name="HitPoints" value="@ViewBag.CharacterData.HitPoints" id="characterhp"/>
     <br />
     <label> Current Alignment: </label> @ViewBag.CharacterData.Alignment
     <label>New Alignment: </label>
@@ -67,7 +86,7 @@
     <br />
     <label>Current CON: </label> @ViewBag.CharacterData.Constitution
     <label>New CON: </label>
-    <input name="Constitution" type="number" minimum="3" value="@ViewBag.CharacterData.Constitution" id="con" />
+    <input name="Constitution" type="number" minimum="3" value="@ViewBag.CharacterData.Constitution" id="constitution" />
     <br />
     <label>Current INT: </label> @ViewBag.CharacterData.Intelligence
     <label>New INT: </label>

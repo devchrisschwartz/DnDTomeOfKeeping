@@ -3,5 +3,31 @@
     ViewBag.Title = "UserProfile";
 }
 
-<h2>UserProfile</h2>
+<h1>@ViewBag.User.UserName</h1>
 
+<h3>@ViewBag.User.UserName's Characters</h3>
+@foreach (var Char in ViewBag.CharacterToView)
+    {
+<tr>
+    <td class="col-md-4">
+        <a href="/Home/ViewCharacter?CharacterID=@Char.CharID">View @Char.CharName     </a>
+    </td>
+    <td class="col-md-4">
+        <a href="/Home/CharacterEdit?CharacterID=@Char.CharID&Class=@Char.Class">Edit @Char.CharName</a><br />
+    </td>
+</tr>
+    }
+</table>
+
+
+<h3>@ViewBag.User.UserName's Campaigns</h3>
+
+
+<br />
+<h3>My Campaigns</h3>
+@foreach (var Camp in ViewBag.MyCampaigns)
+{
+<a href="/Home/Campaign?id=@Camp.CampaignID">@Camp.CampaignName</a>
+}
+
+<br /><br /><br /><br /><br /><br />

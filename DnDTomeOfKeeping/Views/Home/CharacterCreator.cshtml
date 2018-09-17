@@ -4,7 +4,25 @@
 }
 
 <script>
-	
+	function rollhp(level) {
+		total = 0;
+		hp = document.getElementById('characterhp');
+		con = document.getElementById('constitution');
+		conmodifier = Math.floor(con.value / 2) - 5;
+		
+		timestoroll = level - 1;
+		dicetoroll = @ViewBag.HitDieSize + 0;
+		for (i = 0; i < timestoroll; i++) {
+			random = Math.ceil(Math.random() * dicetoroll);
+			total += random;
+		}
+		if (conmodifier == -5) {
+			hp.value = total + @ViewBag.HitDieSize + 0 + (conmodifier * (level-1));
+		} else {
+			hp.value = total + @ViewBag.HitDieSize + conmodifier + (conmodifier * (level-1));
+		}
+	}
+
 	function rolldice(strength, dexterity, constitution, intelligence, wisdom, charisma) {
 		total1 = 0;
 		total2 = 0;
@@ -53,14 +71,6 @@
 		result6.value = total6;
 
 	}
-	
-	function loady() {
-		for (f in dieFace) {
-			e = document.getElementById(f);
-			if (e) e.innerHTML = dieFace[f].replace("REPLACEME", f);
-		}
-	}
-	
 </script>
 
 <form action="/Home/CharacterSubmit" method="post">
@@ -71,7 +81,7 @@
 	<input type="hidden" value="@ViewBag.ClassID" name="Class" />
 	<br />
 	<label>Level: </label>
-	<select name="CharLevel">
+	<select name="CharLevel" id="level">
 		<option value="1">1</option>
 		<option value="2">2</option>
 		<option value="3">3</option>
@@ -93,7 +103,7 @@
 		<option value="19">19</option>
 		<option value="20">20</option>
 	</select> <br />
-	<label>HP: </label><input type="number" name="HitPoints" @*min="@(ViewBag.Classes["hit_die"] + con + (1*(charlvl - 1)))"*@ />
+	<label>HP: </label><input type="number" name="HitPoints" id="characterhp"/> <button type="button" id="roll" onclick="rollhp(level.value)">Roll HP</button>
 	<h2>Statistics</h2> <button type="button" id="roll" onclick="rolldice('strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma')">Roll All Stats</button><br />
 	<label>STR: </label><input name="Strength" type="number" min="3" id="strength"> <button type="button" id="roll" onclick="rolldice('strength')">Roll Strength</button><br />
 	<p>Strength (STR) is your character's physical power. Used for climbing, jumping, melee martial-type weapon attacks, and Athletics skill checks.</p>

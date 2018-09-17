@@ -19,9 +19,9 @@ namespace DnDTomeOfKeeping.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
-            ViewBag.PubChar = ORM.Characters.ToList();
-            return View();
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();//right here pulling in from db
+            ViewBag.PubChar = ORM.Characters.ToList(); //saving to ViewBag
+            return View();//sending to the view
         }
 
         [Authorize]
@@ -75,6 +75,7 @@ namespace DnDTomeOfKeeping.Controllers
 
                 JObject jsonClasses = JObject.Parse(data);
                 int size = jsonClasses["proficiency_choices"].Count();
+                ViewBag.HitDieSize = jsonClasses["hit_die"];
                 ViewBag.Name = jsonClasses["name"];
                 ViewBag.Classes = jsonClasses["proficiency_choices"][size - 1];
                 ViewBag.ClassID = jsonClasses["index"];
@@ -141,8 +142,6 @@ namespace DnDTomeOfKeeping.Controllers
             string loggedinuser = User.Identity.GetUserId();
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
             ViewBag.CharacterToView = ORM.Characters.Where(x => x.UserID == loggedinuser).ToList();
-            //ViewBag.CharacterToView = ORM.Characters.ToList();
-            ViewBag.CharacterIDs = ORM.Characters.Where(x => x.CharID > 0).ToList();
 
             ViewBag.MyCampaigns = ORM.Campaigns.Where(x => x.DMUserID == loggedinuser).ToList();
 
@@ -191,6 +190,7 @@ namespace DnDTomeOfKeeping.Controllers
 
                 JObject jsonClasses = JObject.Parse(data);
                 int size = jsonClasses["proficiency_choices"].Count();
+                ViewBag.HitDieSize = jsonClasses["hit_die"];
                 ViewBag.Name = jsonClasses["name"];
                 ViewBag.Classes = jsonClasses["proficiency_choices"][size - 1];
 
@@ -546,11 +546,15 @@ namespace DnDTomeOfKeeping.Controllers
 
 
         [HttpGet]
-        public ActionResult UserProfile(string UserName)
+        public ActionResult UserProfile(string username)
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
-           
+            
+
+            //ViewBag.UserChar = ORM.Characters.Where(x => x.UserID).ToList();
+
+            ViewBag.UserCamp = ORM.Campaigns.Where(x => x.DMUserID != null).ToList();
 
             return View();
         }
