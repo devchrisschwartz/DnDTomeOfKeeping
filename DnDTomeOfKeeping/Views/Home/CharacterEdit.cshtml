@@ -1,8 +1,10 @@
-﻿
+﻿@using DnDTomeOfKeeping.Models;
 @{
-    ViewBag.Title = "CharacterEdit";
+	ViewBag.Title = "CharacterEdit";
 
-    @*ViewBag.CharacterData*@
+	Character temp = new Character();
+	temp.Proficiencies = ViewBag.CharacterData.Proficiencies;
+	temp.SpellsKnown = ViewBag.CharacterData.SpellsKnown;
 }
 
 <h2>CharacterEdit</h2>
@@ -82,10 +84,18 @@
         @for (int i = 0; i < ViewBag.Spells.Count; i++)
         {
             <tr>
-                <td>
-                    <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells[i]["name"]" />
-                    @ViewBag.Spells[i]["name"]
-                </td>
+				<td>
+					@if (temp.SpellsKnown.Contains($"{ViewBag.Spells[i]["name"]}"))
+					{
+						<input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells[i]["name"]" checked />
+						@ViewBag.Spells[i]["name"]
+					}
+					else
+					{
+						<input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells[i]["name"]" />
+						@ViewBag.Spells[i]["name"]
+					}
+				</td>
             </tr>
         }
     </table>
@@ -94,11 +104,20 @@
     <label>Change Proficiencies: </label>
     <br />
     @for (int i = 0; i < ViewBag.Classes["from"].Count; i++)
-    {
+	{
+		if (temp.Proficiencies.Contains($"{ViewBag.Classes["from"][i]["name"]}"))
+		{
+			<input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["from"][i]["name"]" checked/>
+        @ViewBag.Classes["from"][i]["name"]
+        <br />
+		}
+		else
+		{
         <input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["from"][i]["name"]" />
         @ViewBag.Classes["from"][i]["name"]
         <br />
-    }
+		}
+	}
     @for (int i = 0; i < ViewBag.Pro.Count; i++)
     {
         <input type="hidden" name="Proficiencies" value="@ViewBag.Pro[i]["name"]" />
