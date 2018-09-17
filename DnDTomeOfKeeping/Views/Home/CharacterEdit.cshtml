@@ -6,15 +6,17 @@
     temp.Proficiencies = ViewBag.CharacterData.Proficiencies;
     temp.SpellsKnown = ViewBag.CharacterData.SpellsKnown;
     string[] classNames = new string[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard" };
+    string[] raceNames = new string[] { "Dwarf", "Elf", "Halfling", "Human", "Dragonborn", "Gnome", "Half-Elf", "Half-Orc", "Tiefling" };
 }
+
 
 <h2>CharacterEdit</h2>
 
 
 
 <label>Character Name: </label> @ViewBag.CharacterData.CharName  <br />
-<label>Race: </label> @ViewBag.CharacterData.Race  <br />
-<label>Class: </label> @classNames[@ViewBag.CharacterData.Class-1]  <br />
+<label>Race: </label>@raceNames[@ViewBag.CharacterData.Race-1]  <br />
+<label>Class: </label> @classNames[@ViewBag.CharacterData.Class - 1]  <br />
 
 <form action="/Home/SaveChanges" method="post">
     <input type="hidden" name="Class" value=" @ViewBag.CharacterData.Class" />
@@ -85,18 +87,18 @@
         @for (int i = 0; i < ViewBag.Spells.Count; i++)
         {
             <tr>
-				<td>
-					@if (temp.SpellsKnown.Contains($"{ViewBag.Spells[i]["name"]}"))
-					{
-						<input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells[i]["name"]" checked />
-						@ViewBag.Spells[i]["name"]
-					}
-					else
-					{
-						<input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells[i]["name"]" />
-						@ViewBag.Spells[i]["name"]
-					}
-				</td>
+                <td>
+                    @if (temp.SpellsKnown.Contains($"{ViewBag.Spells[i]["name"]}"))
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells[i]["name"]" checked />
+                        @ViewBag.Spells[i]["name"]
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells[i]["name"]" />
+                        @ViewBag.Spells[i]["name"]
+                    }
+                </td>
             </tr>
         }
     </table>
@@ -105,20 +107,20 @@
     <label>Change Proficiencies: </label>
     <br />
     @for (int i = 0; i < ViewBag.Classes["from"].Count; i++)
-	{
-		if (temp.Proficiencies.Contains($"{ViewBag.Classes["from"][i]["name"]}"))
-		{
-			<input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["from"][i]["name"]" checked/>
-        @ViewBag.Classes["from"][i]["name"]
-        <br />
-		}
-		else
-		{
-        <input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["from"][i]["name"]" />
-        @ViewBag.Classes["from"][i]["name"]
-        <br />
-		}
-	}
+    {
+        if (temp.Proficiencies.Contains($"{ViewBag.Classes["from"][i]["name"]}"))
+        {
+            <input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["from"][i]["name"]" checked />
+            @ViewBag.Classes["from"][i]["name"]
+            <br />
+        }
+        else
+        {
+            <input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["from"][i]["name"]" />
+            @ViewBag.Classes["from"][i]["name"]
+            <br />
+        }
+    }
     @for (int i = 0; i < ViewBag.Pro.Count; i++)
     {
         <input type="hidden" name="Proficiencies" value="@ViewBag.Pro[i]["name"]" />
