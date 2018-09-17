@@ -1,11 +1,11 @@
 ﻿@using DnDTomeOfKeeping.Models;
 @{
-	ViewBag.Title = "CharacterEdit";
+    ViewBag.Title = "CharacterEdit";
 
-	Character temp = new Character();
-	temp.Proficiencies = ViewBag.CharacterData.Proficiencies;
-	temp.SpellsKnown = ViewBag.CharacterData.SpellsKnown;
-
+    Character temp = new Character();
+    temp.Proficiencies = ViewBag.CharacterData.Proficiencies;
+    temp.SpellsKnown = ViewBag.CharacterData.SpellsKnown;
+    string[] classNames = new string[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard" };
 }
 
 <h2>CharacterEdit</h2>
@@ -14,7 +14,7 @@
 
 <label>Character Name: </label> @ViewBag.CharacterData.CharName  <br />
 <label>Race: </label> @ViewBag.CharacterData.Race  <br />
-<label>Class: </label> @ViewBag.CharacterData.Class  <br />
+<label>Class: </label> @classNames[@ViewBag.CharacterData.Class-1]  <br />
 
 <form action="/Home/SaveChanges" method="post">
     <input type="hidden" name="Class" value=" @ViewBag.CharacterData.Class" />
