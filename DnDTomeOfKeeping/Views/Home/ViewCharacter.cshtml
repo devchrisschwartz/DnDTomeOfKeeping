@@ -9,6 +9,14 @@
 }
 
 <h2>ViewCharacter</h2>
+@if (ViewBag.Character.Campaign != null)
+    {
+    <a href = "/Home/Campaign?id=@ViewBag.Character.Campaign" > View @ViewBag.Character.CharName's Campaign</a>
+    }
+    else
+    {
+    <a href="/Home/Campaign"></a>
+    }
 
 <h2>@ViewBag.Character.CharName</h2>
 
