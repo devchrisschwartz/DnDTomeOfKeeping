@@ -58,10 +58,16 @@
         <div class="col-md-2 text-right">
             <b>Recent Characters</b>
             <p>
-                <a href="">Character 1</a><br />
+                
+                @for(int i = ViewBag.PubChar.Count-1;i>ViewBag.PubChar.Count-6;i--)
+                {
+                    @ViewBag.PubChar[i]
+                    <br />
+                }
+                @*<a href="">Character 1</a><br />
                 <a href="">Character 2</a><br />
                 <a href="">Character 3</a><br />
-                <a href="">Character 4</a><br />
+                <a href="">Character 4</a><br />*@
             </p>
         </div>
     </div>

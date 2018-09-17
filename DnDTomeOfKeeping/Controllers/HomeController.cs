@@ -19,6 +19,8 @@ namespace DnDTomeOfKeeping.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+            ViewBag.PubChar = ORM.Characters.ToList();
             return View();
         }
 
