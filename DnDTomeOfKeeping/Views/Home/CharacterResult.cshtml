@@ -13,7 +13,8 @@
     <table border="1" class="table">
         <tr>
             <th>Name</th>
-            <th>class</th>
+            <th>Class</th>
+            <th>User</th>
 
         </tr>
         @foreach (var character in ViewBag.Characters)
@@ -21,6 +22,19 @@
             <tr>
                 <td><a href="/Home/ViewCharacter?CharacterID=@character.CharID">@character.CharName</a></td>
                 <td>@character.Class</td>
+                @foreach (var user in ViewBag.User)
+                {
+                    if (user.Id == character.UserID)
+                    {
+                        <td><a href="/Home/UserProfile?UserName=@user.UserName">@user.UserName</a></td>
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+
+
             </tr>
         }
     </table>

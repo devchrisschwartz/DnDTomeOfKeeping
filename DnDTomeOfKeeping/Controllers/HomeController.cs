@@ -461,8 +461,15 @@ namespace DnDTomeOfKeeping.Controllers
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
+            List<Character> temp = ORM.Characters.Where(x => x.CharName.ToLower().Contains
+            (charName.ToLower())).ToList();
+
+            List<string> users = temp.Select(x => x.UserID).Distinct().ToList();
+
             ViewBag.Characters = ORM.Characters.Where(x => x.CharName.ToLower().Contains
             (charName.ToLower())).ToList();
+
+            ViewBag.User = ORM.AspNetUsers.Where(x => users.Contains(x.Id)).ToList();
 
             return View("CharacterResult");
         }
@@ -533,6 +540,17 @@ namespace DnDTomeOfKeeping.Controllers
             ViewBag.ListOfCharacters = ORM.Characters.Where(x => x.Campaign == campaignid).ToList();
 
             return RedirectToAction("Campaign", new { id = campaignid });
+        }
+
+
+        [HttpGet]
+        public ActionResult UserProfile(string UserName)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+           
+
+            return View();
         }
     }
 }
