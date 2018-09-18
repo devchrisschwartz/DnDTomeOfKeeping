@@ -1,31 +1,58 @@
 ﻿
 @{
-	ViewBag.Title = "Tracker";
+    ViewBag.Title = "Tracker";
 }
 
 <h2>Tracker</h2>
-<a href="/Home/PickClass">Create a new character!</a> <br />
-<h3>My Characters</h3>
-<table>
+<button type="button" a href="/Home/PickClass" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">Create a Character!</button>
 
-    @foreach (var Char in ViewBag.CharacterToView)
-    {
+    <h3>My Characters</h3>
+    <table border="1" class="table">
+        <tr>
+
+            <th>Character List</th>
+            <th>Edit Character</th>
+            <th>Delete Character</th>
+
+
+            @foreach (var Char in ViewBag.CharacterToView)
+            {
         <tr>
             <td class="col-md-4">
-                <a href="/Home/ViewCharacter?CharacterID=@Char.CharID">View @Char.CharName     </a>
+                <a href="/Home/ViewCharacter?CharacterID=@Char.CharID">@Char.CharName     </a>
             </td>
             <td class="col-md-4">
-                <a href="/Home/CharacterEdit?CharacterID=@Char.CharID&Class=@Char.Class">Edit @Char.CharName</a><br />
+                <a href="/Home/CharacterEdit?CharacterID=@Char.CharID&Class=@Char.Class">Edit</a><br />
+            </td>
+            <td class="col-md-4">
+                <a href="*">Delete</a><br />
             </td>
         </tr>
-    }
-</table>
+        }
+        </table>
 
-<br />
-<h3>My Campaigns</h3>
-@foreach (var Camp in ViewBag.MyCampaigns)
-{
-    <a href="/Home/Campaign?id=@Camp.CampaignID">@Camp.CampaignName</a>
-}
+        <br />
+        <h3>My Campaigns</h3>
 
-<br /><br /><br /><br /><br /><br />
+        <table border="1" class="table">
+            <tr>
+
+                <th>Name</th>
+
+                @foreach (var Camp in ViewBag.MyCampaigns)
+                {
+                <tr>
+                    <td class="col-md-4">
+                        <a href="/Home/Campaign?id=@Camp.CampaignID">@Camp.CampaignName</a>
+                    </td>
+                </tr>
+            }
+                </tr>
+            </table>
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />

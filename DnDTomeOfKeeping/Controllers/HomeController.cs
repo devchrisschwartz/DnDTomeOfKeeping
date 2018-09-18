@@ -550,7 +550,15 @@ namespace DnDTomeOfKeeping.Controllers
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
+            // redirect from charactersearch > character result > username (that created that character)
+
+            // pull info from aspnetuser.id
+            // pull info from characters.userid
+            // pull info from campaigns.dm userid != null
             
+            // display username from the userid
+            // display characters from that userid
+            // display campaigns if dm userid != null
 
             //ViewBag.UserChar = ORM.Characters.Where(x => x.UserID).ToList();
 
