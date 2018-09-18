@@ -25,7 +25,7 @@
                 <a href="/Home/CharacterEdit?CharacterID=@Char.CharID&Class=@Char.Class">Edit</a><br />
             </td>
             <td class="col-md-4">
-                <a href="*">Delete</a><br />
+                <a href="/Home/DeleteCharacter?charID=@Char.CharID" onclick="return confirm(' Are you sure that you want to delete this?')">Delete</a><br />
             </td>
         </tr>
         }
@@ -33,19 +33,26 @@
 
         <br />
         <h3>My Campaigns</h3>
+        
+
+
 
         <table border="1" class="table">
             <tr>
 
                 <th>Name</th>
+                <th>Delete Campaign</th>
 
                 @foreach (var Camp in ViewBag.MyCampaigns)
                 {
-                <tr>
-                    <td class="col-md-4">
-                        <a href="/Home/Campaign?id=@Camp.CampaignID">@Camp.CampaignName</a>
-                    </td>
-                </tr>
+            <tr>
+                <td class="col-md-4">
+                    <a href="/Home/Campaign?id=@Camp.CampaignID">@Camp.CampaignName</a>
+                </td>
+                <td class="col-md-4">
+                    <a href="/Home/DeleteCampaign?campaignID = @Camp.CampaignID" onclick="return confirm('Are you sure that you want to delete this?')">Delete</a><br />
+                </td>
+            </tr>
             }
                 </tr>
             </table>

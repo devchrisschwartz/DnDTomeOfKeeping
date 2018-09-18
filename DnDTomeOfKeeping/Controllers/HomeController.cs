@@ -512,8 +512,23 @@ namespace DnDTomeOfKeeping.Controllers
 
             ORM.SaveChanges();
 
-            return RedirectToAction("Campaign", new { id = newCampaign.CampaignID });
+            return RedirectToAction("Campaign", new {id = newCampaign.CampaignID });
 
+        }
+
+        public ActionResult DeleteCampaign(int campaignID)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+
+            Campaign campaignToDelete = ORM.Campaigns.Find(campaignID);
+
+
+            ORM.Campaigns.Remove(campaignToDelete);
+
+            ORM.SaveChanges();
+
+            return RedirectToAction("Tracker");
         }
 
         [HttpGet]
@@ -544,7 +559,27 @@ namespace DnDTomeOfKeeping.Controllers
             return RedirectToAction("Campaign", new { id = campaignid });
         }
 
+        public ActionResult RemoveCharacterFromCampaign(int charID, int campaignid)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
+            //Campaign tempCamp = ORM.Campaigns.Find(campaignid);
+            Character characterToRemove = ORM.Characters.Find(charID);
+
+            //tempCamp.Characters.Remove(characterToRemove);
+
+            characterToRemove.Campaign = null;
+            ORM.Entry(characterToRemove).State = System.Data.Entity.EntityState.Modified;
+
+            ORM.SaveChanges();
+
+            ViewBag.ListOfCharacters = ORM.Characters.Where(x => x.Campaign == campaignid).ToList();
+
+            return RedirectToAction("Campaign", new { id = campaignid });
+        }
+
+
+       
         [HttpGet]
         public ActionResult UserProfile(string username)
         {
@@ -555,7 +590,7 @@ namespace DnDTomeOfKeeping.Controllers
             // pull info from aspnetuser.id
             // pull info from characters.userid
             // pull info from campaigns.dm userid != null
-            
+
             // display username from the userid
             // display characters from that userid
             // display campaigns if dm userid != null
@@ -565,6 +600,21 @@ namespace DnDTomeOfKeeping.Controllers
             ViewBag.UserCamp = ORM.Campaigns.Where(x => x.DMUserID != null).ToList();
 
             return View();
+        }
+
+        public ActionResult DeleteCharacter(int charID)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+
+            Character characterToDelete = ORM.Characters.Find(charID);
+
+
+            ORM.Characters.Remove(characterToDelete);
+
+            ORM.SaveChanges();
+
+            return RedirectToAction("Tracker");
         }
     }
 }

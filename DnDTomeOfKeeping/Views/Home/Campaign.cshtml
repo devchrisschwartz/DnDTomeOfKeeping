@@ -26,3 +26,15 @@
 </form>
 
 <br /><br /><br />
+
+            <form action="/Home/RemoveCharacterFromCampaign">
+               
+                <input type="hidden" value="@ViewBag.Campaign.CampaignID" name="campaignid" />
+                <select name="charID">
+                    @foreach (var availablecharacter in @ViewBag.ListOfCharacters)
+                    {
+                        <option value="@availablecharacter.CharID">@availablecharacter.CharName</option>
+                    }
+                </select>
+                <input type="submit" value="Remove Character From Campaign" />
+            </form>
