@@ -10,27 +10,6 @@
 }
 
 <script>
-	function levelup(level, currenthp) {
-		if (level < 20) {
-			hproll = 0;
-			hp = document.getElementById('characterhp');
-			con = document.getElementById('constitution');
-			conmodifier = Math.floor(con.value / 2) - 5;
-			lvl = document.getElementById('level');
-			random = Math.ceil(math.random() * @ViewBag.HitDieSize );
-			hproll += random;
-			if (conmodifier < -3) {
-				hp.value = currenthp + hproll;
-			} else {
-				hp.value = currenthp + hproll + conmodifier;
-			}
-			lvl.value = level + 1;
-			document.getElementById('editform').submit();
-		} else {
-			return ('This character is already at maximum level!');
-		}
-	}
-
 	function rollhp(level) {
 		total = 0;
 		hp = document.getElementById('characterhp');
@@ -75,7 +54,6 @@
 			}
 		}
 	</select><br />
-	<button type="button" onclick="levelup(level.value, characterhp.value)">Level up!</button>
 	<br />
 	<input type="hidden" name="CharID" value="@ViewBag.CharacterData.CharID" />
 	<label>Maximum Hit Points: </label>

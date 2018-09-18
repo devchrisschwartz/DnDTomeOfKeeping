@@ -453,8 +453,6 @@ namespace DnDTomeOfKeeping.Controllers
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
-            //ViewBag.CharacterToView = ORM.Characters.Where(x => x.CharID.ToString().Contains(CharID.ToString())).ToList();
-
             ViewBag.Character = ORM.Characters.Find(CharacterID);
 
             return View();
