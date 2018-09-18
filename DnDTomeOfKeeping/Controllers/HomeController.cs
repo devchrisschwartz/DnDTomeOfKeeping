@@ -476,12 +476,19 @@ namespace DnDTomeOfKeeping.Controllers
             return View("CharacterResult");
         }
 
-        public ActionResult SearchCampaignByName(string campaignName)
+        public ActionResult SearchCampaignByName(string campaignName, string userid)
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
+            List<Campaign> temp = ORM.Campaigns.Where(x => x.CampaignName.ToLower().Contains
+            (campaignName.ToLower())).ToList();
+
             ViewBag.Campaigns = ORM.Campaigns.Where(x => x.CampaignName.ToLower().Contains
             (campaignName.ToLower())).ToList();
+
+            List<string> users = temp.Select(x => x.DMUserID).Distinct().ToList();
+
+            ViewBag.User = ORM.AspNetUsers.Where(x => users.Contains(x.UserName)).ToList();
 
             return View("CampaignResult");
         }
@@ -543,6 +550,30 @@ namespace DnDTomeOfKeeping.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult UserProfile(string userid)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            // redirect from charactersearch > character result > username (that created that character)
+
+            // pull info from aspnetuser.id
+            // pull info from characters.userid
+            // pull info from campaigns.dm userid != null
+
+            // display username from the userid
+            // display characters from that userid
+            // display campaigns if dm userid != null
+
+            ViewBag.User = ORM.AspNetUsers.Find(userid);
+
+            ViewBag.UserChar = ORM.Characters.Where(x => x.UserID == userid).ToList();
+
+            ViewBag.UserCamp = ORM.Campaigns.Where(x => x.DMUserID == userid).ToList();
+
+            return View();
+        }
+
         public ActionResult AddToCampaign(int charID, int campaignid)
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
@@ -578,29 +609,6 @@ namespace DnDTomeOfKeeping.Controllers
             return RedirectToAction("Campaign", new { id = campaignid });
         }
 
-
-       
-        [HttpGet]
-        public ActionResult UserProfile(string username)
-        {
-            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
-
-            // redirect from charactersearch > character result > username (that created that character)
-
-            // pull info from aspnetuser.id
-            // pull info from characters.userid
-            // pull info from campaigns.dm userid != null
-
-            // display username from the userid
-            // display characters from that userid
-            // display campaigns if dm userid != null
-
-            //ViewBag.UserChar = ORM.Characters.Where(x => x.UserID).ToList();
-
-            ViewBag.UserCamp = ORM.Campaigns.Where(x => x.DMUserID != null).ToList();
-
-            return View();
-        }
 
         public ActionResult DeleteCharacter(int charID)
         {

@@ -5,29 +5,40 @@
 
 <h1>@ViewBag.User.UserName</h1>
 
-<h3>@ViewBag.User.UserName's Characters</h3>
-@foreach (var Char in ViewBag.CharacterToView)
-    {
-<tr>
-    <td class="col-md-4">
-        <a href="/Home/ViewCharacter?CharacterID=@Char.CharID">View @Char.CharName     </a>
-    </td>
-    <td class="col-md-4">
-        <a href="/Home/CharacterEdit?CharacterID=@Char.CharID&Class=@Char.Class">Edit @Char.CharName</a><br />
-    </td>
-</tr>
+<h3>Characters</h3>
+
+<table border="1" class="table">
+    <tr>
+
+        <th>Characters</th>
+        @foreach (var Char in ViewBag.UserChar)
+        {
+        <tr>
+            <td class="col-md-4">
+                <a href="/Home/ViewCharacter?CharacterID=@Char.CharID">@Char.CharName     </a>
+            </td>
+        </tr>
     }
-</table>
+    </table>
 
+    <br />
+    <h3>Campaigns</h3>
+    <table border="1" class="table">
+        <tr>
 
-<h3>@ViewBag.User.UserName's Campaigns</h3>
-
-
-<br />
-<h3>My Campaigns</h3>
-@foreach (var Camp in ViewBag.MyCampaigns)
-{
-<a href="/Home/Campaign?id=@Camp.CampaignID">@Camp.CampaignName</a>
-}
-
-<br /><br /><br /><br /><br /><br />
+            <th>Campaigns</th>
+            @foreach (var Camp in ViewBag.UserCamp)
+            {
+            <tr>
+                <td class="col-md-4">
+                    <a href="/Home/Campaign?id=@Camp.CampaignID">@Camp.CampaignName</a>
+                </td>
+            </tr>
+        }
+        </table>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />

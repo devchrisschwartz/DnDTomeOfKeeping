@@ -9,20 +9,32 @@
 
 @if (ViewBag.Campaigns != null)
 {
-   // @ViewBag.Campaigns[0]
+    // @ViewBag.Campaigns[0]
 
     <table border="1" class="table">
         <tr>
             <th>Name</th>
             <th>Dungeon Master</th>
-            
+
         </tr>
         @foreach (var campaign in ViewBag.Campaigns)
         {
-        <tr>
-            <td><a href="/Home/Campaign?id=@campaign.CampaignID">@campaign.CampaignName</a></td>
-            <td>@campaign.DMUserID</td>
-        </tr>  
+            <tr>
+                <td><a href="/Home/Campaign?id=@campaign.CampaignID">@campaign.CampaignName</a></td>
+
+                @foreach (var user in ViewBag.User)
+                {
+                    if (user.Id == campaign.DMUserID)
+                    {
+                        <td><a href="/Home/UserProfile?userid=@campaign.DMUserID">@ViewBag.User.UserName</a></td>
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+            </tr>
         }
     </table>
 
