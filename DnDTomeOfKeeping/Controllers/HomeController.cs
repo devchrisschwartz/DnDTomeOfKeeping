@@ -19,9 +19,16 @@ namespace DnDTomeOfKeeping.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            viewbagofholdingEntities ORM = new viewbagofholdingEntities();//right here pulling in from db
-            ViewBag.PubChar = ORM.Characters.ToList(); //saving to ViewBag
-            return View();//sending to the view
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+            ViewBag.PubChar = ORM.Characters.ToList();
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
         }
 
         [Authorize]
@@ -43,13 +50,6 @@ namespace DnDTomeOfKeeping.Controllers
 
                 ViewBag.Classes = jsonClasses["results"];
             }
-
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }
@@ -123,127 +123,6 @@ namespace DnDTomeOfKeeping.Controllers
             {
                 ViewBag.User = User.Identity.GetUserId();
             }
-
-            return View();
-        }
-
-        [Authorize]
-        public ActionResult CreateCampaign()
-        {
-            ViewBag.User = User.Identity.GetUserId();
-
-            return View();
-        }
-
-        [HttpGet]
-        [Authorize]
-        public ActionResult Tracker()
-        {
-            string loggedinuser = User.Identity.GetUserId();
-            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
-            ViewBag.CharacterToView = ORM.Characters.Where(x => x.UserID == loggedinuser).ToList();
-
-            ViewBag.MyCampaigns = ORM.Campaigns.Where(x => x.DMUserID == loggedinuser).ToList();
-
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult CCSearch()
-        {
-
-            return View();
-        }
-
-        public ActionResult Campaign(int id)
-        {
-            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
-
-            ViewBag.ListOfCharacters = ORM.Characters.Where(x => x.Campaign == id).ToList(); //list of characters in the campaign
-
-            ViewBag.AvailableCharacters = ORM.Characters.Where(x => x.Campaign == null).ToList();
-
-            ViewBag.Campaign = ORM.Campaigns.Find(id);
-
-            ViewBag.User = User.Identity.GetUserId();
-
-            return View();
-        }
-
-        [HttpGet]
-        [Authorize]
-        public ActionResult CharacterEdit(int CharacterID, int Class)
-        {
-            string classString = Class.ToString();
-
-            HttpWebRequest dndApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/classes/{classString}");
-
-            dndApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
-
-            HttpWebResponse dndApiResponse = (HttpWebResponse)dndApiRequest.GetResponse();
-
-            if (dndApiResponse.StatusCode == HttpStatusCode.OK)
-            {
-                StreamReader responseData = new StreamReader(dndApiResponse.GetResponseStream());
-
-                string data = responseData.ReadToEnd();
-
-                JObject jsonClasses = JObject.Parse(data);
-                int size = jsonClasses["proficiency_choices"].Count();
-                ViewBag.HitDieSize = jsonClasses["hit_die"];
-                ViewBag.Name = jsonClasses["name"];
-                ViewBag.Classes = jsonClasses["proficiency_choices"][size - 1];
-
-                ViewBag.Choose = jsonClasses["proficiency_choices"][size - 1]["choose"];
-                ViewBag.Pro = jsonClasses["proficiencies"];
-                ViewBag.Saves = jsonClasses["saving_throws"];
-            }
-
-            HttpWebRequest dndRaceApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/races");
-
-            dndRaceApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
-
-            HttpWebResponse dndRaceApiResponse = (HttpWebResponse)dndRaceApiRequest.GetResponse();
-
-            if (dndRaceApiResponse.StatusCode == HttpStatusCode.OK)
-            {
-                StreamReader responseData = new StreamReader(dndRaceApiResponse.GetResponseStream());
-
-                string data = responseData.ReadToEnd();
-
-                JObject jsonRaces = JObject.Parse(data);
-
-                ViewBag.Races = jsonRaces["results"];
-            }
-
-            HttpWebRequest spellApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}");
-
-            spellApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
-
-            HttpWebResponse spellApiResponse = (HttpWebResponse)spellApiRequest.GetResponse();
-
-            if (spellApiResponse.StatusCode == HttpStatusCode.OK)
-            {
-                StreamReader responseData = new StreamReader(spellApiResponse.GetResponseStream());
-
-                string data = responseData.ReadToEnd();
-
-                JObject jsonSpells = JObject.Parse(data);
-
-                ViewBag.Spells = jsonSpells["results"];
-            }
-
-            if (User.Identity.IsAuthenticated)
-            {
-                ViewBag.User = User.Identity.GetUserId();
-            }
-
-
-            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
-
-            Character characterToEdit = ORM.Characters.Find(CharacterID);
-
-            ViewBag.CharacterData = characterToEdit;
 
             return View();
         }
@@ -339,6 +218,84 @@ namespace DnDTomeOfKeeping.Controllers
             ORM.Characters.Add(newCharacter);
             ORM.SaveChanges();
             return RedirectToAction("Tracker");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult CharacterEdit(int CharacterID, int Class)
+        {
+            string classString = Class.ToString();
+
+            HttpWebRequest dndApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/classes/{classString}");
+
+            dndApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse dndApiResponse = (HttpWebResponse)dndApiRequest.GetResponse();
+
+            if (dndApiResponse.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(dndApiResponse.GetResponseStream());
+
+                string data = responseData.ReadToEnd();
+
+                JObject jsonClasses = JObject.Parse(data);
+                int size = jsonClasses["proficiency_choices"].Count();
+                ViewBag.HitDieSize = jsonClasses["hit_die"];
+                ViewBag.Name = jsonClasses["name"];
+                ViewBag.Classes = jsonClasses["proficiency_choices"][size - 1];
+
+                ViewBag.Choose = jsonClasses["proficiency_choices"][size - 1]["choose"];
+                ViewBag.Pro = jsonClasses["proficiencies"];
+                ViewBag.Saves = jsonClasses["saving_throws"];
+            }
+
+            HttpWebRequest dndRaceApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/races");
+
+            dndRaceApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse dndRaceApiResponse = (HttpWebResponse)dndRaceApiRequest.GetResponse();
+
+            if (dndRaceApiResponse.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(dndRaceApiResponse.GetResponseStream());
+
+                string data = responseData.ReadToEnd();
+
+                JObject jsonRaces = JObject.Parse(data);
+
+                ViewBag.Races = jsonRaces["results"];
+            }
+
+            HttpWebRequest spellApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}");
+
+            spellApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse spellApiResponse = (HttpWebResponse)spellApiRequest.GetResponse();
+
+            if (spellApiResponse.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(spellApiResponse.GetResponseStream());
+
+                string data = responseData.ReadToEnd();
+
+                JObject jsonSpells = JObject.Parse(data);
+
+                ViewBag.Spells = jsonSpells["results"];
+            }
+
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.User = User.Identity.GetUserId();
+            }
+
+
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            Character characterToEdit = ORM.Characters.Find(CharacterID);
+
+            ViewBag.CharacterData = characterToEdit;
+
+            return View();
         }
 
         public ActionResult SaveChanges(Character UpdatedCharacter, string[] Proficiencies, string[] SpellsKnown)
@@ -459,83 +416,36 @@ namespace DnDTomeOfKeeping.Controllers
             //OldRecord.Campaign = UpdateItem.Campaign;
         }
 
-        public ActionResult SearchCharByName(string charName)
+        [Authorize]
+        public ActionResult CreateCampaign()
         {
-            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+            ViewBag.User = User.Identity.GetUserId();
 
-            List<Character> temp = ORM.Characters.Where(x => x.CharName.ToLower().Contains
-            (charName.ToLower())).ToList();
-
-            List<string> users = temp.Select(x => x.UserID).Distinct().ToList();
-
-            ViewBag.Characters = ORM.Characters.Where(x => x.CharName.ToLower().Contains
-            (charName.ToLower())).ToList();
-
-            ViewBag.User = ORM.AspNetUsers.Where(x => users.Contains(x.Id)).ToList();
-
-            return View("CharacterResult");
-        }
-
-        public ActionResult SearchCampaignByName(string campaignName, string userid)
-        {
-            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
-
-            List<Campaign> temp = ORM.Campaigns.Where(x => x.CampaignName.ToLower().Contains
-            (campaignName.ToLower())).ToList();
-
-            ViewBag.Campaigns = ORM.Campaigns.Where(x => x.CampaignName.ToLower().Contains
-            (campaignName.ToLower())).ToList();
-
-            List<string> users = temp.Select(x => x.DMUserID).Distinct().ToList();
-
-            ViewBag.User = ORM.AspNetUsers.Where(x => users.Contains(x.UserName)).ToList();
-
-            return View("CampaignResult");
-        }
-
-
-        public ActionResult BrowseCharacters()
-        {
-            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
-
-            ViewBag.CharList = ORM.Characters.ToList();
-            return View();
-        }
-
-        public ActionResult BrowseCampaigns()
-        {
-            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
-
-            ViewBag.CampList = ORM.Campaigns.ToList();
             return View();
         }
 
         public ActionResult SaveCampaign(Campaign newCampaign)
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
-            // ViewBag.campaign = ORM.Campaigns;
 
             ORM.Campaigns.Add(newCampaign);
 
             ORM.SaveChanges();
 
-            return RedirectToAction("Campaign", new {id = newCampaign.CampaignID });
-
+            return RedirectToAction("Campaign", new { id = newCampaign.CampaignID });
         }
 
-        public ActionResult DeleteCampaign(int campaignID)
+        [HttpGet]
+        [Authorize]
+        public ActionResult Tracker()
         {
+            string loggedinuser = User.Identity.GetUserId();
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+            ViewBag.CharacterToView = ORM.Characters.Where(x => x.UserID == loggedinuser).ToList();
 
+            ViewBag.MyCampaigns = ORM.Campaigns.Where(x => x.DMUserID == loggedinuser).ToList();
 
-            Campaign campaignToDelete = ORM.Campaigns.Find(campaignID);
-
-
-            ORM.Campaigns.Remove(campaignToDelete);
-
-            ORM.SaveChanges();
-
-            return RedirectToAction("Tracker");
+            return View();
         }
 
         [HttpGet]
@@ -550,26 +460,32 @@ namespace DnDTomeOfKeeping.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult UserProfile(string userid)
+        public ActionResult DeleteCharacter(int charID)
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
-            // redirect from charactersearch > character result > username (that created that character)
 
-            // pull info from aspnetuser.id
-            // pull info from characters.userid
-            // pull info from campaigns.dm userid != null
+            Character characterToDelete = ORM.Characters.Find(charID);
 
-            // display username from the userid
-            // display characters from that userid
-            // display campaigns if dm userid != null
 
-            ViewBag.User = ORM.AspNetUsers.Find(userid);
+            ORM.Characters.Remove(characterToDelete);
 
-            ViewBag.UserChar = ORM.Characters.Where(x => x.UserID == userid).ToList();
+            ORM.SaveChanges();
 
-            ViewBag.UserCamp = ORM.Campaigns.Where(x => x.DMUserID == userid).ToList();
+            return RedirectToAction("Tracker");
+        }
+
+        public ActionResult Campaign(int id)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            ViewBag.ListOfCharacters = ORM.Characters.Where(x => x.Campaign == id).ToList(); //list of characters in the campaign
+
+            ViewBag.AvailableCharacters = ORM.Characters.Where(x => x.Campaign == null).ToList();
+
+            ViewBag.Campaign = ORM.Campaigns.Find(id);
+
+            ViewBag.User = User.Identity.GetUserId();
 
             return View();
         }
@@ -609,20 +525,100 @@ namespace DnDTomeOfKeeping.Controllers
             return RedirectToAction("Campaign", new { id = campaignid });
         }
 
-
-        public ActionResult DeleteCharacter(int charID)
+        public ActionResult DeleteCampaign(int campaignID)
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
 
-            Character characterToDelete = ORM.Characters.Find(charID);
+            Campaign campaignToDelete = ORM.Campaigns.Find(campaignID);
 
 
-            ORM.Characters.Remove(characterToDelete);
+            ORM.Campaigns.Remove(campaignToDelete);
 
             ORM.SaveChanges();
 
             return RedirectToAction("Tracker");
+        }
+
+        [HttpGet]
+        public ActionResult UserProfile(string userid)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            // redirect from charactersearch > character result > username (that created that character)
+
+            // pull info from aspnetuser.id
+            // pull info from characters.userid
+            // pull info from campaigns.dm userid != null
+
+            // display username from the userid
+            // display characters from that userid
+            // display campaigns if dm userid != null
+
+            ViewBag.User = ORM.AspNetUsers.Find(userid);
+
+            ViewBag.UserChar = ORM.Characters.Where(x => x.UserID == userid).ToList();
+
+            ViewBag.UserCamp = ORM.Campaigns.Where(x => x.DMUserID == userid).ToList();
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult CCSearch()
+        {
+
+            return View();
+        }
+
+        public ActionResult SearchCharByName(string charName)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            List<Character> temp = ORM.Characters.Where(x => x.CharName.ToLower().Contains
+            (charName.ToLower())).ToList();
+
+            List<string> users = temp.Select(x => x.UserID).Distinct().ToList();
+
+            ViewBag.Characters = ORM.Characters.Where(x => x.CharName.ToLower().Contains
+            (charName.ToLower())).ToList();
+
+            ViewBag.User = ORM.AspNetUsers.Where(x => users.Contains(x.Id)).ToList();
+
+            return View("CharacterResult");
+        }
+
+        public ActionResult SearchCampaignByName(string campaignName, string userid)
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            List<Campaign> temp = ORM.Campaigns.Where(x => x.CampaignName.ToLower().Contains
+            (campaignName.ToLower())).ToList();
+
+            ViewBag.Campaigns = ORM.Campaigns.Where(x => x.CampaignName.ToLower().Contains
+            (campaignName.ToLower())).ToList();
+
+            List<string> users = temp.Select(x => x.DMUserID).Distinct().ToList();
+
+            ViewBag.User = ORM.AspNetUsers.Where(x => users.Contains(x.UserName)).ToList();
+
+            return View("CampaignResult");
+        }
+
+        public ActionResult BrowseCharacters()
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            ViewBag.CharList = ORM.Characters.ToList();
+            return View();
+        }
+
+        public ActionResult BrowseCampaigns()
+        {
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            ViewBag.CampList = ORM.Campaigns.ToList();
+            return View();
         }
     }
 }
