@@ -324,17 +324,46 @@ namespace DnDTomeOfKeeping.Controllers
 
                 if (jsonSpellSlot["spellcasting"] != null)
                 {
+                    if (jsonSpellSlot["spellcasting"]["cantrips_known"] != null)
+                    {
                     newCharacter.Cantrips = (int)jsonSpellSlot["spellcasting"]["cantrips_known"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_1"] != null)
+                    {
                     newCharacter.SpellSlot1 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_1"];
-                    newCharacter.SpellSlot2 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_2"];
-                    newCharacter.SpellSlot3 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_3"];
-                    newCharacter.SpellSlot4 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_4"];
-                    newCharacter.SpellSlot5 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_5"];
-                    newCharacter.SpellSlot6 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_6"];
-                    newCharacter.SpellSlot7 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_7"];
-                    newCharacter.SpellSlot8 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_8"];
-                    newCharacter.SpellSlot9 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_9"];
-
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_2"] != null)
+                    {
+                        newCharacter.SpellSlot2 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_2"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_3"] != null)
+                    {
+                        newCharacter.SpellSlot3 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_3"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_4"] != null)
+                    {
+                        newCharacter.SpellSlot4 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_4"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_5"] != null)
+                    {
+                        newCharacter.SpellSlot5 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_5"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_6"] != null)
+                    {
+                        newCharacter.SpellSlot6 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_6"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_7"] != null)
+                    {
+                        newCharacter.SpellSlot7 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_7"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_8"] != null)
+                    {
+                        newCharacter.SpellSlot8 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_8"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_9"] != null)
+                    {
+                        newCharacter.SpellSlot9 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_9"];
+                    }
                 }
 
             }
@@ -642,17 +671,46 @@ namespace DnDTomeOfKeeping.Controllers
 
                 if (jsonSpellSlot["spellcasting"] != null)
                 {
-                    UpdatedCharacter.Cantrips = (int)jsonSpellSlot["spellcasting"]["cantrips_known"];
-                    UpdatedCharacter.SpellSlot1 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_1"];
-                    UpdatedCharacter.SpellSlot2 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_2"];
-                    UpdatedCharacter.SpellSlot3 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_3"];
-                    UpdatedCharacter.SpellSlot4 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_4"];
-                    UpdatedCharacter.SpellSlot5 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_5"];
-                    UpdatedCharacter.SpellSlot6 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_6"];
-                    UpdatedCharacter.SpellSlot7 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_7"];
-                    UpdatedCharacter.SpellSlot8 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_8"];
-                    UpdatedCharacter.SpellSlot9 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_9"];
-
+                    if (jsonSpellSlot["spellcasting"]["cantrips_known"] != null)
+                    {
+                        UpdatedCharacter.Cantrips = (int)jsonSpellSlot["spellcasting"]["cantrips_known"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_1"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot1 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_1"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_2"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot2 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_2"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_3"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot3 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_3"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_4"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot4 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_4"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_5"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot5 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_5"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_6"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot6 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_6"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_7"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot7 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_7"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_8"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot8 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_8"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_9"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot9 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_9"];
+                    }
                 }
 
             }
