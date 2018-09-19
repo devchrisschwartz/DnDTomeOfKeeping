@@ -110,17 +110,17 @@
     </select> <br />
     <label>HP: </label><input type="number" name="HitPoints" id="characterhp" /> <button type="button" id="roll" onclick="rollhp(level.value)">Roll HP</button>
     <h2>Statistics</h2> <button type="button" id="roll" onclick="rolldice('strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma')">Roll All Stats</button><br />
-    <label>STR: </label><input name="Strength" type="number" min="3" id="strength"> <button type="button" id="roll" onclick="rolldice('strength')">Roll Strength</button><br />
+    <label>STR: </label><input name="Strength" type="number" min="3" max="30" id="strength"> <button type="button" id="roll" onclick="rolldice('strength')">Roll Strength</button><br />
     <p>Strength (STR) is your character's physical power. Used for climbing, jumping, melee martial-type weapon attacks, and Athletics skill checks.</p>
-    <label>DEX: </label><input name="Dexterity" type="number" min="3" id="dexterity" /> <button type="button" id="roll" onclick="rolldice('dexterity')">Roll Dexterity</button> <br />
+    <label>DEX: </label><input name="Dexterity" type="number" min="3" max="30" id="dexterity" /> <button type="button" id="roll" onclick="rolldice('dexterity')">Roll Dexterity</button> <br />
     <p>Dexterity (DEX) is your character's phyiscal.</p>
-    <label>CON: </label><input name="Constitution" type="number" min="3" id="constitution" /> <button type="button" id="roll" onclick="rolldice('constitution')">Roll Constitution</button> <br />
+    <label>CON: </label><input name="Constitution" type="number" min="3" max="30" id="constitution" /> <button type="button" id="roll" onclick="rolldice('constitution')">Roll Constitution</button> <br />
     <p>Constitution (CON) is your character's .</p>
-    <label>INT: </label><input name="Intelligence" type="number" min="3" id="intelligence" /> <button type="button" id="roll" onclick="rolldice('intelligence')">Roll Intelligence</button> <br />
+    <label>INT: </label><input name="Intelligence" type="number" min="3" max="30" id="intelligence" /> <button type="button" id="roll" onclick="rolldice('intelligence')">Roll Intelligence</button> <br />
     <p>Intelligence (INT) is your character's .</p>
-    <label>WIS: </label><input name="Wisdom" type="number" min="3" id="wisdom" /><button type="button" id="roll" onclick="rolldice('wisdom')">Roll Wisdom</button>  <br />
+    <label>WIS: </label><input name="Wisdom" type="number" min="3" max="30" id="wisdom" /><button type="button" id="roll" onclick="rolldice('wisdom')">Roll Wisdom</button>  <br />
     <p>Wisdom (WIS) is your character's .</p>
-    <label>CHA: </label><input name="Charisma" type="number" min="3" id="charisma" /> <button type="button" id="roll" onclick="rolldice('charisma')">Roll Charisma</button> <br />
+    <label>CHA: </label><input name="Charisma" type="number" min="3" max="30" id="charisma" /> <button type="button" id="roll" onclick="rolldice('charisma')">Roll Charisma</button> <br />
     <p>Charisma (CHA) is your character's .</p>
     <h2>Alignment</h2><br />
     <select name="Alignment">

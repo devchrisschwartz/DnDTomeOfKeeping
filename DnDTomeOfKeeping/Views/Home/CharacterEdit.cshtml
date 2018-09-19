@@ -136,22 +136,22 @@
 	</select>
 	<br />
 	<label>STR: </label>
-	<input name="Strength" type="number" minimum="3" value="@ViewBag.CharacterData.Strength" />
+	<input name="Strength" type="number" minimum="3" max="30" value="@ViewBag.CharacterData.Strength" />
 	<br />
 	<label>DEX: </label>
-	<input name="Dexterity" type="number" minimum="3" value="@ViewBag.CharacterData.Dexterity" />
+	<input name="Dexterity" type="number" minimum="3" max="30" value="@ViewBag.CharacterData.Dexterity" />
 	<br />
 	<label>CON: </label>
-	<input name="Constitution" type="number" minimum="3" value="@ViewBag.CharacterData.Constitution" id="constitution" />
+	<input name="Constitution" type="number" minimum="3" max="30" value="@ViewBag.CharacterData.Constitution" id="constitution" />
 	<br />
 	<label>INT: </label>
-	<input name="Intelligence" type="number" minimum="3" value="@ViewBag.CharacterData.Intelligence" />
+	<input name="Intelligence" type="number" minimum="3" max="30" value="@ViewBag.CharacterData.Intelligence" />
 	<br />
 	<label>WIS: </label>
-	<input name="Wisdom" type="number" minimum="3" value="@ViewBag.CharacterData.Wisdom" />
+	<input name="Wisdom" type="number" minimum="3" max="30" value="@ViewBag.CharacterData.Wisdom" />
 	<br />
 	<label>CHA:</label>
-	<input name="Charisma" type="number" minimum="3" value="@ViewBag.CharacterData.Charisma" />
+	<input name="Charisma" type="number" minimum="3" max="30" value="@ViewBag.CharacterData.Charisma" />
 	<br />
 	<label>Current Spells: </label>@ViewBag.CharacterData.SpellsKnown
 	<label>Add Spells:</label>
