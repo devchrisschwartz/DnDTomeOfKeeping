@@ -14,11 +14,13 @@
 	}
 }
 <br /><br /><br />
+@if (ViewBag.User == ViewBag.Campaign.DMUserID)
+{
 <form action="/Home/AddToCampaign"> @*Create list of available characters that are not in a campaign, give option to add to the campaign*@
     <input type="hidden" value="@ViewBag.Campaign.CampaignID" name="campaignid" />
     <select name="charID">
-        @foreach(var availablecharacter in @ViewBag.AvailableCharacters)
-		{
+        @foreach (var availablecharacter in @ViewBag.AvailableCharacters)
+        {
         <option value="@availablecharacter.CharID">@availablecharacter.CharName</option>
         }
     </select>
@@ -37,4 +39,9 @@
                 </select>
                 <input type="submit" value="Remove Character From Campaign" />
             </form>
+}
+else
+{
+
+}
 <br /><br /><br />
