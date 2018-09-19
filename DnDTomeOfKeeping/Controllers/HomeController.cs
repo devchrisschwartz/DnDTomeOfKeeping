@@ -613,9 +613,17 @@ namespace DnDTomeOfKeeping.Controllers
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
-
             Character characterToDelete = ORM.Characters.Find(charID);
 
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.User = User.Identity.GetUserId();
+                string userid = User.Identity.GetUserId();
+                if (characterToDelete.UserID != userid)
+                {
+                    return RedirectToAction("ViewCharacter", new { CharacterID = charID });
+                }
+            }
 
             ORM.Characters.Remove(characterToDelete);
 
