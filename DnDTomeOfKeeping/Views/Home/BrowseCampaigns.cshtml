@@ -1,0 +1,18 @@
+﻿
+@{
+	ViewBag.Title = "BrowseCampaigns";
+}
+
+<h2>Campaigns</h2>
+
+<table border="1" class="table">
+	<tr>
+		<th>Name</th>
+	</tr>
+	@foreach (var campaign in ViewBag.CampList)
+	{
+		<tr>
+			<td><a href="/Home/Campaign?id=@campaign.CampaignID">@campaign.CampaignName</a></td>
+		</tr>
+	}
+</table>

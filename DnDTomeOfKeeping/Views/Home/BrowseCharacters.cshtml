@@ -1,0 +1,37 @@
+﻿
+@{
+	ViewBag.Title = "BrowseCharacters";
+
+	string[] classNames = new string[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard" };
+
+}
+
+<h2>Characters</h2>
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th scope="col">Character List</th>
+			<th scope="col">Character Class</th>
+			<th scope="col">Character Level</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (var Char in ViewBag.CharList)
+		{
+			<tr>
+				<td class="col-md-4">
+					<a href="/Home/ViewCharacter?CharacterID=@Char.CharID">@Char.CharName     </a>
+				</td>
+				<td class="col-md-4">
+					@classNames[Char.Class - 1]<br />
+				</td>
+				<td class="col-md-4">
+					@Char.CharLevel<br />
+				</td>
+
+			</tr>
+		}
+	</tbody>
+</table>
