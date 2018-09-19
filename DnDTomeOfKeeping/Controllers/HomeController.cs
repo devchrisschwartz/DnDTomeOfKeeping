@@ -102,21 +102,168 @@ namespace DnDTomeOfKeeping.Controllers
             }
             string[] Names = new string[] { "barbarian", "bard", "cleric", "druid", "fighter", "monk", "paladin", "ranger", "rogue", "sorcerer", "warlock", "wizard" };
 
-            HttpWebRequest spellApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}");
 
-            spellApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+            HttpWebRequest spellApiRequest0 = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}/level/0");
 
-            HttpWebResponse spellApiResponse = (HttpWebResponse)spellApiRequest.GetResponse();
+            spellApiRequest0.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
 
-            if (spellApiResponse.StatusCode == HttpStatusCode.OK)
+            HttpWebResponse spellApiResponse0 = (HttpWebResponse)spellApiRequest0.GetResponse();
+
+            if (spellApiResponse0.StatusCode == HttpStatusCode.OK)
             {
-                StreamReader responseData = new StreamReader(spellApiResponse.GetResponseStream());
+                StreamReader responseData = new StreamReader(spellApiResponse0.GetResponseStream());
 
-                string data = responseData.ReadToEnd();
+                string cantrips = responseData.ReadToEnd();
 
-                JObject jsonSpells = JObject.Parse(data);
+                JObject jsonSpells = JObject.Parse(cantrips);
 
-                ViewBag.Spells = jsonSpells["results"];
+                ViewBag.Cantrips = jsonSpells["results"];
+            }
+
+            HttpWebRequest spellAPIRequest1 = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}/level/1");
+
+            spellAPIRequest1.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse spellAPIresponse1 = (HttpWebResponse)spellAPIRequest1.GetResponse();
+
+            if (spellAPIresponse1.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(spellAPIresponse1.GetResponseStream());
+
+                string Spells1 = responseData.ReadToEnd();
+
+                JObject jsonSpells = JObject.Parse(Spells1);
+
+                ViewBag.Spells1 = jsonSpells["results"];
+            }
+
+            HttpWebRequest spellAPIRequest2 = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}/level/2");
+
+            spellAPIRequest2.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse spellAPIresponse2 = (HttpWebResponse)spellAPIRequest2.GetResponse();
+
+            if (spellAPIresponse2.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(spellAPIresponse2.GetResponseStream());
+
+                string Spells2 = responseData.ReadToEnd();
+
+                JObject jsonSpells = JObject.Parse(Spells2);
+
+                ViewBag.Spells2 = jsonSpells["results"];
+            }
+            HttpWebRequest spellAPIRequest3 = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}/level/3");
+
+            spellAPIRequest3.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse spellAPIresponse3 = (HttpWebResponse)spellAPIRequest3.GetResponse();
+
+            if (spellAPIresponse3.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(spellAPIresponse3.GetResponseStream());
+
+                string Spells3 = responseData.ReadToEnd();
+
+                JObject jsonSpells = JObject.Parse(Spells3);
+
+                ViewBag.Spells3 = jsonSpells["results"];
+            }
+            HttpWebRequest spellAPIRequest4 = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}/level/4");
+
+            spellAPIRequest4.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse spellAPIresponse4 = (HttpWebResponse)spellAPIRequest4.GetResponse();
+
+            if (spellAPIresponse4.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(spellAPIresponse4.GetResponseStream());
+
+                string Spells4 = responseData.ReadToEnd();
+
+                JObject jsonSpells = JObject.Parse(Spells4);
+
+                ViewBag.Spells4 = jsonSpells["results"];
+            }
+            HttpWebRequest spellAPIRequest5 = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}/level/5");
+
+            spellAPIRequest5.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse spellAPIresponse5 = (HttpWebResponse)spellAPIRequest5.GetResponse();
+
+            if (spellAPIresponse5.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(spellAPIresponse5.GetResponseStream());
+
+                string Spells5 = responseData.ReadToEnd();
+
+                JObject jsonSpells = JObject.Parse(Spells5);
+
+                ViewBag.Spells5 = jsonSpells["results"];
+            }
+            HttpWebRequest spellAPIRequest6 = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}/level/6");
+
+            spellAPIRequest6.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse spellAPIresponse6 = (HttpWebResponse)spellAPIRequest6.GetResponse();
+
+            if (spellAPIresponse6.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(spellAPIresponse6.GetResponseStream());
+
+                string Spells6 = responseData.ReadToEnd();
+
+                JObject jsonSpells = JObject.Parse(Spells6);
+
+                ViewBag.Spells6 = jsonSpells["results"];
+            }
+            HttpWebRequest spellAPIRequest7 = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}/level/7");
+
+            spellAPIRequest7.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse spellAPIresponse7 = (HttpWebResponse)spellAPIRequest7.GetResponse();
+
+            if (spellAPIresponse1.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(spellAPIresponse7.GetResponseStream());
+
+                string Spells7 = responseData.ReadToEnd();
+
+                JObject jsonSpells = JObject.Parse(Spells7);
+
+                ViewBag.Spells7 = jsonSpells["results"];
+            }
+            HttpWebRequest spellAPIRequest8 = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}/level/8");
+
+            spellAPIRequest8.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse spellAPIresponse8 = (HttpWebResponse)spellAPIRequest8.GetResponse();
+
+            if (spellAPIresponse8.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(spellAPIresponse8.GetResponseStream());
+
+                string Spells8 = responseData.ReadToEnd();
+
+                JObject jsonSpells = JObject.Parse(Spells8);
+
+                ViewBag.Spells8 = jsonSpells["results"];
+            }
+            HttpWebRequest spellAPIRequest9 = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/spells/{Names[Class - 1]}/level/9");
+
+            spellAPIRequest9.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+            HttpWebResponse spellAPIresponse9 = (HttpWebResponse)spellAPIRequest9.GetResponse();
+
+            if (spellAPIresponse9.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader responseData = new StreamReader(spellAPIresponse9.GetResponseStream());
+
+                string Spells9 = responseData.ReadToEnd();
+
+                JObject jsonSpells = JObject.Parse(Spells9);
+
+                ViewBag.Spells9 = jsonSpells["results"];
             }
 
             if (User.Identity.IsAuthenticated)

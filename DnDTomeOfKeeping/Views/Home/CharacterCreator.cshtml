@@ -1,7 +1,11 @@
 ﻿@using DnDTomeOfKeeping.Models;
 @{
-	ViewBag.Title = "CharacterCreator";
+    ViewBag.Title = "CharacterCreator";
 }
+<style>
+     td { vertical-align: top; }
+
+</style>
 
 <script>
 	function rollhp(level) {
@@ -9,7 +13,7 @@
 		hp = document.getElementById('characterhp');
 		con = document.getElementById('constitution');
 		conmodifier = Math.floor(con.value / 2) - 5;
-		
+
 		timestoroll = level - 1;
 		dicetoroll = @ViewBag.HitDieSize + 0;
 		for (i = 0; i < timestoroll; i++) {
@@ -74,116 +78,203 @@
 </script>
 
 <form action="/Home/CharacterSubmit" method="post">
-	<h2>CharacterCreator</h2><br />
-	<label>Character Name: </label><input type="text" name="CharName" />
-	<input type="hidden" value="@ViewBag.Name" />
-	<h2>Class: @ViewBag.Name</h2>
-	<input type="hidden" value="@ViewBag.ClassID" name="Class" />
-	<br />
-	<label>Level: </label>
-	<select name="CharLevel" id="level">
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		<option value="5">5</option>
-		<option value="6">6</option>
-		<option value="7">7</option>
-		<option value="8">8</option>
-		<option value="9">9</option>
-		<option value="10">10</option>
-		<option value="11">11</option>
-		<option value="12">12</option>
-		<option value="13">13</option>
-		<option value="14">14</option>
-		<option value="15">15</option>
-		<option value="16">16</option>
-		<option value="17">17</option>
-		<option value="18">18</option>
-		<option value="19">19</option>
-		<option value="20">20</option>
-	</select> <br />
-	<label>HP: </label><input type="number" name="HitPoints" id="characterhp"/> <button type="button" id="roll" onclick="rollhp(level.value)">Roll HP</button>
-	<h2>Statistics</h2> <button type="button" id="roll" onclick="rolldice('strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma')">Roll All Stats</button><br />
-	<label>STR: </label><input name="Strength" type="number" min="3" id="strength"> <button type="button" id="roll" onclick="rolldice('strength')">Roll Strength</button><br />
-	<p>Strength (STR) is your character's physical power. Used for climbing, jumping, melee martial-type weapon attacks, and Athletics skill checks.</p>
-	<label>DEX: </label><input name="Dexterity" type="number" min="3" id="dexterity" /> <button type="button" id="roll" onclick="rolldice('dexterity')">Roll Dexterity</button> <br />
-	<p>Dexterity (DEX) is your character's .</p>
-	<label>CON: </label><input name="Constitution" type="number" min="3" id="constitution" /> <button type="button" id="roll" onclick="rolldice('constitution')">Roll Constitution</button> <br />
-	<p>Constitution (CON) is your character's .</p>
-	<label>INT: </label><input name="Intelligence" type="number" min="3" id="intelligence" /> <button type="button" id="roll" onclick="rolldice('intelligence')">Roll Intelligence</button> <br />
-	<p>Intelligence (INT) is your character's .</p>
-	<label>WIS: </label><input name="Wisdom" type="number" min="3" id="wisdom" /><button type="button" id="roll" onclick="rolldice('wisdom')">Roll Wisdom</button>  <br />
-	<p>Wisdom (WIS) is your character's .</p>
-	<label>CHA: </label><input name="Charisma" type="number" min="3" id="charisma" /> <button type="button" id="roll" onclick="rolldice('charisma')">Roll Charisma</button> <br />
-	<p>Charisma (CHA) is your character's .</p>
-	<h2>Alignment</h2><br />
-	<select name="Alignment">
-		<option value="Lawful Good">Lawful Good</option>
-		<option value="Lawful Neutral">Lawful Neutral</option>
-		<option value="Lawful Evil">Lawful Evil</option>
-		<option value="Neutral Good">Neutral Good</option>
-		<option value="True Neutral">True Neutral</option>
-		<option value="Neutral Evil">Neutral Evil</option>
-		<option value="Chaotic Good"> Chaotic Good</option>
-		<option value="Chaotic Neutral"> Chaotic Neutral</option>
-		<option value="Chaotic Evil"> Chaotic Evil</option>
-	</select>
-	<br />
-	<h2>Race</h2><br />
-	<select name="Race">
-		@for (int i = 0; i < ViewBag.Races.Count; i++)
-		{
-			<option value="@(i+1)">@ViewBag.Races[i]["name"]</option>
-		}
-	</select>
+    <h2>CharacterCreator</h2><br />
+    <label>Character Name: </label><input type="text" name="CharName" />
+    <input type="hidden" value="@ViewBag.Name" />
+    <h2>Class: @ViewBag.Name</h2>
+    <input type="hidden" value="@ViewBag.ClassID" name="Class" />
+    <br />
+    <label>Level: </label>
+    <select name="CharLevel" id="level">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+    </select> <br />
+    <label>HP: </label><input type="number" name="HitPoints" id="characterhp" /> <button type="button" id="roll" onclick="rollhp(level.value)">Roll HP</button>
+    <h2>Statistics</h2> <button type="button" id="roll" onclick="rolldice('strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma')">Roll All Stats</button><br />
+    <label>STR: </label><input name="Strength" type="number" min="3" id="strength"> <button type="button" id="roll" onclick="rolldice('strength')">Roll Strength</button><br />
+    <p>Strength (STR) is your character's physical power. Used for climbing, jumping, melee martial-type weapon attacks, and Athletics skill checks.</p>
+    <label>DEX: </label><input name="Dexterity" type="number" min="3" id="dexterity" /> <button type="button" id="roll" onclick="rolldice('dexterity')">Roll Dexterity</button> <br />
+    <p>Dexterity (DEX) is your character's .</p>
+    <label>CON: </label><input name="Constitution" type="number" min="3" id="constitution" /> <button type="button" id="roll" onclick="rolldice('constitution')">Roll Constitution</button> <br />
+    <p>Constitution (CON) is your character's .</p>
+    <label>INT: </label><input name="Intelligence" type="number" min="3" id="intelligence" /> <button type="button" id="roll" onclick="rolldice('intelligence')">Roll Intelligence</button> <br />
+    <p>Intelligence (INT) is your character's .</p>
+    <label>WIS: </label><input name="Wisdom" type="number" min="3" id="wisdom" /><button type="button" id="roll" onclick="rolldice('wisdom')">Roll Wisdom</button>  <br />
+    <p>Wisdom (WIS) is your character's .</p>
+    <label>CHA: </label><input name="Charisma" type="number" min="3" id="charisma" /> <button type="button" id="roll" onclick="rolldice('charisma')">Roll Charisma</button> <br />
+    <p>Charisma (CHA) is your character's .</p>
+    <h2>Alignment</h2><br />
+    <select name="Alignment">
+        <option value="Lawful Good">Lawful Good</option>
+        <option value="Lawful Neutral">Lawful Neutral</option>
+        <option value="Lawful Evil">Lawful Evil</option>
+        <option value="Neutral Good">Neutral Good</option>
+        <option value="True Neutral">True Neutral</option>
+        <option value="Neutral Evil">Neutral Evil</option>
+        <option value="Chaotic Good"> Chaotic Good</option>
+        <option value="Chaotic Neutral"> Chaotic Neutral</option>
+        <option value="Chaotic Evil"> Chaotic Evil</option>
+    </select>
+    <br />
+    <h2>Race</h2><br />
+    <select name="Race">
+        @for (int i = 0; i < ViewBag.Races.Count; i++)
+        {
+            <option value="@(i+1)">@ViewBag.Races[i]["name"]</option>
+        }
+    </select>
 
-	<br />
-	<h2>Proficiency Choices: </h2>
+    <br />
+    <h2>Proficiency Choices: </h2>
 
-	<h3>Pick @ViewBag.Choose from this list</h3>
-	@for (int i = 0; i < ViewBag.Classes["from"].Count; i++)
-	{
-		<input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["from"][i]["name"]" />
-		@ViewBag.Classes["from"][i]["name"]
-		<br />
-	}
+    <h3>Pick @ViewBag.Choose from this list</h3>
+    @for (int i = 0; i < ViewBag.Classes["from"].Count; i++)
+    {
+        <input type="checkbox" name="Proficiencies" value="@ViewBag.Classes["from"][i]["name"]" />
+        @ViewBag.Classes["from"][i]["name"]
+        <br />
+    }
 
-	<br />
+    <br />
 
-	@if (ViewBag.Spells.Count != 0)
-	{
-		<h2>This is the list of spells for your class:</h2>
-		<h3>Please select the ones your character knows:</h3>
-		<br />
-		<table border="1">
-			@for (int i = 0; i < ViewBag.Spells.Count; i++)
-			{
-				<tr>
-					<td>
-						<input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells[i]["name"]" />
-						@ViewBag.Spells[i]["name"]
-					</td>
-				</tr>
-			}
-		</table> 
-	}
+    @if (ViewBag.Cantrips.Count != 0)
+    {
+        <h2>This is the list of spells for your class:</h2>
+        <h3>Please select the ones your character knows:</h3>
+        <br />
 
-	<h3>Armor and Weapon Proficiencies</h3>
-	@for (int i = 0; i < ViewBag.Pro.Count; i++)
-	{
-		<p>@ViewBag.Pro[i]["name"]</p>
-		<input type="hidden" name="Proficiencies" value="@ViewBag.Pro[i]["name"]" />
-	}
+        <table border="1">
+            <tr>
+                <td>
+                    <p>Cantrips</p>
+                    @for (int i = 0; i < ViewBag.Cantrips.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Cantrips[i]["name"]" />
+                        @ViewBag.Cantrips[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 1 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells1.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells1[i]["name"]" />
+                        @ViewBag.Spells1[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 2 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells2.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells2[i]["name"]" />
+                        @ViewBag.Spells2[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 3 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells3.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells3[i]["name"]" />
+                        @ViewBag.Spells3[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 4 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells4.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells4[i]["name"]" />
+                        @ViewBag.Spells4[i]["name"]
+                        <br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Level 5 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells5.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells5[i]["name"]" />
+                        @ViewBag.Spells5[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 6 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells6.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells6[i]["name"]" />
+                        @ViewBag.Spells6[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 7 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells7.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells7[i]["name"]" />
+                        @ViewBag.Spells7[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 8 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells8.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells8[i]["name"]" />
+                        @ViewBag.Spells8[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 9 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells9.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells9[i]["name"]" />
+                        @ViewBag.Spells9[i]["name"]
+                        <br />
+                    }
+                </td>
+            </tr>
+        </table>
 
-	<h3>Saving Throws</h3>
-	@for (int i = 0; i < ViewBag.Saves.Count; i++)
-	{
-		<p>@ViewBag.Saves[i]["name"]</p>
-		<input type="hidden" name="Proficiencies" value="@ViewBag.Saves[i]["name"]" />
-	}
+    }
 
-	<input name="UserID" type="hidden" value="@ViewBag.User" />
-	<input type="submit" value="Create Character" />
+    <h3>Armor and Weapon Proficiencies</h3>
+    @for (int i = 0; i < ViewBag.Pro.Count; i++)
+    {
+        <p>@ViewBag.Pro[i]["name"]</p>
+        <input type="hidden" name="Proficiencies" value="@ViewBag.Pro[i]["name"]" />
+    }
+
+    <h3>Saving Throws</h3>
+    @for (int i = 0; i < ViewBag.Saves.Count; i++)
+    {
+        <p>@ViewBag.Saves[i]["name"]</p>
+        <input type="hidden" name="Proficiencies" value="@ViewBag.Saves[i]["name"]" />
+    }
+
+    <input name="UserID" type="hidden" value="@ViewBag.User" />
+    <input type="submit" value="Create Character" />
 </form>
 <br /><br /><br /><br />
