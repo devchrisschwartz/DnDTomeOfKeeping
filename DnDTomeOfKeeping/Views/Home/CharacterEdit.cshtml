@@ -9,6 +9,12 @@
 	string[] raceNames = new string[] { "Dwarf", "Elf", "Halfling", "Human", "Dragonborn", "Gnome", "Half-Elf", "Half-Orc", "Tiefling" };
 }
 
+<style>
+	td {
+		vertical-align: top;
+	}
+</style>
+
 <script>
 	function rollhp(level) {
 		total = 0;
@@ -153,27 +159,182 @@
 	<label>CHA:</label>
 	<input name="Charisma" type="number" minimum="3" max="30" value="@ViewBag.CharacterData.Charisma" />
 	<br />
+	@if (ViewBag.CharacterData.SpellsKnown != null)
+	{
 	<label>Current Spells: </label>@ViewBag.CharacterData.SpellsKnown
-	<label>Add Spells:</label>
-	<table border="1">
-		@for (int i = 0; i < ViewBag.Spells.Count; i++)
-		{
-			<tr>
-				<td>
-					@if (temp.SpellsKnown.Contains($"{ViewBag.Spells[i]["name"]}"))
-					{
-						<input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells[i]["name"]" checked />
-						@ViewBag.Spells[i]["name"]
-					}
-					else
-					{
-						<input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells[i]["name"]" />
-						@ViewBag.Spells[i]["name"]
-					}
-				</td>
-			</tr>
-		}
-	</table>
+	}
+	@if (ViewBag.Cantrips.Count != 0)
+    {
+        <h2>This is the list of spells for your class:</h2>
+        <h3>Please select the ones your character knows:</h3>
+        <br />
+
+        <table border="1">
+            <tr>
+                <td>
+                    <p>Cantrips</p>
+                    @for (int i = 0; i < ViewBag.Cantrips.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Cantrips[i]["name"]" />
+                        @ViewBag.Cantrips[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 1 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells1.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells1[i]["name"]" />
+                        @ViewBag.Spells1[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 2 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells2.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells2[i]["name"]" />
+                        @ViewBag.Spells2[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 3 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells3.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells3[i]["name"]" />
+                        @ViewBag.Spells3[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 4 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells4.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells4[i]["name"]" />
+                        @ViewBag.Spells4[i]["name"]
+                        <br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Level 5 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells5.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells5[i]["name"]" />
+                        @ViewBag.Spells5[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 6 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells6.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells6[i]["name"]" />
+                        @ViewBag.Spells6[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 7 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells7.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells7[i]["name"]" />
+                        @ViewBag.Spells7[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 8 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells8.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells8[i]["name"]" />
+                        @ViewBag.Spells8[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 9 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells9.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells9[i]["name"]" />
+                        @ViewBag.Spells9[i]["name"]
+                        <br />
+                    }
+                </td>
+            </tr>
+        </table>
+
+    }
+
+    else if (ViewBag.ClassID == 7 || ViewBag.ClassID == 8)
+    {
+        <h2>This is the list of spells for your class:</h2>
+        <h3>Please select the ones your character knows:</h3>
+        <br />
+        <table border="1">
+            <tr>
+
+                <td>
+                    <p>Level 1 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells1.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells1[i]["name"]" />
+                        @ViewBag.Spells1[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 2 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells2.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells2[i]["name"]" />
+                        @ViewBag.Spells2[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 3 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells3.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells3[i]["name"]" />
+                        @ViewBag.Spells3[i]["name"]
+                        <br />
+                    }
+                </td>
+                <td>
+                    <p>Level 4 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells4.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells4[i]["name"]" />
+                        @ViewBag.Spells4[i]["name"]
+                        <br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Level 5 Spells</p>
+                    @for (int i = 0; i < ViewBag.Spells5.Count; i++)
+                    {
+                        <input type="checkbox" name="SpellsKnown" value="@ViewBag.Spells5[i]["name"]" />
+                        @ViewBag.Spells5[i]["name"]
+                        <br />
+                    }
+                </td>
+
+            </tr>
+
+
+        </table>
+
+    }
+    else
+    {
+
+    }
+
 	<label>Current Proficiencies: </label>@ViewBag.CharacterData.Proficiencies
 	<br />
 	<label>Change Proficiencies: </label>
