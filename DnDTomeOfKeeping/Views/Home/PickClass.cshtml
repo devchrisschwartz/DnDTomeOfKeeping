@@ -1,16 +1,53 @@
 ﻿
 @{
-    ViewBag.Title = "PickClass";
+	ViewBag.Title = "PickClass";
 }
 
 <h2>Select your class!</h2>
 
+<script>
+	function classdescription() {
+		o = document.getElementById('description');
+		p = document.getElementById('classselect');
+		if (p.value == 1) {
+			o.innerHTML = "Barbarian - The relentless combatant, fueled by fury or it\'s totem bonds with animals. In tune with the natural order.";
+		} else if (p.value == 2) {
+			o.innerHTML = "Bard - A story teller or musician using his wits, magic, and lore to get out of (or avoid) tight situations.";
+		} else if (p.value == 3) {
+			o.innerHTML = 'Cleric - A Holy man devoted to a deity. Capable of bolstering the party and heal their wounds, or laying low their enemies with divine wrath.';
+		} else if (p.value == 4) {
+			o.innerHTML = 'Druid - A nomad devoted to the world and the powers of Nature. Capable of adopting the form of a beast for battle or utility, bolstering the party and healing their wounds, or laying low their enemies with nature\'s wrath.';
+		} else if (p.value == 5) {
+			o.innerHTML = 'Fighter - Skilled combatant or strategist typically relying on his heavy armor and weapons to cut down their enemies. His training gives him unique abilities.';
+		} else if (p.value == 6) {
+			o.innerHTML = 'Monk - Martial artist pulling on the power of his own body to produce impressive results.';
+		} else if (p.value == 7) {
+			o.innerHTML = 'Paladin -Nnearly as skilled as the Fighter but bolsters his efforts with divine magic. Through his devotion he gains special boons from his god.';
+		} else if (p.value == 8) {
+			o.innerHTML = 'Ranger - One who uses a unique blend of wilderness knowledge and martial ability to be a deadly hunter, with a bow, a pet or melee weapons.';
+		} else if (p.value == 9) {
+			o.innerHTML = 'Rogue - A thief, assassin or stealthy character who has a knack for picking out his enemies weaknesses and exploiting them.';
+		} else if (p.value == 10) {
+			o.innerHTML = 'Sorcerer - A magic user who draws his power from within, summoning his innate magical power and bending it to his will.';
+		} else if (p.value == 11) {
+			o.innerHTML = 'Warlock - Pacted to a powerful entity the Warlock trades favors for boons and spells.';
+		} else if (p.value == 12) {
+			o.innerHTML = 'Wizard - Keeper of arcane secrets and forgotten knowledge, the Wizard manipulates magic and spells with cunning.';
+		}
+	}
+</script>
+
 <form action="/Home/CharacterCreator" method="get">
-	<select name="Class">
-		@for(int i = 0; i<12; i++)
-            {
-		<option value="@(i+1)">@ViewBag.Classes[i]["name"]</option>
-            }
+	<select name="Class" id="classselect" onchange="classdescription()">
+		@for (int i = 0; i < 12; i++)
+		{
+			<option value="@(i+1)">@ViewBag.Classes[i]["name"]</option>
+		}
 	</select>
 	<button type="submit">Select</button>
 </form>
+<br /> <br />
+<h3>Class Description</h3> <br />
+<div id="description">
+	Barbarian - the relentless combatant, fueled by fury or it's totem bonds with animals. In tune with the natural order.
+</div>

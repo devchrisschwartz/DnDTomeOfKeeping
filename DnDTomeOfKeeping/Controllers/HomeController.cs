@@ -430,15 +430,19 @@ namespace DnDTomeOfKeeping.Controllers
                 ViewBag.Spells = jsonSpells["results"];
             }
 
-            if (User.Identity.IsAuthenticated)
-            {
-                ViewBag.User = User.Identity.GetUserId();
-            }
-
-
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
             Character characterToEdit = ORM.Characters.Find(CharacterID);
+
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.User = User.Identity.GetUserId();
+                string userid = User.Identity.GetUserId();
+                if (characterToEdit.UserID != userid)
+                {
+                    return RedirectToAction("ViewCharacter", new { CharacterID });
+                }
+            }
 
             ViewBag.CharacterData = characterToEdit;
 
@@ -635,10 +639,19 @@ namespace DnDTomeOfKeeping.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult AddToCampaign(int charID, int campaignid)
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
+            Campaign CampValidation = ORM.Campaigns.Find(campaignid);
+
+            string userid = User.Identity.GetUserId();
+
+            if(CampValidation.DMUserID != userid)
+            {
+                return RedirectToAction("Campaign", new { id = campaignid });
+            }
             Character charToEdit = ORM.Characters.Find(charID);
 
             charToEdit.Campaign = campaignid;
@@ -651,14 +664,20 @@ namespace DnDTomeOfKeeping.Controllers
             return RedirectToAction("Campaign", new { id = campaignid });
         }
 
+        [Authorize]
         public ActionResult RemoveCharacterFromCampaign(int charID, int campaignid)
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
-            //Campaign tempCamp = ORM.Campaigns.Find(campaignid);
-            Character characterToRemove = ORM.Characters.Find(charID);
+            Campaign CampValidation = ORM.Campaigns.Find(campaignid);
 
-            //tempCamp.Characters.Remove(characterToRemove);
+            string userid = User.Identity.GetUserId();
+
+            if (CampValidation.DMUserID != userid)
+            {
+                return RedirectToAction("Campaign", new { id = campaignid });
+            }
+            Character characterToRemove = ORM.Characters.Find(charID);
 
             characterToRemove.Campaign = null;
             ORM.Entry(characterToRemove).State = System.Data.Entity.EntityState.Modified;
