@@ -1,6 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "Tracker";
+	ViewBag.Title = "Tracker";
+	string[] classNames = new string[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard" };
+
 }
 
 <h2>Tracker</h2>
@@ -8,14 +10,11 @@
 
 <h3>My Characters</h3>
 
-
-
-
-
 <table class="table table-bordered">
     <thead>
         <tr>
             <th scope="col">Character List</th>
+			<th scope="col">Level and Class</th>
             <th scope="col">Edit Character</th>
             <th scope="col">Delete Character</th>
         </tr>
@@ -24,18 +23,21 @@
 
         @foreach (var Char in ViewBag.CharacterToView)
         {
-            <tr>
-                <td class="col-md-4">
-                    <a href="/Home/ViewCharacter?CharacterID=@Char.CharID">@Char.CharName     </a>
-                </td>
-                <td class="col-md-4">
-                    <a href="/Home/CharacterEdit?CharacterID=@Char.CharID&Class=@Char.Class">Edit</a><br />
-                </td>
-                <td class="col-md-4">
-                    <a href="/Home/DeleteCharacter?charID=@Char.CharID" onclick="return confirm(' Are you sure that you want to delete this?')">Delete</a><br />
-                </td>
+		<tr>
+			<td class="col-md-3">
+				<a href="/Home/ViewCharacter?CharacterID=@Char.CharID">@Char.CharName</a>
+			</td>
+			<td class="col-md-3">
+				Level @Char.CharLevel @classNames[Char.Class - 1]
+			</td>
+			<td class="col-md-3">
+				<a href="/Home/CharacterEdit?CharacterID=@Char.CharID&Class=@Char.Class">Edit</a><br />
+			</td>
+			<td class="col-md-3">
+				<a href="/Home/DeleteCharacter?charID=@Char.CharID" onclick="return confirm(' Are you sure that you want to delete this?')">Delete</a><br />
+			</td>
 
-            </tr>
+		</tr>
         }
     </tbody>
 </table>

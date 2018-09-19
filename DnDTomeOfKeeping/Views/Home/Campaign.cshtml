@@ -1,6 +1,9 @@
 ﻿
 @{
 	ViewBag.Title = "Campaign";
+
+	string[] classNames = new string[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard" };
+
 }
 
 <h2>Campaign</h2>
@@ -10,35 +13,36 @@
 {
 	foreach (var character in ViewBag.ListOfCharacters)
 	{
-<a href="/Home/ViewCharacter?CharacterID=@character.CharID">@character.CharName</a> <br />
+		<a href="/Home/ViewCharacter?CharacterID=@character.CharID">@character.CharName, Level @character.CharLevel @classNames[character.Class - 1]</a> <br />
 	}
 }
-<br /><br /><br />
+<br />
 @if (ViewBag.User == ViewBag.Campaign.DMUserID)
 {
-<form action="/Home/AddToCampaign"> @*Create list of available characters that are not in a campaign, give option to add to the campaign*@
-    <input type="hidden" value="@ViewBag.Campaign.CampaignID" name="campaignid" />
-    <select name="charID">
-        @foreach (var availablecharacter in @ViewBag.AvailableCharacters)
-        {
-        <option value="@availablecharacter.CharID">@availablecharacter.CharName</option>
-        }
-    </select>
-    <input type="submit" value="Add To Campaign" />
-</form>
+	<form action="/Home/AddToCampaign">
+		@*Create list of available characters that are not in a campaign, give option to add to the campaign*@
+		<input type="hidden" value="@ViewBag.Campaign.CampaignID" name="campaignid" />
+		<select name="charID">
+			@foreach (var availablecharacter in @ViewBag.AvailableCharacters)
+			{
+			<option value="@availablecharacter.CharID">@availablecharacter.CharName, Level @availablecharacter.CharLevel @classNames[availablecharacter.Class - 1] </option>
+			}
+		</select>
+		<input type="submit" value="Add Character To Campaign" />
+	</form>
+	<br />
 
+	<form action="/Home/RemoveCharacterFromCampaign">
 
-            <form action="/Home/RemoveCharacterFromCampaign">
-               
-                <input type="hidden" value="@ViewBag.Campaign.CampaignID" name="campaignid" />
-                <select name="charID">
-                    @foreach (var availablecharacter in @ViewBag.ListOfCharacters)
-                    {
-                        <option value="@availablecharacter.CharID">@availablecharacter.CharName</option>
-                    }
-                </select>
-                <input type="submit" value="Remove Character From Campaign" />
-            </form>
+		<input type="hidden" value="@ViewBag.Campaign.CampaignID" name="campaignid" />
+		<select name="charID">
+			@foreach (var availablecharacter in @ViewBag.ListOfCharacters)
+			{
+			<option value="@availablecharacter.CharID">@availablecharacter.CharName, Level @availablecharacter.CharLevel @classNames[availablecharacter.Class - 1]</option>
+			}
+		</select>
+		<input type="submit" value="Remove Character From Campaign" />
+	</form>
 }
 else
 {

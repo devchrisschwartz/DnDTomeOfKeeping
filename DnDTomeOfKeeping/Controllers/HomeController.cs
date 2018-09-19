@@ -701,9 +701,23 @@ namespace DnDTomeOfKeeping.Controllers
         {
             viewbagofholdingEntities ORM = new viewbagofholdingEntities();
 
+            Campaign CampValidation = ORM.Campaigns.Find(campaignID);
+
+            string userid = User.Identity.GetUserId();
+
+            if (CampValidation.DMUserID != userid)
+            {
+                return RedirectToAction("Campaign", new { id = campaignID });
+            }
 
             Campaign campaignToDelete = ORM.Campaigns.Find(campaignID);
 
+            List<Character> tempcharacters = ORM.Characters.Where(x => x.Campaign == campaignID).ToList();
+
+            foreach(Character c in tempcharacters)
+            {
+                c.Campaign = null;
+            }
 
             ORM.Campaigns.Remove(campaignToDelete);
 
