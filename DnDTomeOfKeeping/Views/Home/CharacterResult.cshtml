@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "CharacterResult";
+    string[] classNames = new string[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard" };
 }
 
 <h2>CharacterResult</h2>
@@ -21,7 +22,7 @@
         {
             <tr>
                 <td><a href="/Home/ViewCharacter?CharacterID=@character.CharID">@character.CharName</a></td>
-                <td>@character.Class</td>
+                <td>@classNames[@character.Class-1]</td>
                 @foreach (var user in ViewBag.User)
                 {
                     if (user.Id == character.UserID)
