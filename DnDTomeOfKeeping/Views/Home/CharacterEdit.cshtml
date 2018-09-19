@@ -22,8 +22,8 @@
 			random = Math.ceil(Math.random() * dicetoroll);
 			total += random;
 		}
-		if (conmodifier == -5) {
-			hp.value = total + @ViewBag.HitDieSize + 0 + (conmodifier * (level - 1));
+		if (conmodifier < -3) {
+			hp.value = total + @ViewBag.HitDieSize + 0;
 		} else {
 			hp.value = total + @ViewBag.HitDieSize + conmodifier + (conmodifier * (level - 1));
 		}

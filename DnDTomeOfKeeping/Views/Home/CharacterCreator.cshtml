@@ -21,8 +21,8 @@
 			random = Math.ceil(Math.random() * dicetoroll);
 			total += random;
 		}
-		if (conmodifier == -5) {
-			hp.value = total + @ViewBag.HitDieSize + 0 + (conmodifier * (level-1));
+		if (conmodifier < -3) {
+			hp.value = total + @ViewBag.HitDieSize + 0;
 		} else {
 			hp.value = total + @ViewBag.HitDieSize + conmodifier + (conmodifier * (level-1));
 		}
@@ -113,7 +113,7 @@
     <label>STR: </label><input name="Strength" type="number" min="3" id="strength"> <button type="button" id="roll" onclick="rolldice('strength')">Roll Strength</button><br />
     <p>Strength (STR) is your character's physical power. Used for climbing, jumping, melee martial-type weapon attacks, and Athletics skill checks.</p>
     <label>DEX: </label><input name="Dexterity" type="number" min="3" id="dexterity" /> <button type="button" id="roll" onclick="rolldice('dexterity')">Roll Dexterity</button> <br />
-    <p>Dexterity (DEX) is your character's .</p>
+    <p>Dexterity (DEX) is your character's phyiscal.</p>
     <label>CON: </label><input name="Constitution" type="number" min="3" id="constitution" /> <button type="button" id="roll" onclick="rolldice('constitution')">Roll Constitution</button> <br />
     <p>Constitution (CON) is your character's .</p>
     <label>INT: </label><input name="Intelligence" type="number" min="3" id="intelligence" /> <button type="button" id="roll" onclick="rolldice('intelligence')">Roll Intelligence</button> <br />
