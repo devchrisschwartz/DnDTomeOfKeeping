@@ -1,6 +1,8 @@
 ﻿@model DnDTomeOfKeeping.Models.RegisterViewModel
 @{
 	ViewBag.Title = "Home Page";
+	string[] classNames = new string[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard" };
+
 }
 
 <div class="row">
@@ -81,13 +83,13 @@
 
 		</div>
 		<div class="col-md-2 text-right">
-			<b>Recent Characters</b>
-			<p>
+			<b>Recent Characters</b> <br />
+			
 				@if (ViewBag.PubChar.Count >= 4)
 				{
 					for (int i = ViewBag.PubChar.Count - 1; i > ViewBag.PubChar.Count - 6; i--)
 					{
-						<a href="/Home/ViewCharacter?CharacterID=@ViewBag.PubChar[i].CharID">View @ViewBag.PubChar[i].CharName</a>
+				<a href="/Home/ViewCharacter?CharacterID=@ViewBag.PubChar[i].CharID">View @ViewBag.PubChar[i].CharName, Level @ViewBag.PubChar[i].CharLevel @classNames[ViewBag.PubChar[i].Class - 1]</a>
 						<br />
 					}
 				}
