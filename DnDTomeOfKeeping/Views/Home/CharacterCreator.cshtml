@@ -108,20 +108,24 @@
         <option value="19">19</option>
         <option value="20">20</option>
     </select> <br />
-    <label>HP: </label><input type="number" name="HitPoints" id="characterhp" /> <button type="button" id="roll" onclick="rollhp(level.value)">Roll HP</button>
-    <h2>Statistics</h2> <button type="button" id="roll" onclick="rolldice('strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma')">Roll All Stats</button><br />
-    <label>STR: </label><input name="Strength" type="number" min="3" max="30" id="strength"> <button type="button" id="roll" onclick="rolldice('strength')">Roll Strength</button><br />
+    <label>HP: </label><input type="number" name="HitPoints" id="characterhp" required/> <button type="button" id="roll" onclick="rollhp(level.value)">Roll HP</button>
+	<p>Hit Points is the representation of how much punishment your character can take.</p>
+    <h2>Statistics</h2> <button type="button" id="roll" onclick="rolldice('strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma')">Roll All Stats</button><br /><br />
+    <label>STR: </label><input name="Strength" type="number" min="3" max="30" id="strength" required> <button type="button" id="roll" onclick="rolldice('strength')">Roll Strength</button><br />
     <p>Strength (STR) is your character's physical power. Used for climbing, jumping, melee martial-type weapon attacks, and Athletics skill checks.</p>
-    <label>DEX: </label><input name="Dexterity" type="number" min="3" max="30" id="dexterity" /> <button type="button" id="roll" onclick="rolldice('dexterity')">Roll Dexterity</button> <br />
-    <p>Dexterity (DEX) is your character's phyiscal.</p>
-    <label>CON: </label><input name="Constitution" type="number" min="3" max="30" id="constitution" /> <button type="button" id="roll" onclick="rolldice('constitution')">Roll Constitution</button> <br />
-    <p>Constitution (CON) is your character's .</p>
-    <label>INT: </label><input name="Intelligence" type="number" min="3" max="30" id="intelligence" /> <button type="button" id="roll" onclick="rolldice('intelligence')">Roll Intelligence</button> <br />
-    <p>Intelligence (INT) is your character's .</p>
-    <label>WIS: </label><input name="Wisdom" type="number" min="3" max="30" id="wisdom" /><button type="button" id="roll" onclick="rolldice('wisdom')">Roll Wisdom</button>  <br />
-    <p>Wisdom (WIS) is your character's .</p>
-    <label>CHA: </label><input name="Charisma" type="number" min="3" max="30" id="charisma" /> <button type="button" id="roll" onclick="rolldice('charisma')">Roll Charisma</button> <br />
-    <p>Charisma (CHA) is your character's .</p>
+    <label>DEX: </label><input name="Dexterity" type="number" min="3" max="30" id="dexterity" required/> <button type="button" id="roll" onclick="rolldice('dexterity')">Roll Dexterity</button> <br />
+    <p>Dexterity (DEX) is your character's physical agility. Used for skillful motions such as stealth, sleight of hand, ranged weapon attacks and finesse martial weapon attacks
+	like daggers and rapiers. Affects your ability to avoid attacks and how fast your character acts.</p>
+    <label>CON: </label><input name="Constitution" type="number" min="3" max="30" id="constitution" required/> <button type="button" id="roll" onclick="rolldice('constitution')">Roll Constitution</button> <br />
+    <p>Constitution (CON) is your character's endurance. Affects maximum hit points and how resistant you are to disease or poison, as well as exhaustion.</p>
+    <label>INT: </label><input name="Intelligence" type="number" min="3" max="30" id="intelligence" required/> <button type="button" id="roll" onclick="rolldice('intelligence')">Roll Intelligence</button> <br />
+    <p>Intelligence (INT) is your character's reasoning and memory. Used for knowledge skills. Affects Wizard and Sorcerer spellcasting.</p>
+    <label>WIS: </label><input name="Wisdom" type="number" min="3" max="30" id="wisdom" required/><button type="button" id="roll" onclick="rolldice('wisdom')">Roll Wisdom</button>  <br />
+    <p>Wisdom (WIS) is your character's perception and insight. Affects Druid, Cleric, Ranger, and Paladin spellcasting, and is used for sight and hearing,
+	as well as trying to read other individuals to determine if they are telling the truth.</p>
+    <label>CHA: </label><input name="Charisma" type="number" min="3" max="30" id="charisma" required/> <button type="button" id="roll" onclick="rolldice('charisma')">Roll Charisma</button> <br />
+    <p>Charisma (CHA) is your character's force of personality. Affects interactions with others, and is used to determine resistance to magic that causes shifting.
+	Affects Warlock and Bard spellcasting.</p>
     <h2>Alignment</h2><br />
     <select name="Alignment">
         <option value="Lawful Good">Lawful Good</option>
