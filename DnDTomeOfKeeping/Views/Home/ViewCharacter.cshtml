@@ -2,59 +2,157 @@
 @{
 
 
-	ViewBag.Title = "ViewCharacter";
+  
 
-	string[] classNames = new string[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard" };
-	string[] raceNames = new string[] { "Dwarf", "Elf", "Halfling", "Human", "Dragonborn", "Gnome", "Half-Elf", "Half-Orc", "Tiefling" };
+    string[] classNames = new string[] { "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard" };
+    string[] raceNames = new string[] { "Dwarf", "Elf", "Halfling", "Human", "Dragonborn", "Gnome", "Half-Elf", "Half-Orc", "Tiefling" };
 }
 
-<h2>ViewCharacter</h2>
 @if (ViewBag.Character.Campaign != null)
-    {
-    <a href = "/Home/Campaign?id=@ViewBag.Character.Campaign" > View @ViewBag.Character.CharName's Campaign</a>
-    }
-    else
-    {
-    <a href="/Home/Campaign"></a>
-    }
-
-<h2>@ViewBag.Character.CharName</h2>
-
-<label>Character Name: </label> @ViewBag.Character.CharName  <br />
-<label>Race: </label> @raceNames[@ViewBag.Character.Race - 1]  <br />
-<label>Class: </label> @classNames[@ViewBag.Character.Class - 1]  <br />
-<label>Current Level: </label> @ViewBag.Character.CharLevel<br />
-<label>Current HP: </label> @ViewBag.Character.HitPoints<br />
-<label>Current Alignment: </label> @ViewBag.Character.Alignment<br />
-<label>Current STR: </label> @ViewBag.Character.Strength<br />
-<label>Current DEX: </label> @ViewBag.Character.Dexterity<br />
-<label>Current CON: </label> @ViewBag.Character.Constitution<br />
-<label>Current INT: </label> @ViewBag.Character.Intelligence<br />
-<label>Current WIS: </label> @ViewBag.Character.Wisdom<br />
-<label>Current CHA: </label> @ViewBag.Character.Charisma<br />
-@if (ViewBag.Character.SpellSlot1 != null || ViewBag.Character.SpellSlot2 != null || ViewBag.Character.SpellSlot3 != null || ViewBag.Character.SpellSlot4 != null
-	|| ViewBag.Character.SpellSlot5 != null || ViewBag.Character.SpellSlot6 != null || ViewBag.Character.SpellSlot7 != null || ViewBag.Character.SpellSlot8 != null
-	|| ViewBag.Character.SpellSlot9 != null)
 {
-	<label>Spell Slots:</label><br />
-	<p>1: @ViewBag.Character.SpellSlot1</p>
-	<p>2: @ViewBag.Character.SpellSlot2</p>
-	<p>3: @ViewBag.Character.SpellSlot3</p>
-	<p>4: @ViewBag.Character.SpellSlot4</p>
-	<p>5: @ViewBag.Character.SpellSlot5</p>
-	<p>6: @ViewBag.Character.SpellSlot6</p>
-	<p>7: @ViewBag.Character.SpellSlot7</p>
-	<p>8: @ViewBag.Character.SpellSlot8</p>
-	<p>9: @ViewBag.Character.SpellSlot9</p>
+    <a href="/Home/Campaign?id=@ViewBag.Character.Campaign"> View @ViewBag.Character.CharName's Campaign</a>
 }
+else
+{
+    <a href="/Home/Campaign"></a>
+}
+
+@*<h2>@ViewBag.Character.CharName</h2>*@
+
+<!-- https://getbootstrap.com/docs/3.3/css/#grid -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="h3">@ViewBag.Character.CharName</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="table-responsive">
+                <!-- https://getbootstrap.com/docs/3.3/css/#tables -->
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <td><label>Character Name: </label> @ViewBag.Character.CharName</td>
+                        <td><label>Race: </label> @raceNames[@ViewBag.Character.Race - 1]</td>
+                    </tr>
+                    <tr>
+                        <td><label>Class: </label> @classNames[@ViewBag.Character.Class - 1]</td>
+                        <td><label>Current Alignment: </label> @ViewBag.Character.Alignment</td>
+                    </tr>
+                    <tr>
+                        <td><label>Current Level: </label> @ViewBag.Character.CharLevel</td>
+                        <td><label>Current HP: </label> @ViewBag.Character.HitPoints</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <td><label>Current STR: </label></td>
+                        <td>@ViewBag.Character.Strength</td>
+                    </tr>
+                    <tr>
+                        <td><label>Current DEX: </label></td>
+                        <td>@ViewBag.Character.Dexterity</td>
+                    </tr>
+                    <tr>
+                        <td><label>Current CON: </label></td>
+                        <td>@ViewBag.Character.Constitution</td>
+                    </tr>
+                    <tr>
+                        <td><label>Current INT: </label></td>
+                        <td>@ViewBag.Character.Intelligence</td>
+                    </tr>
+                    <tr>
+                        <td><label>Current WIS: </label></td>
+                        <td>@ViewBag.Character.Wisdom</td>
+                    </tr>
+                    <tr>
+                        <td><label>Current CHA: </label></td>
+                        <td>@ViewBag.Character.Charisma</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-3 kristensDivTwo">
+            <div class="h4">Spell Slots</div>
+            <div class="row">
+                @if (ViewBag.Character.SpellSlot1 != null || ViewBag.Character.SpellSlot2 != null || ViewBag.Character.SpellSlot3 != null || ViewBag.Character.SpellSlot4 != null
+          || ViewBag.Character.SpellSlot5 != null || ViewBag.Character.SpellSlot6 != null || ViewBag.Character.SpellSlot7 != null || ViewBag.Character.SpellSlot8 != null
+          || ViewBag.Character.SpellSlot9 != null)
+                {
+                    <div class="col-xs-6">1: @ViewBag.Character.SpellSlot1</div>
+                    <div class="col-xs-6">2: @ViewBag.Character.SpellSlot2</div>
+                    <div class="col-xs-6">3: @ViewBag.Character.SpellSlot3</div>
+                    <div class="col-xs-6">4: @ViewBag.Character.SpellSlot4</div>
+                    <div class="col-xs-6">5: @ViewBag.Character.SpellSlot5</div>
+                    <div class="col-xs-6">6: @ViewBag.Character.SpellSlot6</div>
+                    <div class="col-xs-6">7: @ViewBag.Character.SpellSlot7</div>
+                    <div class="col-xs-6">8: @ViewBag.Character.SpellSlot8</div>
+                    <div class="col-xs-6">9: @ViewBag.Character.SpellSlot9</div>
+                }
+            </div>
+            <div class="h4">Proficiencies</div>
+            @*<div class="row">*@
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            @*</div>*@
+        </div>
+        <div class="col-md-3 kristensDiv">
+            <div class="h3">Spells Known</div>
+            <div class="row">
+                <div class="col-xs-6">Spell 1</div>
+                <div class="col-xs-6">Spell 2</div>
+                <div class="col-xs-6">Spell 3</div>
+                <div class="col-xs-6">Spell 4</div>
+                <div class="col-xs-6">Spell 5</div>
+                <div class="col-xs-6">Spell 6</div>
+                <div class="col-xs-6">Spell 7</div>
+                <div class="col-xs-6">Spell 8</div>
+            </div>
+            <div class="h3">Features</div>
+            <div class="row">
+                <div class="col-xs-6">Feature 1</div>
+                <div class="col-xs-6">Feature 2</div>
+                <div class="col-xs-6">Feature 3</div>
+                <div class="col-xs-6">Feature 4</div>
+                <div class="col-xs-6">Feature 5</div>
+            </div>
+        </div>
+    </div>
+</div>
+@*@if (ViewBag.Character.SpellSlot1 != null || ViewBag.Character.SpellSlot2 != null || ViewBag.Character.SpellSlot3 != null || ViewBag.Character.SpellSlot4 != null
+        || ViewBag.Character.SpellSlot5 != null || ViewBag.Character.SpellSlot6 != null || ViewBag.Character.SpellSlot7 != null || ViewBag.Character.SpellSlot8 != null
+        || ViewBag.Character.SpellSlot9 != null)
+    {
+        <label>Spell Slots:</label>
+        <br />
+        <p>1: @ViewBag.Character.SpellSlot1</p>
+        <p>2: @ViewBag.Character.SpellSlot2</p>
+        <p>3: @ViewBag.Character.SpellSlot3</p>
+        <p>4: @ViewBag.Character.SpellSlot4</p>
+        <p>5: @ViewBag.Character.SpellSlot5</p>
+        <p>6: @ViewBag.Character.SpellSlot6</p>
+        <p>7: @ViewBag.Character.SpellSlot7</p>
+        <p>8: @ViewBag.Character.SpellSlot8</p>
+        <p>9: @ViewBag.Character.SpellSlot9</p>
+    }*@
 @if (ViewBag.Character.SpellsKnown != null)
 {
-	<label>Current Spells: </label>@ViewBag.Character.SpellsKnown<br />
+    <label>Current Spells: </label>@ViewBag.Character.SpellsKnown
+    <br />
 }
-<label>Current Proficiencies: </label>@ViewBag.Character.Proficiencies <br />
-<label>Current Features: </label>@ViewBag.Character.Features<br />
+<label>Current Proficiencies: </label>@ViewBag.Character.Proficiencies
+<br />
+<label>Current Features: </label>@ViewBag.Character.Features
+<br />
 
-<br /><br /><br />
+<br />
+<br />
+<br />
 
 
 

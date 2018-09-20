@@ -38,3 +38,19 @@ textarea {
     .footer .row {
         margin: 5px 0;
     }
+
+.kristensDivTwo {
+    /*box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);*/
+    border: 1px solid lightgray;
+    border-radius: .25rem;
+    /*background-color: #f8f9fa;*/
+    margin-right: 30px;
+    margin-left: 20px;
+}
+
+.kristensDiv {
+    /*box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);*/
+    border: 1px solid lightgray;
+    border-radius: .25rem;
+    /*background-color: #f8f9fa;*/
+}
