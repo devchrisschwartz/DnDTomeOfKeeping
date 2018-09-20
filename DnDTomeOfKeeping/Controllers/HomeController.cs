@@ -624,8 +624,20 @@ namespace DnDTomeOfKeeping.Controllers
             return View();
         }
 
-        public ActionResult SaveChanges(Character UpdatedCharacter, string[] Proficiencies, string[] SpellsKnown)
+        public ActionResult SaveChanges(Character UpdatedCharacter, string[] Proficiencies, string[] SpellsKnown, string submitButton)
         {
+            if(submitButton == "levelup")
+            {
+                Character temp = UpdatedCharacter;
+                string[] tempprofs = Proficiencies;
+                string[] tempspells = SpellsKnown;
+                return RedirectToAction("LevelUp", new
+                {
+                    LevelProficiencies = tempprofs,
+                }
+                );
+            }
+
             string featuresString = "";
 
             string characterLevel;
@@ -654,9 +666,163 @@ namespace DnDTomeOfKeeping.Controllers
                     }
                 }
             }
-
+            UpdatedCharacter.Features = featuresString;
 
             characterLevel = UpdatedCharacter.CharLevel.ToString();
+            HttpWebRequest dndSpellSlotApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/classes/{Names[UpdatedCharacter.Class - 1]}/level/{characterLevel}");
+            dndSpellSlotApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+            HttpWebResponse dndSpellSlotApiResponse = (HttpWebResponse)dndSpellSlotApiRequest.GetResponse();
+
+            if (dndSpellSlotApiResponse.StatusCode == HttpStatusCode.OK)
+            {
+                StreamReader SpellSlotResponseData = new StreamReader(dndSpellSlotApiResponse.GetResponseStream());
+
+                string spellslotdata = SpellSlotResponseData.ReadToEnd();
+
+                JObject jsonSpellSlot = JObject.Parse(spellslotdata);
+
+                if (jsonSpellSlot["spellcasting"] != null)
+                {
+                    if (jsonSpellSlot["spellcasting"]["cantrips_known"] != null)
+                    {
+                        UpdatedCharacter.Cantrips = (int)jsonSpellSlot["spellcasting"]["cantrips_known"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_1"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot1 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_1"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_2"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot2 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_2"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_3"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot3 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_3"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_4"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot4 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_4"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_5"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot5 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_5"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_6"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot6 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_6"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_7"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot7 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_7"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_8"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot8 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_8"];
+                    }
+                    if (jsonSpellSlot["spellcasting"]["spell_slots_level_9"] != null)
+                    {
+                        UpdatedCharacter.SpellSlot9 = (int)jsonSpellSlot["spellcasting"]["spell_slots_level_9"];
+                    }
+                }
+
+            }
+
+            if (SpellsKnown != null)
+            {
+                string spells = "";
+
+                foreach (string spell in SpellsKnown)
+                {
+                    spells += spell + ",";
+                }
+                UpdatedCharacter.SpellsKnown = spells;
+            }
+
+            string s = "";
+
+            foreach (string p in Proficiencies)
+            {
+                s += p + ",";
+            }
+            UpdatedCharacter.Proficiencies = s;
+
+            viewbagofholdingEntities ORM = new viewbagofholdingEntities();
+
+            Character OldRecord = ORM.Characters.Find(UpdatedCharacter.CharID);
+
+            OldRecord.HitPoints = UpdatedCharacter.HitPoints;
+            OldRecord.Alignment = UpdatedCharacter.Alignment;
+            OldRecord.CharLevel = UpdatedCharacter.CharLevel;
+            OldRecord.SpellsKnown = UpdatedCharacter.SpellsKnown;
+            OldRecord.Proficiencies = UpdatedCharacter.Proficiencies;
+            OldRecord.Strength = UpdatedCharacter.Strength;
+            OldRecord.Dexterity = UpdatedCharacter.Dexterity;
+            OldRecord.Constitution = UpdatedCharacter.Constitution;
+            OldRecord.Intelligence = UpdatedCharacter.Intelligence;
+            OldRecord.Wisdom = UpdatedCharacter.Wisdom;
+            OldRecord.Charisma = UpdatedCharacter.Charisma;
+            OldRecord.Features = UpdatedCharacter.Features;
+            OldRecord.SpellSlot1 = UpdatedCharacter.SpellSlot1;
+            OldRecord.SpellSlot2 = UpdatedCharacter.SpellSlot2;
+            OldRecord.SpellSlot3 = UpdatedCharacter.SpellSlot3;
+            OldRecord.SpellSlot4 = UpdatedCharacter.SpellSlot4;
+            OldRecord.SpellSlot5 = UpdatedCharacter.SpellSlot5;
+            OldRecord.SpellSlot6 = UpdatedCharacter.SpellSlot6;
+            OldRecord.SpellSlot7 = UpdatedCharacter.SpellSlot7;
+            OldRecord.SpellSlot8 = UpdatedCharacter.SpellSlot8;
+            OldRecord.SpellSlot9 = UpdatedCharacter.SpellSlot9;
+
+            ORM.Entry(OldRecord).State = System.Data.Entity.EntityState.Modified;
+            ORM.SaveChanges();
+
+
+            return RedirectToAction("Tracker");
+            //OldRecord.Feats = UpdateItem.Feats;
+            //OldRecord.Equipment = UpdateItem.Equipment;
+            //OldRecord.Features = UpdateItem.Features;
+            //OldRecord.Campaign = UpdateItem.Campaign;
+        }
+
+        public ActionResult LevelUp(Character UpdatedCharacter, string[] Proficiencies, string[] SpellsKnown, int hitdie)
+        {
+            double tempCon = double.Parse(UpdatedCharacter.Constitution.ToString());
+
+            int conmodifer = int.Parse(Math.Floor(tempCon / 2 - 5).ToString());
+            if(UpdatedCharacter.CharLevel < 20)
+            UpdatedCharacter.CharLevel += 1;
+
+            UpdatedCharacter.HitPoints += hitdie;
+            string featuresString = "";
+
+            string characterLevel;
+
+            for (int i = 1; i <= UpdatedCharacter.CharLevel; i++)
+            {
+
+                characterLevel = i.ToString();
+                HttpWebRequest dndFeatureApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/classes/{Names[UpdatedCharacter.Class - 1]}/level/{characterLevel}");
+
+                dndFeatureApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+
+                HttpWebResponse dndFeatureApiResponse = (HttpWebResponse)dndFeatureApiRequest.GetResponse();
+
+                if (dndFeatureApiResponse.StatusCode == HttpStatusCode.OK)
+                {
+                    StreamReader featureResponseData = new StreamReader(dndFeatureApiResponse.GetResponseStream());
+
+                    string featuredata = featureResponseData.ReadToEnd();
+
+                    JObject jsonFeatures = JObject.Parse(featuredata);
+
+                    for (int j = 0; j < jsonFeatures["features"].Count(); j++)
+                    {
+                        featuresString += jsonFeatures["features"][j]["name"] + ",";
+                    }
+                }
+            }
+            UpdatedCharacter.Features = featuresString;
+
+            characterLevel = (UpdatedCharacter.CharLevel).ToString();
             HttpWebRequest dndSpellSlotApiRequest = WebRequest.CreateHttp($"http://www.dnd5eapi.co/api/classes/{Names[UpdatedCharacter.Class - 1]}/level/{characterLevel}");
             dndSpellSlotApiRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
             HttpWebResponse dndSpellSlotApiResponse = (HttpWebResponse)dndSpellSlotApiRequest.GetResponse();

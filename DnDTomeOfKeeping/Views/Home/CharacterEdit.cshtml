@@ -16,6 +16,16 @@
 </style>
 
 <script>
+	function chooseaction() {
+		document.getElementById('editform').action = "/Home/LevelUp";
+		document.getElementById('editform').submit();
+	}
+
+	function savechanges() {
+		document.getElementById('editform').action = "/Home/SaveChanges";
+		document.getElementById('editform').submit();
+	}
+
 	function rollhp(level) {
 		total = 0;
 		hp = document.getElementById('characterhp');
@@ -44,9 +54,10 @@
 <label>Race: </label>@raceNames[@ViewBag.CharacterData.Race - 1]  <br />
 <label>Class: </label> @classNames[@ViewBag.CharacterData.Class - 1]  <br />
 
-<form action="/Home/SaveChanges" method="post" id="editform">
+<form method="post" id="editform">
 	<input type="hidden" name="Class" value=" @ViewBag.CharacterData.Class" />
-	<label>Level: </label>
+	<input type="hidden" name="hitdie" value="@ViewBag.HitDieSize" />
+	<button type="submit" onclick="chooseaction()" >Level up!</button><label>Level: </label> 
 	<select name="CharLevel" id="level">
 		@for (int i = 1; i <= 20; i++)
 		{
@@ -363,7 +374,7 @@
 	{
 		<input type="hidden" name="Proficiencies" value="@ViewBag.Saves[i]["name"]" />
 	}
-	<input type="submit" value="Save Changes" />
+	<button type="submit" onclick="savechanges()">Save Changes</button>
 </form>
 <br />
 <br />
